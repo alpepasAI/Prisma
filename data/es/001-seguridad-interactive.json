@@ -1,0 +1,47 @@
+{
+  "title": "SecurOS Analyzer",
+  "subtitle": "Node.js, PHP & Open Source",
+  "nav": [
+    { "id": "summary", "label": "Resumen Ejecutivo" },
+    { "id": "nodejs", "label": "El Ecosistema Node.js" },
+    { "id": "php", "label": "El Paisaje PHP" },
+    { "id": "comparison", "label": "Análisis Comparativo" },
+    { "id": "oss", "label": "Realidad de la Cadena de Suministro OSS" },
+    { "id": "mitigation", "label": "Mitigación y Mejores Prácticas" }
+  ],
+  "sections": {
+    "summary": "<div class=\"mb-8\"><span class=\"interactive-badge\">OVERVIEW</span><h2 class=\"interactive-h2\">Desmitificando que \"PHP es más seguro que Node.js\"</h2><p class=\"interactive-p\">Esta sección establece la base de nuestro análisis. Aborda la premisa central: las diferencias de seguridad percibidas entre Node.js y PHP. Comprenderás que ningún lenguaje es inherentemente \"seguro\" o \"inseguro\", sino que poseen modelos de amenazas completamente diferentes.</p></div><div class=\"interactive-grid mt-8\"><div class=\"interactive-card card-accent-primary\"><h3 class=\"interactive-h3\">⚠️ El Dilema de Node.js</h3><p class=\"interactive-p text-sm\">Los problemas de seguridad de Node.js rara vez provienen del lenguaje en sí. La vulnerabilidad crítica radica en su <strong>Cadena de Suministro</strong>.</p><ul class=\"interactive-list\"><li>• Alto riesgo de dependencias comprometidas.</li><li>• Vulnerable al Typosquatting.</li><li>• Árboles de dependencias transitivas profundas.</li></ul></div><div class=\"interactive-card card-accent-tertiary\"><h3 class=\"interactive-h3\">🛡️ La Realidad de PHP</h3><p class=\"interactive-p text-sm\">PHP no es inherentemente más seguro; su superficie de ataque es simplemente tradicional. El ecosistema amplio (aplicaciones heredadas, plugins de WordPress) sufre enormemente de vulnerabilidades a nivel de <strong>Aplicación</strong>.</p><ul class=\"interactive-list\"><li>• Menor dependencia de árboles masivos.</li><li>• Mayor riesgo de inyección SQL y XSS en código mal escrito.</li><li>• Vulnerabilidades en CMS y plugins.</li></ul></div></div><div class=\"interactive-box mt-10\"><h4 class=\"font-bold mb-2\">Conclusión Principal</h4><p>Decir que PHP es más seguro que Node.js es una falsa equivalencia. <strong>Node.js</strong> requiere una gestión rigurosa de la cadena de suministro. <strong>PHP</strong> requiere auditoría rigurosa de código. Ambos requieren seguridad proactiva.</p></div>",
+    
+    "nodejs": "<div class=\"mb-8\"><span class=\"interactive-badge badge-tertiary\">DEEP DIVE</span><h2 class=\"interactive-h2\">El Ecosistema Node.js: Riesgo de Cadena de Suministro</h2><p class=\"interactive-p\">Aquí exploramos la arquitectura de Node.js que genera su principal crítica de seguridad: las dependencias transitivas y el ecosistema NPM.</p></div><div class=\"interactive-card mb-8\"><h3 class=\"interactive-h3\">El Agujero Negro \"node_modules\"</h3><p class=\"interactive-p mb-6\">La filosofía fomenta paquetes pequeños de un solo uso. Instalas 5, que instalan 50, que instalan 500.</p><div class=\"chart-container\"><canvas id=\"dependencyScaleChart\"></canvas></div></div><div class=\"interactive-grid grid-3\"><div class=\"interactive-box box-error\"><h4 class=\"font-bold mb-2\">Typosquatting</h4><p class=\"text-sm\">Paquetes con nombres casi idénticos a los populares.</p></div><div class=\"interactive-box box-error\"><h4 class=\"font-bold mb-2\">Robo de Cuenta</h4><p class=\"text-sm\">Hackers comprometen la cuenta NPM de un mantenedor legítimo.</p></div><div class=\"interactive-box box-error\"><h4 class=\"font-bold mb-2\">Protestware</h4><p class=\"text-sm\">Mantenedores sabotean su propio código por razones políticas/personales.</p></div></div>",
+    
+    "php": "<div class=\"mb-8\"><span class=\"interactive-badge badge-tertiary\">DEEP DIVE</span><h2 class=\"interactive-h2\">El Paisaje PHP: Aplicación y Arquitectura</h2><p class=\"interactive-p\">Examinamos el perfil de seguridad de PHP. Padece menos de árboles de dependencias masivos, pero su uso generalizado presenta retos distintos.</p></div><div class=\"interactive-grid mb-8\"><div class=\"interactive-card\"><h3 class=\"interactive-h3\">La Evolución de la Seguridad PHP</h3><p class=\"interactive-p\">Hoy en día, PHP moderno (PHP 8+) junto con frameworks empresariales como Laravel ofrece protecciones robustas integradas.</p></div><div class=\"interactive-card\"><h3 class=\"interactive-h3\">Gestión de Dependencias: Composer</h3><p class=\"interactive-p\">PHP usa Composer. Los paquetes tienden a ser más grandes y monolíticos, resultando en árboles de dependencias más superficiales.</p></div></div><div class=\"interactive-box box-warning\"><h3 class=\"interactive-h3\">⚠️ El Vector CMS</h3><p class=\"text-sm\">La inmensa mayoría de brechas en PHP hoy ocurren en Sistemas de Gestión de Contenido (CMS) como WordPress, a través de plugins de terceros mal revisados.</p></div>",
+    
+    "comparison": "<div class=\"mb-8\"><span class=\"interactive-badge\">ANALYSIS</span><h2 class=\"interactive-h2\">Perfiles de Amenaza Comparativos</h2><p class=\"interactive-p\">Un gráfico interactivo de las áreas de riesgo asociadas con Node.js y PHP.</p></div><div class=\"interactive-card\"><h3 class=\"interactive-h3 mb-6\">Distribución de Riesgo</h3><div class=\"chart-container\"><canvas id=\"threatRadarChart\"></canvas></div></div><div class=\"mt-8 overflow-x-auto\"><table class=\"interactive-table\"><thead><tr><th>Vector</th><th>Foco Node.js</th><th>Foco PHP</th></tr></thead><tbody><tr><td>Code Injection (SQLi/XSS)</td><td>Bajo</td><td class=\"text-error\">Alto</td></tr><tr><td>Supply Chain</td><td class=\"text-error\">Crítico</td><td>Moderado</td></tr><tr><td>Configuración de Servidor</td><td>Moderado</td><td class=\"text-error\">Alto</td></tr></tbody></table></div>",
+    
+    "oss": "<div class=\"mb-8\"><span class=\"interactive-badge badge-secondary\">MACRO VIEW</span><h2 class=\"interactive-h2\">La Realidad de la Cadena de Suministro OSS</h2><p class=\"interactive-p\">Independientemente de usar Node.js o PHP, las aplicaciones modernas están ensambladas principalmente a partir de componentes OSS.</p></div><div class=\"interactive-grid items-center mb-10\"><div><h3 class=\"interactive-h3\">La \"Tragedia de los Comunes\"</h3><p class=\"interactive-p mb-4\">El software de código abierto es fundamental, pero muchas bibliotecas críticas las mantienen voluntarios solitarios.</p><ul class=\"interactive-list\"><li><strong>Log4j:</strong> Un fallo en una utilidad de logs expuso infraestructura global.</li><li><strong>XZ Utils:</strong> Un ataque sofisticado para inyectar una puerta trasera en Linux.</li></ul></div><div class=\"interactive-card\"><h4 class=\"text-center font-bold mb-4\">Vectores de Ataque</h4><div class=\"chart-container\"><canvas id=\"attackVectorsChart\"></canvas></div></div></div>",
+    
+    "mitigation": "<div class=\"mb-8\"><span class=\"interactive-badge badge-primary\">ACTIONABLE INSIGHTS</span><h2 class=\"interactive-h2\">Mecanismos de Confianza</h2><p class=\"interactive-p\">Conocer los riesgos es el primer paso. Aquí tienes una lista de comprobación práctica.</p></div><div class=\"interactive-card p-0 overflow-hidden\"><div class=\"p-6 border-b\"><h3 class=\"interactive-h3\">Lista de Postura de Seguridad</h3></div><ul id=\"mitigationChecklist\" class=\"interactive-checklist\"></ul><div class=\"p-4 text-right bg-surface-dim\"><span id=\"scoreDisplay\" class=\"font-bold text-primary text-lg\">0 / 5 Implementado</span></div></div><div class=\"interactive-grid mt-8\"><div class=\"interactive-card\"><h4 class=\"font-bold mb-2\">SCA (Software Composition Analysis)</h4><p class=\"text-sm\">Herramientas automatizadas que escanean tu código en busca de vulnerabilidades.</p></div><div class=\"interactive-card\"><h4 class=\"font-bold mb-2\">SBOM (Software Bill of Materials)</h4><p class=\"text-sm\">Un inventario formal de todos los componentes de terceros.</p></div></div>"
+  },
+  "chartData": {
+    "radar": {
+      "labels": ["Code Injection", "Supply Chain", "Server Misconfig", "Business Logic", "Data Leaks"],
+      "node": [2, 9, 4, 6, 5],
+      "php": [8, 4, 7, 5, 5]
+    },
+    "bar": {
+      "labels": ["Direct Deps", "Transitive Deps", "Total Packages"],
+      "data": [5, 45, 50]
+    },
+    "doughnut": {
+      "labels": ["Account Takeover", "Typosquatting", "Malicious Commits", "Protestware"],
+      "data": [45, 30, 15, 10]
+    }
+  },
+  "checklistData": [
+    { "id": "chk1", "label": "Usar Lockfiles Estrictos", "desc": "Comprometer siempre package-lock.json o composer.lock." },
+    { "id": "chk2", "label": "Escaneo de Vulnerabilidades Automatizado", "desc": "Implementar Dependabot o Snyk en CI/CD." },
+    { "id": "chk3", "label": "Principio de Menor Privilegio", "desc": "Ejecutar aplicaciones con permisos mínimos." },
+    { "id": "chk4", "label": "Auditar Dependencias", "desc": "Ejecutar npm audit periódicamente." },
+    { "id": "chk5", "label": "Fijar Versiones Críticas", "desc": "Evitar versiones flotantes (^1.2.0) en componentes críticos." }
+  ]
+}

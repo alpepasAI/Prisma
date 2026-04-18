@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Opcional: Si hubiera un sitemap real
+# Sitemap: https://tudominio.com/sitemap.xml

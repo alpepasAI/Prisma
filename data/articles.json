@@ -1,0 +1,48 @@
+{
+  "articles": [
+    {
+      "id": "001-seguridad-codigo-abierto-cadena-suministro",
+      "date": "2025-04-18",
+      "readingTime": 8,
+      "tags": ["ciberseguridad", "open-source", "npm", "supply-chain"],
+      "featured": true,
+      "formats": {
+        "podcast": {
+          "available": true,
+          "episode": 1
+        },
+        "pdf": {
+          "available": true,
+          "pages": 30
+        },
+        "infographic": {
+          "available": true
+        },
+        "interactive": {
+          "available": true,
+          "dataFile": "001-seguridad-interactive.json"
+        }
+      },
+      "i18n": {
+        "es": {
+          "title": "Crisis en el Código Abierto: La Ciberseguridad Evoluciona del Código a la Cadena de Suministro",
+          "summary": "Entre el 70% y el 90% de las bases de código modernas dependen de componentes externos. Con 9.8 billones de descargas en 2025, los atacantes han industrializado sus operaciones contra npm, donde se concentra el 99% del malware open-source detectado. Analizamos las vulnerabilidades arquitectónicas de Node.js frente a PHP y las estrategias para un futuro resiliente.",
+          "contentFile": "001-seguridad-codigo-abierto-cadena-suministro.md",
+          "podcasts": {
+            "short": "5TM189rq8nhOPjOKznBEAu",
+            "normal": "1IptSz7bN4uQuyz5Hf2CVB"
+          }
+        },
+        "en": {
+          "title": "Open Source Crisis: Cybersecurity Evolves from Code to Supply Chain",
+          "summary": "Between 70% and 90% of modern codebases depend on external components. With 9.8 trillion downloads in 2025, attackers have industrialized their operations against npm, where 99% of detected open-source malware is concentrated. We analyze the architectural vulnerabilities of Node.js vs. PHP and strategies for a resilient future.",
+          "contentFile": "001-seguridad-codigo-abierto-cadena-suministro.md",
+          "podcasts": {
+            "short": "6Hsuguj6MtmQcnYrCQPyjj",
+            "normal": "5bzNpVMxDEy44TjJRKbsds"
+          }
+        }
+      }
+    }
+  ]
+}

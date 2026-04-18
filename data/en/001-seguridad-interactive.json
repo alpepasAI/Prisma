@@ -1,0 +1,47 @@
+{
+  "title": "SecurOS Analyzer",
+  "subtitle": "Node.js, PHP & Open Source",
+  "nav": [
+    { "id": "summary", "label": "Executive Summary" },
+    { "id": "nodejs", "label": "The Node.js Ecosystem" },
+    { "id": "php", "label": "The PHP Landscape" },
+    { "id": "comparison", "label": "Comparative Analysis" },
+    { "id": "oss", "label": "OSS Supply Chain Reality" },
+    { "id": "mitigation", "label": "Mitigation & Best Practices" }
+  ],
+  "sections": {
+    "summary": "<div class=\"mb-8\"><span class=\"interactive-badge\">OVERVIEW</span><h2 class=\"interactive-h2\">Debunking the \"PHP is Safer than Node.js\" Myth</h2><p class=\"interactive-p\">This section sets the foundation for our analysis. It addresses the core premise: the perceived security differences between Node.js and PHP. You will understand that neither language is inherently \"secure\" or \"insecure\"—they possess entirely different threat models.</p></div><div class=\"interactive-grid mt-8\"><div class=\"interactive-card card-accent-primary\"><h3 class=\"interactive-h3\">⚠️ The Node.js Dilemma</h3><p class=\"interactive-p text-sm\">Node.js security issues rarely stem from the core language. The critical vulnerability lies in its <strong>Supply Chain</strong>.</p><ul class=\"interactive-list\"><li>• High risk of compromised dependencies.</li><li>• Vulnerable to Typosquatting.</li><li>• Deep transitive dependency trees.</li></ul></div><div class=\"interactive-card card-accent-tertiary\"><h3 class=\"interactive-h3\">🛡️ The PHP Reality</h3><p class=\"interactive-p text-sm\">PHP is not inherently safer; its attack surface is traditional. The broader ecosystem suffers heavily from <strong>Application-Level</strong> vulnerabilities.</p><ul class=\"interactive-list\"><li>• Lower reliance on massive dependency trees.</li><li>• Higher risk of SQL Injection & XSS.</li><li>• Vulnerabilities in specific CMS plugins.</li></ul></div></div><div class=\"interactive-box mt-10\"><h4 class=\"font-bold mb-2\">Core Conclusion</h4><p>Saying PHP is safer than Node.js is a false equivalence. <strong>Node.js</strong> requires rigorous supply chain management. <strong>PHP</strong> requires rigorous application code auditing. Both require proactive security measures.</p></div>",
+    
+    "nodejs": "<div class=\"mb-8\"><span class=\"interactive-badge badge-tertiary\">DEEP DIVE</span><h2 class=\"interactive-h2\">The Node.js Ecosystem: Supply Chain Risk</h2><p class=\"interactive-p\">Here we explore the architecture of Node.js that leads to its primary security criticism: transitive dependencies and the NPM ecosystem.</p></div><div class=\"interactive-card mb-8\"><h3 class=\"interactive-h3\">The \"node_modules\" Black Hole</h3><p class=\"interactive-p mb-6\">The philosophy encourages single-purpose packages. You install 5, they install 50, which install 500.</p><div class=\"chart-container\"><canvas id=\"dependencyScaleChart\"></canvas></div></div><div class=\"interactive-grid grid-3\"><div class=\"interactive-box box-error\"><h4 class=\"font-bold mb-2\">Typosquatting</h4><p class=\"text-sm\">Malicious packages with names almost identical to popular ones.</p></div><div class=\"interactive-box box-error\"><h4 class=\"font-bold mb-2\">Account Takeover</h4><p class=\"text-sm\">Hackers compromise a legitimate maintainer's NPM account.</p></div><div class=\"interactive-box box-error\"><h4 class=\"font-bold mb-2\">Protestware</h4><p class=\"text-sm\">Maintainers intentionally sabotage their own code.</p></div></div>",
+    
+    "php": "<div class=\"mb-8\"><span class=\"interactive-badge badge-tertiary\">DEEP DIVE</span><h2 class=\"interactive-h2\">The PHP Landscape: Application & Architecture</h2><p class=\"interactive-p\">We examine PHP's security profile. It suffers less from massive dependency trees, but its history presents different challenges.</p></div><div class=\"interactive-grid mb-8\"><div class=\"interactive-card\"><h3 class=\"interactive-h3\">The Evolution of PHP Security</h3><p class=\"interactive-p\">Today, modern PHP (PHP 8+) combined with enterprise frameworks like Laravel offers robust built-in protections.</p></div><div class=\"interactive-card\"><h3 class=\"interactive-h3\">Dependency Management: Composer</h3><p class=\"interactive-p\">PHP uses Composer. Packages tend to be larger and more monolithic, resulting in shallower dependency trees.</p></div></div><div class=\"interactive-box box-warning\"><h3 class=\"interactive-h3\">⚠️ The CMS Vulnerability Vector</h3><p class=\"text-sm\">The vast majority of PHP security breaches today occur within Content Management Systems (CMS) like WordPress through poorly vetted plugins.</p></div>",
+    
+    "comparison": "<div class=\"mb-8\"><span class=\"interactive-badge\">ANALYSIS</span><h2 class=\"interactive-h2\">Comparative Threat Profiles</h2><p class=\"interactive-p\">An interactive chart illustrating the risk areas associated with Node.js and PHP.</p></div><div class=\"interactive-card\"><h3 class=\"interactive-h3 mb-6\">Risk Distribution Area</h3><div class=\"chart-container\"><canvas id=\"threatRadarChart\"></canvas></div></div><div class=\"mt-8 overflow-x-auto\"><table class=\"interactive-table\"><thead><tr><th>Vector</th><th>Node.js Focus</th><th>PHP Focus</th></tr></thead><tbody><tr><td>Code Injection (SQLi/XSS)</td><td>Lower</td><td class=\"text-error\">Higher</td></tr><tr><td>Supply Chain / Dependencies</td><td class=\"text-error\">Critical</td><td>Moderate</td></tr><tr><td>Server Configuration</td><td>Moderate</td><td class=\"text-error\">High</td></tr></tbody></table></div>",
+    
+    "oss": "<div class=\"mb-8\"><span class=\"interactive-badge badge-secondary\">MACRO VIEW</span><h2 class=\"interactive-h2\">The Open Source Supply Chain Reality</h2><p class=\"interactive-p\">Abstracting away from specific languages, modern applications are primarily assembled from OSS components.</p></div><div class=\"interactive-grid items-center mb-10\"><div><h3 class=\"interactive-h3\">The \"Tragedy of the Commons\"</h3><p class=\"interactive-p mb-4\">Open source is foundational, but many critical libraries are maintained by single volunteers.</p><ul class=\"interactive-list\"><li><strong>Log4j:</strong> A single flaw in a logging utility exposed global enterprise infrastructure.</li><li><strong>XZ Utils:</strong> A sophisticated attack to inject a backdoor into core Linux libraries.</li></ul></div><div class=\"interactive-card\"><h4 class=\"text-center font-bold mb-4\">Distribution of Supply Chain Attack Methods</h4><div class=\"chart-container\"><canvas id=\"attackVectorsChart\"></canvas></div></div></div>",
+    
+    "mitigation": "<div class=\"mb-8\"><span class=\"interactive-badge badge-primary\">ACTIONABLE INSIGHTS</span><h2 class=\"interactive-h2\">Mechanisms for Trust & Security</h2><p class=\"interactive-p\">Knowing the risks is only the first step. Here is a practical checklist.</p></div><div class=\"interactive-card p-0 overflow-hidden\"><div class=\"p-6 border-b\"><h3 class=\"interactive-h3\">Universal Security Posture Checklist</h3></div><ul id=\"mitigationChecklist\" class=\"interactive-checklist\"></ul><div class=\"p-4 text-right bg-surface-dim\"><span id=\"scoreDisplay\" class=\"font-bold text-primary text-lg\">0 / 5 Implemented</span></div></div><div class=\"interactive-grid mt-8\"><div class=\"interactive-card\"><h4 class=\"font-bold mb-2\">SCA (Software Composition Analysis)</h4><p class=\"text-sm\">Automated tools that continuously scan your packages against known vulnerabilities.</p></div><div class=\"interactive-card\"><h4 class=\"font-bold mb-2\">SBOM (Software Bill of Materials)</h4><p class=\"text-sm\">A formal inventory of all third-party components utilized in an application.</p></div></div>"
+  },
+  "chartData": {
+    "radar": {
+      "labels": ["Code Injection", "Supply Chain", "Server Misconfig", "Business Logic", "Data Leaks"],
+      "node": [2, 9, 4, 6, 5],
+      "php": [8, 4, 7, 5, 5]
+    },
+    "bar": {
+      "labels": ["Direct Deps", "Transitive Deps", "Total Packages"],
+      "data": [5, 45, 50]
+    },
+    "doughnut": {
+      "labels": ["Account Takeover", "Typosquatting", "Malicious Commits", "Protestware"],
+      "data": [45, 30, 15, 10]
+    }
+  },
+  "checklistData": [
+    { "id": "chk1", "label": "Use Strict Lockfiles", "desc": "Always commit package-lock.json or composer.lock to ensure immutable builds." },
+    { "id": "chk2", "label": "Automated Vulnerability Scanning", "desc": "Implement Dependabot, Snyk, or similar tools in CI/CD pipelines." },
+    { "id": "chk3", "label": "Principle of Least Privilege", "desc": "Run applications and containers with minimal necessary system permissions." },
+    { "id": "chk4", "label": "Audit Dependencies Regularly", "desc": "Run npm audit or composer audit periodically and remove unused packages." },
+    { "id": "chk5", "label": "Pin Internal/Critical Dependencies", "desc": "Avoid using floating versions (e.g., ^1.2.0) for mission-critical components." }
+  ]
+}
