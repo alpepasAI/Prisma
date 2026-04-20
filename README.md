@@ -44,13 +44,23 @@ Dado que PRISMA hace llamadas `fetch()` para obtener los archivos JSON y Markdow
 Necesitas un servidor HTTP local básico. Puedes usar cualquiera de las siguientes opciones desde la raíz del proyecto:
 
 - **Node.js / npm:** `npx serve .` o `npx http-server`
-- **Python:** `python -m http.server 8000`
+- **Python:** `python3 -m http.server 8000`
 - **PHP:** `php -S localhost:8000`
 
 Luego, abre `http://localhost:8000` en tu navegador.
 
-## Cómo añadir nuevo contenido
+## 🚀 Gestión de Contenido y Workflows
 
-1. Crea tus archivos `.md` en `data/es/` y `data/en/`.
-2. (Opcional) Sube los PDFs e infografías a sus respectivas carpetas de idioma.
-3. Edita `data/articles.json` y añade un nuevo objeto al array con todos los metadatos (IDs de Spotify, rutas de archivos, etiquetas, tiempos de lectura, etc.). El sistema hará el resto automáticamente.
+Para añadir un nuevo artículo a PRISMA de forma automatizada, sigue estos pasos:
+
+1.  **Preparar Archivos:** Deja todos tus documentos (PDFs, Markdowns, Infografías y HTML de Dashboard) en la carpeta `draft/`.
+2.  **Lanzar Integración:** Envía el contenido de `CONTENT_TEMPLATE.md` al agente de IA.
+3.  **Procesado Automático:** El agente ejecutará el workflow `article_integration` ubicado en `.agent/workflows/article_integration.md`, el cual se encarga de:
+    -   Extraer títulos y etiquetas de los Markdowns.
+    -   Calcular el tiempo de lectura y asignar la fecha actual.
+    -   Mover y renombrar todos los activos a sus carpetas finales.
+    -   Actualizar `articles.json` y gestionar el estado de "noticia destacada".
+    -   Limpiar la carpeta `draft/`.
+4.  **Revisión Final:** Verifica los cambios y proporciona los IDs finales de Spotify para los podcasts.
+
+Para más detalles sobre la arquitectura y filosofía del proyecto, consulta [AGENTS.md](AGENTS.md).

@@ -3,9 +3,9 @@
     {
       "id": "001-seguridad-codigo-abierto-cadena-suministro",
       "date": "2025-04-18",
-      "readingTime": 8,
+      "readingTime": 6,
       "tags": ["ciberseguridad", "open-source", "npm", "supply-chain"],
-      "featured": true,
+      "featured": false,
       "formats": {
         "podcast": {
           "available": true,
@@ -40,6 +40,50 @@
           "podcasts": {
             "short": "6Hsuguj6MtmQcnYrCQPyjj",
             "normal": "5bzNpVMxDEy44TjJRKbsds"
+          }
+        }
+      }
+    },
+    {
+      "id": "002-mcp-estado-seguridad-futuro",
+      "date": "2026-04-20",
+      "readingTime": 8,
+      "tags": ["mcp", "ai-agents", "seguridad", "interoperabilidad"],
+      "featured": true,
+      "formats": {
+        "podcast": {
+          "available": true,
+          "episode": 2
+        },
+        "pdf": {
+          "available": true,
+          "pages": 18
+        },
+        "infographic": {
+          "available": true
+        },
+        "interactive": {
+          "available": true,
+          "dataFile": "002-mcp-interactive.json"
+        }
+      },
+      "i18n": {
+        "es": {
+          "title": "Model Context Protocol 2026: Arquitectura agéntica y el fin de la fragmentación en IA",
+          "summary": "En 2024, conectar un LLM con herramientas externas era una labor artesanal y fragmentada. Hoy, con más de 97 millones de implementaciones mensuales, el MCP se ha consolidado como el 'USB-C de la IA', resolviendo el problema de la interoperabilidad N-a-N. Analizamos cómo este protocolo no solo orquestas agentes, sino que introduce nuevos vectores de ataque críticos como la inyección de prompts indirecta.",
+          "contentFile": "002-mcp-estado-seguridad-futuro.md",
+          "podcasts": {
+            "short": "1cUiBFgiBtYkf4b618F7bw",
+            "normal": "654zBUWATkYItBhvRTcPdw"
+          }
+        },
+        "en": {
+          "title": "Model Context Protocol 2026: Agentic Architecture and the End of AI Fragmentation",
+          "summary": "In 2024, connecting an LLM with external tools was a handcrafted and fragmented task. Today, with over 97 million monthly implementations, MCP has established itself as the 'USB-C of AI', solving the N-to-N interoperability problem. We analyze how this protocol not only orchestrates agents but also introduces critical new attack vectors like indirect prompt injection.",
+          "contentFile": "002-mcp-estado-seguridad-futuro.md",
+          "podcasts": {
+            "short": "4oO4lEdzkYUs3E961Xt9Qv",
+            "normal": "3X4YYkn6qDrVbhakJUPHPh"
           }
         }
       }

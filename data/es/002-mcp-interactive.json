@@ -1,0 +1,39 @@
+{
+  "title": "MCP 2026: Auditoría y Ecosistema",
+  "subtitle": "Análisis del Estándar de Interoperabilidad",
+  "nav": [
+    { "id": "genesis", "label": "Génesis" },
+    { "id": "security", "label": "Seguridad" },
+    { "id": "ecosystem", "label": "Ecosistema" },
+    { "id": "roadmap", "label": "Roadmap" },
+    { "id": "checklist", "label": "Buenas Prácticas" }
+  ],
+  "sections": {
+    "genesis": "<div class=\"mb-8\"><span class=\"interactive-badge\">PROTOCOL OVERVIEW</span><h2 class=\"interactive-h2\">El 'USB-C' de la Inteligencia Artificial</h2><p class=\"interactive-p\">El Model Context Protocol (MCP) resuelve el problema de la integración fragmentada, permitiendo a cualquier agente de IA conectarse a cualquier herramienta mediante un estándar unificado.</p></div><div class=\"interactive-grid\"><div class=\"interactive-card card-accent-primary\"><h3 class=\"interactive-h3\">Desacoplamiento Crítico</h3><p class=\"interactive-p text-sm\">Separa el <strong>Cerebro</strong> (razonamiento del LLM) de las <strong>Manos</strong> (ejecución en el servidor MCP).</p><ul class=\"interactive-list\"><li>• Mayor escalabilidad.</li><li>• Seguridad por abstracción.</li><li>• Ahorro de ventana de contexto.</li></ul></div><div class=\"interactive-card card-accent-secondary\"><h3 class=\"interactive-h3\">Hitos 2024-2026</h3><p class=\"interactive-p text-sm\">Desde la liberación por Anthropic hasta la donación a la Linux Foundation (AAIF).</p></div></div>",
+    
+    "security": "<div class=\"mb-8\"><span class=\"interactive-badge badge-error\">AUDIT REPORT</span><h2 class=\"interactive-h2\">Riesgos de Origen y Procedencia</h2><p class=\"interactive-p\">La superficie de ataque del MCP se ha convertido en el principal foco de ciberseguridad agéntica.</p></div><div class=\"interactive-card mb-8\"><h3 class=\"interactive-h3\">Vectores de Ataque Principales</h3><div class=\"mt-4 overflow-x-auto\"><table class=\"interactive-table\"><thead><tr><th>Origen</th><th>Riesgo</th><th>Confianza</th></tr></thead><tbody><tr><td>Locales (Unvetted)</td><td>Ejecución de código arbitrario (RCE)</td><td class=\"text-error\">Muy Bajo</td></tr><tr><td>Remotos Gestionados</td><td>Fuga de datos en tránsito</td><td class=\"text-warning\">Medio</td></tr><tr><td>Integraciones Oficiales</td><td>Vulnerabilidad de suministro (SCA)</td><td class=\"text-success\">Alto</td></tr></tbody></table></div></div><div class=\"interactive-box box-error\"><h4 class=\"font-bold mb-2\">⚠️ Inyección de Prompts Indirecta</h4><p class=\"text-sm\">Instrucciones maliciosas ocultas en archivos externos (PDFs, Emails) que toman el control de las herramientas del agente.</p></div>",
+    
+    "ecosystem": "<div class=\"mb-8\"><span class=\"interactive-badge badge-tertiary\">MARKET STATE</span><h2 class=\"interactive-h2\">Distribución del Ecosistema MCP</h2><p class=\"interactive-p\">Análisis de más de 177,000 servidores MCP indexados globalmente en Smithery y PulseMCP.</p></div><div class=\"interactive-card\"><h3 class=\"interactive-h3 mb-6\">Calidad de los Servidores</h3><div class=\"chart-container\"><canvas id=\"ecosystemDoughnut\"></canvas></div></div>",
+    
+    "roadmap": "<div class=\"mb-8\"><span class=\"interactive-badge\">FUTURE TRENDS</span><h2 class=\"interactive-h2\">Hacia la Autonomía Orquestada</h2><p class=\"interactive-p\">La tendencia se desplaza de la creación manual de herramientas hacia la autogeneración desde OpenAPI.</p></div><div class=\"interactive-card\"><h3 class=\"interactive-h3 mb-6\">Proyección de Adopción Nativa</h3><div class=\"chart-container\"><canvas id=\"adoptionChart\"></canvas></div></div>",
+    
+    "checklist": "<div class=\"mb-8\"><span class=\"interactive-badge badge-primary\">CHECKLIST</span><h2 class=\"interactive-h2\">Manifiesto de Desarrollo Seguro</h2><p class=\"interactive-p\">Al diseñar o implementar MCP, estas reglas son mandatorias para garantizar la integridad del sistema.</p></div><div class=\"interactive-card p-0 overflow-hidden\"><ul id=\"mcpChecklist\" class=\"interactive-checklist\"></ul><div class=\"p-4 text-right bg-surface-dim\"><span id=\"scoreDisplay\" class=\"font-bold text-primary text-lg\">0 / 4 Implementado</span></div></div>"
+  },
+  "chartData": {
+    "doughnut": {
+      "labels": ["Wrappers Scraping", "Scripts Locales", "Remotos BaaS", "Integraciones Enterprise"],
+      "data": [45, 15, 15, 25]
+    },
+    "bar": {
+      "labels": ["Q1 2025", "Q3 2025", "Q1 2026", "Q3 2026", "Q1 2027"],
+      "data": [15, 30, 55, 70, 85],
+      "secondaryData": [85, 70, 45, 30, 15]
+    }
+  },
+  "checklistData": [
+    { "id": "mcp1", "label": "Principio de Menor Privilegio", "desc": "Usar tokens Scoped (OAuth 2.1) en lugar de claves de API globales." },
+    { "id": "mcp2", "label": "Validación de Esquema Estricta", "desc": "Usar Zod o Pydantic para sanitizar todas las entradas del LLM." },
+    { "id": "mcp3", "label": "Human-in-the-Loop", "desc": "Requerir confirmación humana para cualquier acción destructiva (DELETE/POST)." },
+    { "id": "mcp4", "label": "Aislamiento (Sandboxing)", "desc": "Ejecutar servidores MCP locales en contenedores endurecidos (Docker/gVisor)." }
+  ]
+}

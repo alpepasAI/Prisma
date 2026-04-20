@@ -14,7 +14,7 @@ const PRISMA = {
     try {
       const response = await fetch('/data/articles.json', { cache: 'no-store' });
       const data = await response.json();
-      this.articlesData = data.articles;
+      this.articlesData = data.articles.sort((a, b) => new Date(b.date) - new Date(a.date));
       return this.articlesData;
     } catch (err) {
       console.error('Failed to load articles:', err);
@@ -181,7 +181,7 @@ const PRISMA = {
     const interactiveDisabled = !formats.interactive?.available ? ' format-card--disabled' : '';
 
     const pdfUrl = this.getPdfUrl(article.id, lang);
-    const infographicSrc = this.getInfographicUrl(lang);
+    const infographicSrc = this.getInfographicUrl(article.id, lang);
 
     heroEl.innerHTML = `
       <div class="hero-bg"></div>
@@ -274,7 +274,7 @@ const PRISMA = {
         : `<span class="format-indicator format-indicator--inactive"><span class="material-symbols-outlined">picture_as_pdf</span><span data-i18n="format_not_available">${window.i18n.t('format_not_available')}</span></span>`;
 
       const infographicIndicator = formats.infographic?.available
-        ? `<a href="javascript:void(0)" data-infographic="${this.getInfographicUrl(lang)}" class="format-indicator format-indicator--active" style="text-decoration:none;"><span class="material-symbols-outlined">data_exploration</span><span data-i18n="format_infographic_available">${window.i18n.t('format_infographic_available')}</span></a>`
+        ? `<a href="javascript:void(0)" data-infographic="${this.getInfographicUrl(article.id, lang)}" class="format-indicator format-indicator--active" style="text-decoration:none;"><span class="material-symbols-outlined">data_exploration</span><span data-i18n="format_infographic_available">${window.i18n.t('format_infographic_available')}</span></a>`
         : `<span class="format-indicator format-indicator--inactive"><span class="material-symbols-outlined">data_exploration</span><span data-i18n="format_not_available">${window.i18n.t('format_not_available')}</span></span>`;
 
       const interactiveIndicator = formats.interactive?.available
@@ -384,16 +384,20 @@ const PRISMA = {
    * Get PDF URL based on language
    */
   getPdfUrl(articleId, lang) {
-    const baseName = articleId;
-    // Map article IDs to PDF filenames
-    return `/assets/pdfs/seguridad-codigo-abierto-nodejs-vs-php-${lang}.pdf`;
+    if (articleId === '001-seguridad-codigo-abierto-cadena-suministro') {
+      return `/assets/pdfs/seguridad-codigo-abierto-nodejs-vs-php-${lang}.pdf`;
+    }
+    return `/assets/pdfs/${articleId}-${lang}.pdf`;
   },
 
   /**
    * Get infographic URL based on language
    */
-  getInfographicUrl(lang) {
-    return `/assets/infographics/open-source-security-${lang}.png`;
+  getInfographicUrl(articleId, lang) {
+    if (articleId === '001-seguridad-codigo-abierto-cadena-suministro') {
+      return `/assets/infographics/open-source-security-${lang}.png`;
+    }
+    return `/assets/infographics/${articleId}-infographic-${lang}.png`;
   },
 
   /**
@@ -514,7 +518,7 @@ const PRISMA = {
 
     // Infographic card
     if (formats.infographic?.available) {
-      const infographicSrc = this.getInfographicUrl(lang);
+      const infographicSrc = this.getInfographicUrl(article.id, lang);
       sidebarHtml += `
         <div class="sidebar-card" id="infographic">
           <div class="sidebar-card__header">
@@ -769,9 +773,10 @@ const PRISMA = {
       // Render Tags
       const tagsContainer = document.getElementById('topics-filter-tags');
       if (tagsContainer) {
-        tagsContainer.innerHTML = allTags.map(tag => {
+        tagsContainer.innerHTML = allTags.map((tag, i) => {
           const isActive = selectedTags.includes(tag) ? ' active' : '';
-          return `<button class="filter-tag${isActive}" data-tag="${tag}">${this.translateTag(tag)}</button>`;
+          const variant = this.getTagVariant(i);
+          return `<button class="filter-tag${isActive} tag--${variant}" data-tag="${tag}">${this.translateTag(tag)}</button>`;
         }).join('');
 
         // Attach tag click events
@@ -1040,8 +1045,8 @@ const PRISMA = {
       });
     }
 
-    // Doughnut
-    const doughnutCanvas = document.getElementById('attackVectorsChart');
+    // Doughnut (Attack Vectors or Ecosystem)
+    const doughnutCanvas = document.getElementById('attackVectorsChart') || document.getElementById('ecosystemDoughnut');
     if (doughnutCanvas && chartData.doughnut) {
       new Chart(doughnutCanvas, {
         type: 'doughnut',
@@ -1049,17 +1054,63 @@ const PRISMA = {
           labels: chartData.doughnut.labels,
           datasets: [{
             data: chartData.doughnut.data,
-            backgroundColor: ['#4cd7f6', '#4edea3', '#d0bcff', '#ffb4ab']
+            backgroundColor: doughnutCanvas.id === 'ecosystemDoughnut' 
+              ? ['#f43f5e', '#f59e0b', '#3b82f6', '#10b981']
+              : ['#4cd7f6', '#4edea3', '#d0bcff', '#ffb4ab']
           }]
         },
-        options: { responsive: true, maintainAspectRatio: false }
+        options: { 
+          responsive: true, 
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: { color: '#ffffff', padding: 20 }
+            }
+          }
+        }
+      });
+    }
+
+    // Bar/Line Hybrid (Adoption)
+    const adoptionCanvas = document.getElementById('adoptionChart');
+    if (adoptionCanvas && chartData.bar && chartData.bar.secondaryData) {
+      new Chart(adoptionCanvas, {
+        type: 'bar',
+        data: {
+          labels: chartData.bar.labels,
+          datasets: [
+            {
+              label: 'REST APIs',
+              data: chartData.bar.secondaryData,
+              type: 'line',
+              borderColor: '#ffb4ab',
+              borderWidth: 2,
+              tension: 0.4
+            },
+            {
+              label: 'MCP Support',
+              data: chartData.bar.data,
+              backgroundColor: '#4cd7f6',
+              borderRadius: 4
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' } },
+            x: { grid: { display: false } }
+          }
+        }
       });
     }
   },
 
   initInteractiveChecklist(checklistData) {
     if (!checklistData) return;
-    const container = document.getElementById('mitigationChecklist');
+    const container = document.getElementById('mitigationChecklist') || document.getElementById('mcpChecklist');
     const scoreDisplay = document.getElementById('scoreDisplay');
     if (!container || !scoreDisplay) return;
 

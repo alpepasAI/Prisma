@@ -24,7 +24,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
 
   <!-- Styles -->
-  <link rel="stylesheet" href="css/styles.css?v=3" />
+  <link rel="stylesheet" href="css/styles.css?v=7" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
 
   <!-- Markdown Parser -->
@@ -84,20 +84,17 @@
 
   <!-- Footer -->
   <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-logo">PRISMA</div>
-      <div class="footer-links">
-        <a href="#" class="footer-link" data-i18n="footer_privacy">Política de Privacidad</a>
-        <a href="#" class="footer-link" data-i18n="footer_terms">Términos de Servicio</a>
-        <a href="#" class="footer-link" data-i18n="footer_github">Github</a>
-        <a href="#" class="footer-link" data-i18n="footer_contact">Contacto</a>
-      </div>
+    <div class="footer-inner" style="flex-direction: row; justify-content: space-between; align-items: center; gap: var(--space-md);">
       <div class="footer-copyright" data-i18n="footer_copyright">© 2025 PRISMA. Todos los derechos reservados.</div>
+      <div class="footer-links" style="flex-direction: row; gap: var(--space-lg); margin: 0;">
+        <a href="mailto:info@alpepaslabs.com" class="footer-link" data-i18n="footer_contact">Contacto</a>
+      </div>
+      <div style="font-size: 0.7rem; color: var(--primary); opacity: 0.6; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 600;" data-i18n="powered_by">Potenciado por Gemini & NotebookLM</div>
     </div>
   </footer>
 
   <!-- Scripts -->
-  <script src="js/i18n.js?v=2"></script>
-  <script src="js/app.js?v=2"></script>
+  <script src="js/i18n.js?v=7"></script>
+  <script src="js/app.js?v=7"></script>
 </body>
 </html>

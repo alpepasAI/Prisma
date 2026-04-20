@@ -1,0 +1,39 @@
+{
+  "title": "MCP 2026: Audit and Ecosystem",
+  "subtitle": "Interoperability Standard Analysis",
+  "nav": [
+    { "id": "genesis", "label": "Genesis" },
+    { "id": "security", "label": "Security" },
+    { "id": "ecosystem", "label": "Ecosystem" },
+    { "id": "roadmap", "label": "Roadmap" },
+    { "id": "checklist", "label": "Best Practices" }
+  ],
+  "sections": {
+    "genesis": "<div class=\"mb-8\"><span class=\"interactive-badge\">PROTOCOL OVERVIEW</span><h2 class=\"interactive-h2\">The 'USB-C' of Artificial Intelligence</h2><p class=\"interactive-p\">Model Context Protocol (MCP) resolves the problem of fragmented integration, allowing any AI agent to connect to any tool via a unified standard.</p></div><div class=\"interactive-grid\"><div class=\"interactive-card card-accent-primary\"><h3 class=\"interactive-h3\">Critical Decoupling</h3><p class=\"interactive-p text-sm\">Separates the <strong>Brain</strong> (LLM reasoning) from the <strong>Hands</strong> (MCP server execution).</p><ul class=\"interactive-list\"><li>• Higher scalability.</li><li>• Security through abstraction.</li><li>• Context window efficiency.</li></ul></div><div class=\"interactive-card card-accent-secondary\"><h3 class=\"interactive-h3\">2024-2026 Milestones</h3><p class=\"interactive-p text-sm\">From Anthropic's release to donation to the Linux Foundation (AAIF).</p></div></div>",
+    
+    "security": "<div class=\"mb-8\"><span class=\"interactive-badge badge-error\">AUDIT REPORT</span><h2 class=\"interactive-h2\">Provenance and Origin Risks</h2><p class=\"interactive-p\">The MCP attack surface has become the primary focus of agentic cybersecurity.</p></div><div class=\"interactive-card mb-8\"><h3 class=\"interactive-h3\">Primary Attack Vectors</h3><div class=\"mt-4 overflow-x-auto\"><table class=\"interactive-table\"><thead><tr><th>Origin</th><th>Risk</th><th>Confidence</th></tr></thead><tbody><tr><td>Local (Unvetted)</td><td>Arbitrary Code Execution (RCE)</td><td class=\"text-error\">Very Low</td></tr><tr><td>Managed Remote</td><td>Data leak in transit</td><td class=\"text-warning\">Medium</td></tr><tr><td>Official Integrations</td><td>Supply Chain Vulnerability (SCA)</td><td class=\"text-success\">High</td></tr></tbody></table></div></div><div class=\"interactive-box box-error\"><h4 class=\"font-bold mb-2\">⚠️ Indirect Prompt Injection</h4><p class=\"text-sm\">Hidden malicious instructions in external files (PDFs, Emails) that take control of the agent's tools.</p></div>",
+    
+    "ecosystem": "<div class=\"mb-8\"><span class=\"interactive-badge badge-tertiary\">MARKET STATE</span><h2 class=\"interactive-h2\">MCP Ecosystem Distribution</h2><p class=\"interactive-p\">Analysis of over 177,000 MCP servers indexed globally on Smithery and PulseMCP.</p></div><div class=\"interactive-card\"><h3 class=\"interactive-h3 mb-6\">Server Quality</h3><div class=\"chart-container\"><canvas id=\"ecosystemDoughnut\"></canvas></div></div>",
+    
+    "roadmap": "<div class=\"mb-8\"><span class=\"interactive-badge\">FUTURE TRENDS</span><h2 class=\"interactive-h2\">Towards Orchestrated Autonomy</h2><p class=\"interactive-p\">The trend is shifting from manual tool creation to self-generation from OpenAPI.</p></div><div class=\"interactive-card\"><h3 class=\"interactive-h3 mb-6\">Native Adoption Projection</h3><div class=\"chart-container\"><canvas id=\"adoptionChart\"></canvas></div></div>",
+    
+    "checklist": "<div class=\"mb-8\"><span class=\"interactive-badge badge-primary\">CHECKLIST</span><h2 class=\"interactive-h2\">Secure Development Manifesto</h2><p class=\"interactive-p\">When designing or implementing MCP, these rules are mandatory to ensure system integrity.</p></div><div class=\"interactive-card p-0 overflow-hidden\"><ul id=\"mcpChecklist\" class=\"interactive-checklist\"></ul><div class=\"p-4 text-right bg-surface-dim\"><span id=\"scoreDisplay\" class=\"font-bold text-primary text-lg\">0 / 4 Implemented</span></div></div>"
+  },
+  "chartData": {
+    "doughnut": {
+      "labels": ["Scraping Wrappers", "Local Scripts", "Remote BaaS", "Enterprise Integrations"],
+      "data": [45, 15, 15, 25]
+    },
+    "bar": {
+      "labels": ["Q1 2025", "Q3 2025", "Q1 2026", "Q3 2026", "Q1 2027"],
+      "data": [15, 30, 55, 70, 85],
+      "secondaryData": [85, 70, 45, 30, 15]
+    }
+  },
+  "checklistData": [
+    { "id": "mcp1", "label": "Principle of Least Privilege", "desc": "Use Scoped tokens (OAuth 2.1) instead of global API keys." },
+    { "id": "mcp2", "label": "Strict Schema Validation", "desc": "Use Zod or Pydantic to sanitize all LLM inputs." },
+    { "id": "mcp3", "label": "Human-in-the-Loop", "desc": "Require human confirmation for any destructive action (DELETE/POST)." },
+    { "id": "mcp4", "label": "Isolation (Sandboxing)", "desc": "Run local MCP servers in hardened containers (Docker/gVisor)." }
+  ]
+}

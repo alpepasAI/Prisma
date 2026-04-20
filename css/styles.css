@@ -1396,7 +1396,7 @@ ul, ol {
 
 .filter-tag {
   background: transparent;
-  border: 1px solid var(--outline-variant);
+  border: 1px solid rgba(61, 73, 76, 0.4);
   color: var(--on-surface-variant);
   padding: var(--space-sm) var(--space-lg);
   border-radius: var(--radius-full);
@@ -1407,6 +1407,10 @@ ul, ol {
   transition: all var(--transition-fast);
 }
 
+.filter-tag.tag--primary { border-color: rgba(76, 215, 246, 0.2); color: var(--primary); }
+.filter-tag.tag--secondary { border-color: rgba(208, 188, 255, 0.2); color: var(--secondary); }
+.filter-tag.tag--tertiary { border-color: rgba(78, 222, 163, 0.2); color: var(--tertiary); }
+
 .filter-tag:hover {
   border-color: var(--outline);
   color: var(--on-surface);
@@ -1414,9 +1418,9 @@ ul, ol {
 }
 
 .filter-tag.active {
-  background: var(--primary);
-  color: var(--on-primary);
-  border-color: var(--primary);
+  background: var(--primary) !important;
+  color: var(--on-primary) !important;
+  border-color: var(--primary) !important;
 }
 
 /* Topics Logic Toggle */

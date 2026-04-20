@@ -42,7 +42,10 @@ PRISMA is a minimalist, **client-side only (Vanilla JS)** Single Page Applicatio
 - **SEO Limitations:** Because content and meta-tags (`og:title`, `og:image`) are generated client-side via JavaScript, some legacy social media crawlers (which do not execute JS) might only see the fallback static meta-tags in the HTML. **If true zero-JS SEO becomes a strict requirement**, the project should be migrated to a Static Site Generator (SSG) like Astro, Next.js, or Eleventy. Do not attempt to add server-side logic in the current architecture.
 - **Performance:** For massive scalability (e.g., thousands of articles), loading the entire `articles.json` into memory on every page load might become a bottleneck. Pagination or a search index (like Lunr.js) should be considered if the dataset grows significantly.
 
-## 5. Development Rules
+## 5. Workflows
+Standardized procedures for content integration and maintenance are located in `.agent/workflows/`. Always refer to these files when performing complex operations.
+
+## 6. Development Rules
 1. **Consistency:** If adding a new page, reuse the existing Header and Footer templates.
 2. **Translation First:** Do not hardcode user-facing strings in HTML or JS. Always add a key to `i18n.js` and reference it.
 3. **Accessibility:** Preserve `aria-label` attributes and focus states. Ensure interactive elements are keyboard accessible.

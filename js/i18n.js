@@ -46,7 +46,7 @@ const translations = {
     
     detail_listen: 'Escucha el Análisis',
     detail_episode: 'Episodio',
-    detail_podcast_short: 'Versión Resumida (5 min)',
+    detail_podcast_short: 'Versión Resumida',
     detail_podcast_normal: 'Versión Completa',
     detail_visual_data: 'Datos Visuales',
     detail_expand: 'Ampliar',
@@ -65,11 +65,20 @@ const translations = {
     logic_or: 'Cualquiera',
     logic_and: 'Todos',
 
+    // Mission Section
+    mission_title: 'Nuestra Misión',
+    mission_text: 'Este blog nace del deseo de compartir temas de vanguardia sobre IA y programación. Aprovechamos la potencia de modelos como Gemini Deep Research y NotebookLM para crear un crisol de formatos (PDF, Podcast, Infografías, Dashboard Interactivo) para cada análisis, permitiendo que selecciones el que mejor se adapte a tu momento.',
+    powered_by: 'Potenciado por Gemini & NotebookLM',
+
     // Tags
     'tag_ciberseguridad': 'Ciberseguridad',
     'tag_open-source': 'Open Source',
     'tag_npm': 'npm',
     'tag_supply-chain': 'Cadena de Suministro',
+    'tag_mcp': 'MCP',
+    'tag_ai-agents': 'Agentes de IA',
+    'tag_seguridad': 'Seguridad',
+    'tag_interoperabilidad': 'Interoperabilidad',
   },
   en: {
     // Navigation
@@ -113,7 +122,7 @@ const translations = {
 
     detail_listen: 'Listen to the Analysis',
     detail_episode: 'Episode',
-    detail_podcast_short: 'Short Version (5 min)',
+    detail_podcast_short: 'Short Version',
     detail_podcast_normal: 'Full Version',
     detail_visual_data: 'Visual Data',
     detail_expand: 'Expand',
@@ -132,11 +141,20 @@ const translations = {
     logic_or: 'Any',
     logic_and: 'All',
 
+    // Mission Section
+    mission_title: 'Our Mission',
+    mission_text: 'This blog was born from a desire to share cutting-edge topics in AI and programming. We leverage the power of models like Gemini Deep Research and NotebookLM to create a crucible of formats (PDF, Podcast, Infographics, Interactive Dashboard) for each analysis, letting you choose the one that best fits your moment.',
+    powered_by: 'Powered by Gemini & NotebookLM',
+
     // Tags
     'tag_ciberseguridad': 'Cybersecurity',
     'tag_open-source': 'Open Source',
     'tag_npm': 'npm',
     'tag_supply-chain': 'Supply Chain',
+    'tag_mcp': 'MCP',
+    'tag_ai-agents': 'AI Agents',
+    'tag_seguridad': 'Security',
+    'tag_interoperabilidad': 'Interoperability',
   }
 };
 
@@ -188,7 +206,7 @@ function setLang(lang) {
  */
 function t(key) {
   const lang = getLang();
-  return translations[lang]?.[key] || translations['es']?.[key] || key;
+  return translations[lang]?.[key] || translations['es']?.[key] || null;
 }
 
 /**
