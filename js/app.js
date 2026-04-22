@@ -929,6 +929,15 @@ const PRISMA = {
     document.title = `PRISMA — ${data.title}`;
     this.updateSEO(`PRISMA — ${data.title}`, data.subtitle);
 
+    // Apply theme if specified
+    const html = document.documentElement;
+    if (data.theme) {
+      html.classList.add(`theme-${data.theme}`);
+    } else {
+      // Remove any previously applied themes
+      html.classList.remove('theme-stone');
+    }
+
     const subtitleEl = document.getElementById('interactive-subtitle');
     const desktopNav = document.getElementById('desktop-nav');
     const mobileNav = document.getElementById('mobile-nav');
@@ -991,10 +1000,132 @@ const PRISMA = {
 
     // Post-render logic: Checklist
     this.initInteractiveChecklist(data.checklistData);
+
+    // Post-render logic: Accordions
+    this.initAccordions();
+
+    // Post-render logic: Tabs
+    this.initTabs();
+  },
+
+  initTabs() {
+    // Generic data-attribute based tabs
+    const tabButtons = document.querySelectorAll('[data-tab-btn]');
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const group = btn.getAttribute('data-tab-btn');
+        const targetId = btn.getAttribute('data-tab-id');
+
+        document.querySelectorAll(`[data-tab-btn="${group}"]`).forEach(b => {
+          b.classList.toggle('active', b.getAttribute('data-tab-id') === targetId);
+          // Support for Tailwind-style active classes in Stone theme
+          if (group === 'foundations') {
+             b.classList.toggle('tab-active', b.getAttribute('data-tab-id') === targetId);
+             b.classList.toggle('bg-stone-100', b.getAttribute('data-tab-id') !== targetId);
+             b.classList.toggle('text-stone-500', b.getAttribute('data-tab-id') !== targetId);
+          }
+        });
+
+        document.querySelectorAll(`[data-tab-content="${group}"]`).forEach(c => {
+          c.classList.toggle('hidden', c.getAttribute('data-tab-id') !== targetId);
+          c.classList.toggle('block', c.getAttribute('data-tab-id') === targetId);
+        });
+      });
+    });
+
+    // Specific support for Article 003 Draft IDs (ACID/BASE)
+    const btnAcid = document.getElementById('btn-acid');
+    const btnBase = document.getElementById('btn-base');
+    const contentAcid = document.getElementById('content-acid');
+    const contentBase = document.getElementById('content-base');
+
+    if (btnAcid && btnBase) {
+      const setActive = (type) => {
+        const isAcid = type === 'acid';
+        btnAcid.className = `flex-1 py-4 font-bold text-center transition-colors ${isAcid ? 'tab-active' : 'bg-stone-100 text-stone-500 hover:bg-stone-200'}`;
+        btnBase.className = `flex-1 py-4 font-bold text-center transition-colors ${!isAcid ? 'tab-active' : 'bg-stone-100 text-stone-500 hover:bg-stone-200'}`;
+        contentAcid.classList.toggle('hidden', !isAcid);
+        contentAcid.classList.toggle('block', isAcid);
+        contentBase.classList.toggle('hidden', isAcid);
+        contentBase.classList.toggle('block', !isAcid);
+      };
+      btnAcid.addEventListener('click', () => setActive('acid'));
+      btnBase.addEventListener('click', () => setActive('base'));
+    }
+
+    // Specific support for Article 003 Draft IDs (Patterns)
+    const patternBtns = {
+      saga: document.getElementById('btn-saga'),
+      outbox: document.getElementById('btn-outbox'),
+      validation: document.getElementById('btn-validation')
+    };
+    const patternDiagrams = {
+      saga: document.getElementById('diagram-saga'),
+      outbox: document.getElementById('diagram-outbox'),
+      validation: document.getElementById('diagram-validation')
+    };
+
+    if (patternBtns.saga) {
+      const setPatternActive = (key) => {
+        Object.keys(patternBtns).forEach(k => {
+          const isActive = k === key;
+          if (!patternBtns[k]) return;
+          patternBtns[k].className = `text-left px-4 py-3 rounded-lg border-2 transition-all font-bold ${isActive ? 'border-amber-500 bg-amber-50 text-amber-900' : 'border-stone-200 hover:border-stone-400 bg-white text-stone-700'}`;
+          if (patternDiagrams[k]) {
+            patternDiagrams[k].classList.toggle('hidden', !isActive);
+            patternDiagrams[k].classList.toggle('block', isActive);
+          }
+        });
+      };
+      Object.keys(patternBtns).forEach(key => {
+        patternBtns[key]?.addEventListener('click', () => setPatternActive(key));
+      });
+    }
+  },
+
+  initAccordions() {
+    // Support for Article 003 .risk-toggle class
+    const riskToggles = document.querySelectorAll('.risk-toggle');
+    riskToggles.forEach(toggle => {
+      toggle.addEventListener('click', () => {
+        const content = toggle.nextElementSibling;
+        const icon = toggle.querySelector('span');
+        const isHidden = content.classList.contains('hidden');
+        
+        // Toggle this one
+        content.classList.toggle('hidden', !isHidden);
+        if (icon) icon.textContent = isHidden ? '−' : '+';
+        
+        // Optional: close others (accordion behavior)
+        riskToggles.forEach(other => {
+          if (other !== toggle) {
+            other.nextElementSibling.classList.add('hidden');
+            const otherIcon = other.querySelector('span');
+            if (otherIcon) otherIcon.textContent = '+';
+          }
+        });
+      });
+    });
+
+    // Support for standard PRISMA .risk-header class
+    const headers = document.querySelectorAll('.risk-header');
+    headers.forEach(header => {
+      header.addEventListener('click', () => {
+        const accordion = header.parentElement;
+        const content = header.nextElementSibling;
+        const isActive = accordion.classList.toggle('active');
+        if (content) content.classList.toggle('active', isActive);
+      });
+    });
   },
 
   initInteractiveCharts(chartData) {
     if (!chartData || typeof Chart === 'undefined') return;
+
+    // Set Chart.js Defaults for Dark Mode Compatibility
+    Chart.defaults.color = '#a8a29e'; // Stone-400
+    Chart.defaults.borderColor = 'rgba(68, 64, 60, 0.3)'; // var(--outline)
+    Chart.defaults.font.family = "'Inter', sans-serif";
     
     // Radar
     const radarCanvas = document.getElementById('threatRadarChart');
@@ -1070,6 +1201,85 @@ const PRISMA = {
           }
         }
       });
+    }
+
+    // Performance Chart (Article 003)
+    const perfCanvas = document.getElementById('performanceChart');
+    if (perfCanvas && chartData.performance) {
+      const perfChart = new Chart(perfCanvas, {
+        type: 'bar',
+        data: {
+          labels: chartData.performance.labels,
+          datasets: [{
+            label: 'Write Throughput (TPS)',
+            data: chartData.performance.values,
+            backgroundColor: ['#78716c', '#d97706'],
+            borderRadius: 4
+          }]
+        },
+        options: { 
+          responsive: true, 
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              labels: { 
+                color: '#f5f5f4', // Stone-100
+                font: { size: 12, weight: 'bold' }
+              }
+            }
+          },
+          scales: { 
+            y: { 
+              beginAtZero: true, 
+              grid: { 
+                color: 'rgba(245, 245, 244, 0.1)', // Light grid
+                drawBorder: false
+              },
+              ticks: { 
+                color: '#d6d3d1', // Stone-300
+                font: { size: 11 }
+              }
+            },
+            x: {
+              grid: { display: false },
+              ticks: { 
+                color: '#d6d3d1', // Stone-300
+                font: { size: 11 }
+              }
+            }
+          }
+        }
+      });
+
+      // Handle custom toggles
+      const btnWrite = document.getElementById('chart-toggle-write');
+      const btnRead = document.getElementById('chart-toggle-read');
+      const infoEl = document.getElementById('chart-info');
+
+      if (btnWrite && btnRead) {
+        btnWrite.addEventListener('click', () => {
+          btnWrite.classList.add('active');
+          btnRead.classList.remove('active');
+          perfChart.data.labels = chartData.performance.labels;
+          perfChart.data.datasets[0].data = chartData.performance.values;
+          perfChart.data.datasets[0].label = 'Write Throughput (TPS)';
+          perfChart.data.datasets[0].backgroundColor = ['#78716c', '#f59e0b'];
+          perfChart.update();
+          const descriptionEl = document.getElementById('chart-description');
+          if (descriptionEl && chartData.performance.infoWrite) descriptionEl.innerHTML = chartData.performance.infoWrite;
+        });
+        btnRead.addEventListener('click', () => {
+          btnRead.classList.add('active');
+          btnWrite.classList.remove('active');
+          perfChart.data.labels = chartData.performance.secondaryLabels;
+          perfChart.data.datasets[0].data = chartData.performance.secondaryValues;
+          perfChart.data.datasets[0].label = 'Read Latency (ms)';
+          perfChart.data.datasets[0].backgroundColor = ['#f59e0b', '#78716c']; // Use vibrant amber
+          perfChart.update();
+          const descriptionEl = document.getElementById('chart-description');
+          if (descriptionEl && chartData.performance.infoRead) descriptionEl.innerHTML = chartData.performance.infoRead;
+        });
+      }
     }
 
     // Bar/Line Hybrid (Adoption)

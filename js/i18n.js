@@ -11,7 +11,7 @@ const translations = {
     nav_archive: 'Archivo',
 
     // Hero
-    hero_cta: 'Leer Análisis Completo',
+    hero_cta: 'Leer Artículo Editorial',
 
     // Formats
     format_podcast: 'Podcast',
@@ -34,6 +34,8 @@ const translations = {
     footer_terms: 'Términos de Servicio',
     footer_github: 'Github',
     footer_contact: 'Contacto',
+    footer_designed_by: 'Diseñado por',
+    footer_labs: 'Alpepas Labs',
     footer_copyright: `© ${new Date().getFullYear()} PRISMA. Todos los derechos reservados.`,
 
     // Search
@@ -53,7 +55,7 @@ const translations = {
     detail_full_study: 'Estudio Completo',
     detail_full_study_desc: 'Accede al documento técnico detallado con referencias académicas y benchmarks.',
     detail_download_pdf: 'Descargar PDF',
-    detail_web_version: 'Leer versión web',
+    detail_web_version: 'Leer Artículo Editorial',
     detail_related: 'Artículos Relacionados',
     detail_share: 'Compartir',
 
@@ -79,6 +81,12 @@ const translations = {
     'tag_ai-agents': 'Agentes de IA',
     'tag_seguridad': 'Seguridad',
     'tag_interoperabilidad': 'Interoperabilidad',
+    'tag_arquitectura': 'Arquitectura',
+    'tag_backend': 'Backend',
+    'tag_nosql': 'NoSQL',
+    'tag_consistencia-eventual': 'Consistencia Eventual',
+    'tag_microservicios': 'Microservicios',
+    'tag_rendimiento': 'Rendimiento',
   },
   en: {
     // Navigation
@@ -87,7 +95,7 @@ const translations = {
     nav_archive: 'Archive',
 
     // Hero
-    hero_cta: 'Read Full Analysis',
+    hero_cta: 'Read Editorial Article',
 
     // Formats
     format_podcast: 'Podcast',
@@ -110,6 +118,8 @@ const translations = {
     footer_terms: 'Terms of Service',
     footer_github: 'Github',
     footer_contact: 'Contact',
+    footer_designed_by: 'Designed by',
+    footer_labs: 'Alpepas Labs',
     footer_copyright: `© ${new Date().getFullYear()} PRISMA. All rights reserved.`,
 
     // Search
@@ -129,7 +139,7 @@ const translations = {
     detail_full_study: 'Full Study',
     detail_full_study_desc: 'Access the detailed technical document with academic references and benchmarks.',
     detail_download_pdf: 'Download PDF',
-    detail_web_version: 'Read web version',
+    detail_web_version: 'Read Editorial Article',
     detail_related: 'Related Articles',
     detail_share: 'Share',
 
@@ -155,6 +165,12 @@ const translations = {
     'tag_ai-agents': 'AI Agents',
     'tag_seguridad': 'Security',
     'tag_interoperabilidad': 'Interoperability',
+    'tag_arquitectura': 'Architecture',
+    'tag_backend': 'Backend',
+    'tag_nosql': 'NoSQL',
+    'tag_consistencia-eventual': 'Eventual Consistency',
+    'tag_microservicios': 'Microservices',
+    'tag_rendimiento': 'Performance',
   }
 };
 

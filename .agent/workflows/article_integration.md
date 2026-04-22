@@ -30,24 +30,32 @@ This workflow automates the process of adding a new technical article to the PRI
     -   Insert the new entry at the top of the `articles` array.
     -   Set `featured: true` for the new article.
     -   Set `featured: false` for all previous articles.
-    -   **Summary:** Write a 2-3 sentence editorial summary with a professional "hook" and industry perspective.
+    -   **Summary (articles.json):** Write a compelling 2-3 sentence introduction with a strong "hook" that presents a problem or interesting fact to invite the user to read more.
 
 ## Step 4: Content Generation
-1.  **Web Markdown:** Save the cleaned Markdown files to `data/es/[ID].md` and `data/en/[ID].md`. Remove any redundant main titles (`# Title`) as the UI handles them.
-2.  **Interactive Dashboard:** 
-    -   Parse `draft/interactive_article.html`.
-    -   Transform data into `data/es/[ID]-interactive.json` and `data/en/[ID]-interactive.json`.
-    -   Ensure charts and sections match the PRISMA design system.
+1.  **Web Markdown (Editorial Summary):** Do NOT copy the full research markdown. Generate a high-quality **editorial summary** (~800-1000 words) that captures the core narrative and key points in a journalistic style. Save to `data/es/[ID].md` and `data/en/[ID].md`.
+2.  **Interactive Dashboard (Full Fidelity):** 
+    -   Follow the detailed instructions in [Interactive Dashboard Integration](.agent/workflows/interactive_dashboard_integration.md).
+    -   Transform draft HTML into `data/es/[ID]-interactive.json` and `data/en/[ID]-interactive.json`.
+    -   **CRITICAL:** Maintain the *exact* text and structure from the draft. 
+    -   Ensure dark-mode compatibility via `styles.css` overrides as described in the sub-workflow.
+3.  **Visual Assets & Covers:**
+    -   Follow the instructions in [Visual Assets & Podcast Covers](.agent/workflows/podcast_cover_creation.md).
+    -   Generate a 21:9 Hero image and 4 branded 3000x3000px Spotify covers.
+    -   Organize Spotify assets in `assets/spotify/[ID_NUMBER]/`.
+    -   Embed the hero image at the top of the markdown articles.
 
 ## Step 5: Internationalization
 1.  **Update `js/i18n.js`**:
     -   Add any new tags found in Step 1 to the `tags` section in both `es` and `en` dictionaries.
     -   Use the `tag_` prefix for keys.
 
-## Step 6: Cleanup & Validation
-1.  **Delete Drafts:** Wipe all files inside the `draft/` folder.
-2.  **Bump Version:** Increment the `?v=X` parameter in `index.html`, `article.html`, and `topics.html` to invalidate cache.
-3.  **Final Report:** Summarize the changes and provide links for manual verification.
+## Step 6: Validation & Prompts
+1.  **NotebookLM Prompt Generation:** 
+    -   Based on the final article content, generate a custom prompt for NotebookLM's "Customize Audio Overview" (specifically for the *'What should the AI hosts focus on in this episode?'* field).
+    -   The prompt should emphasize the "Prisma style": technical depth, professional debate, and real-world implications.
+2.  **Final Report:** Summarize the changes, provide the NotebookLM prompt, and include links for manual verification.
 
-## Step 7: Podcast Update (Post-Approval)
-1.  Once the user provides Spotify URLs, update the `podcasts` object in the corresponding `articles.json` entry.
+## Step 7: Finalization (User Approval Required)
+1.  **Podcast Update:** Once the user provides Spotify URLs, update the `podcasts` object in the corresponding `articles.json` entry.
+2.  **Cleanup:** **NEVER delete files automatically.** Only after the user gives the final "OK" and explicitly confirms that the article is perfect, delete all files inside the `draft/` folder. This folder contains the templates and source materials that might be needed for fixes.

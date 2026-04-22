@@ -1,4 +1,6 @@
-## Open Source Crisis: Cybersecurity Evolves from Code to Supply Chain
+![Open Source Crisis](assets/covers/001-supply-chain-hero.png)
+
+# **Open Source Crisis: Cybersecurity Evolves from Code to Supply Chain**
 
 Global digital infrastructure faces unprecedented pressure. Today, **between 70% and 90% of modern codebases are composed of external dependencies**, shifting the IT risk from organizations' internal code to the complex supply chain they consume. With a staggering 9.8 trillion package downloads reached in 2025, malicious actors are industrializing cyberattacks against the major development ecosystems.
 

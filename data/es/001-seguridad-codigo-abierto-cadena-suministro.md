@@ -1,4 +1,6 @@
-## Crisis en el Código Abierto: La Ciberseguridad Evoluciona del Código a la Cadena de Suministro
+![Crisis en el Código Abierto](assets/covers/001-supply-chain-hero.png)
+
+# **Crisis en el Código Abierto: La Ciberseguridad Evoluciona del Código a la Cadena de Suministro**
 
 La infraestructura digital global enfrenta una presión sin precedentes. En la actualidad, **entre el 70% y el 90% de las bases de código modernas están compuestas por dependencias externas**, lo que ha trasladado el riesgo informático desde el código interno de las organizaciones hacia la compleja red de suministros que consumen. Con un asombroso volumen de 9.8 billones de descargas de paquetes alcanzado en 2025, actores maliciosos están industrializando los ciberataques contra los principales ecosistemas de desarrollo.
 

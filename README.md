@@ -63,4 +63,15 @@ Para añadir un nuevo artículo a PRISMA de forma automatizada, sigue estos paso
     -   Limpiar la carpeta `draft/`.
 4.  **Revisión Final:** Verifica los cambios y proporciona los IDs finales de Spotify para los podcasts.
 
+## 📁 Estrategia de Activos y Almacenamiento
+
+PRISMA gestiona diferentes tipos de activos visuales para maximizar la calidad en todas las plataformas:
+
+- **`assets/covers/`**: Contiene imágenes optimizadas para la web (como el hero panorámico 21:9). Estos archivos son esenciales para la carga de la página.
+- **`assets/spotify/`**: Almacena carátulas en alta resolución (3000x3000px) exclusivas para plataformas de podcast.
+- **`assets/sources/`**: Fuentes maestras (logos, archivos de diseño originales).
+
+> [!NOTE]
+> **Gestión de espacio:** Actualmente, todos los activos se sincronizan con GitHub para facilitar el despliegue en Cloudflare. Si el tamaño del repositorio aumenta significativamente debido a los activos de alta resolución en `assets/spotify/`, se recomienda añadir dicha carpeta al `.gitignore` y gestionar esos archivos de forma externa (LFS o almacenamiento en la nube).
+
 Para más detalles sobre la arquitectura y filosofía del proyecto, consulta [AGENTS.md](AGENTS.md).

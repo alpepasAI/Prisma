@@ -1,6 +1,94 @@
 {
   "articles": [
     {
+      "id": "003-consistencia-datos-backend-vs-db",
+      "date": "2026-04-22",
+      "readingTime": 10,
+      "tags": ["arquitectura", "backend", "nosql", "consistencia-eventual", "microservicios", "rendimiento"],
+      "featured": true,
+      "formats": {
+        "podcast": {
+          "available": true,
+          "episode": 3
+        },
+        "pdf": {
+          "available": true,
+          "pages": 24
+        },
+        "infographic": {
+          "available": true
+        },
+        "interactive": {
+          "available": true,
+          "dataFile": "003-consistencia-interactive.json"
+        }
+      },
+      "i18n": {
+        "es": {
+          "title": "Consistencia Delegada: El Fin de la Integridad Referencial tal como la Conocíamos",
+          "summary": "¿Qué sucede cuando la base de datos deja de ser el guardián absoluto de la verdad? En la era del escalado masivo, las 'Foreign Keys' se han convertido en un ancla que frena el rendimiento. Gigantes como Uber, Netflix y Amazon han abandonado la integridad tradicional para delegar la consistencia al Backend. Analizamos cómo este cambio permite gestionar millones de eventos por segundo, pero también abre la puerta a la corrupción silenciosa de datos si no se dominan patrones como Saga y Outbox.",
+          "contentFile": "003-consistencia-datos-backend-vs-db.md",
+          "podcasts": {
+            "short": "2l74d66hMVWCXcxZaX8zbY",
+            "normal": "2p8tzJcmBzgQHRyWSp2DuE"
+          }
+        },
+        "en": {
+          "title": "Delegated Consistency: The End of Referential Integrity as We Knew It",
+          "summary": "What happens when the database is no longer the absolute guardian of truth? In the age of massive scale, 'Foreign Keys' have become an anchor holding back performance. Giants like Uber, Netflix, and Amazon have abandoned traditional integrity to delegate consistency to the Backend. We analyze how this shift allows for handling millions of events per second, while also opening the door to silent data corruption if patterns like Saga and Outbox are not mastered.",
+          "contentFile": "003-consistencia-datos-backend-vs-db.md",
+          "podcasts": {
+            "short": "0ABqCNT5syZtMpWlWeErTR",
+            "normal": "2KBdBoJDfflPwCSk2xq9qy"
+          }
+        }
+      }
+    },
+    {
+      "id": "002-mcp-estado-seguridad-futuro",
+      "date": "2026-04-20",
+      "readingTime": 8,
+      "tags": ["mcp", "ai-agents", "seguridad", "interoperabilidad"],
+      "featured": false,
+      "formats": {
+        "podcast": {
+          "available": true,
+          "episode": 2
+        },
+        "pdf": {
+          "available": true,
+          "pages": 18
+        },
+        "infographic": {
+          "available": true
+        },
+        "interactive": {
+          "available": true,
+          "dataFile": "002-mcp-interactive.json"
+        }
+      },
+      "i18n": {
+        "es": {
+          "title": "Model Context Protocol 2026: Arquitectura agéntica y el fin de la fragmentación en IA",
+          "summary": "En 2024, conectar un LLM con herramientas externas era una labor artesanal y fragmentada. Hoy, con más de 97 millones de implementaciones mensuales, el MCP se ha consolidado como el 'USB-C de la IA', resolviendo el problema de la interoperabilidad N-a-N. Analizamos cómo este protocolo no solo orquestas agentes, sino que introduce nuevos vectores de ataque críticos como la inyección de prompts indirecta.",
+          "contentFile": "002-mcp-estado-seguridad-futuro.md",
+          "podcasts": {
+            "short": "1cUiBFgiBtYkf4b618F7bw",
+            "normal": "654zBUWATkYItBhvRTcPdw"
+          }
+        },
+        "en": {
+          "title": "Model Context Protocol 2026: Agentic Architecture and the End of AI Fragmentation",
+          "summary": "In 2024, connecting an LLM with external tools was a handcrafted and fragmented task. Today, with over 97 million monthly implementations, MCP has established itself as the 'USB-C of AI', solving the N-to-N interoperability problem. We analyze how this protocol not only orchestrates agents but also introduces critical new attack vectors like indirect prompt injection.",
+          "contentFile": "002-mcp-estado-seguridad-futuro.md",
+          "podcasts": {
+            "short": "4oO4lEdzkYUs3E961Xt9Qv",
+            "normal": "3X4YYkn6qDrVbhakJUPHPh"
+          }
+        }
+      }
+    },
+    {
       "id": "001-seguridad-codigo-abierto-cadena-suministro",
       "date": "2025-04-18",
       "readingTime": 6,
@@ -40,50 +128,6 @@
           "podcasts": {
             "short": "6Hsuguj6MtmQcnYrCQPyjj",
             "normal": "5bzNpVMxDEy44TjJRKbsds"
-          }
-        }
-      }
-    },
-    {
-      "id": "002-mcp-estado-seguridad-futuro",
-      "date": "2026-04-20",
-      "readingTime": 8,
-      "tags": ["mcp", "ai-agents", "seguridad", "interoperabilidad"],
-      "featured": true,
-      "formats": {
-        "podcast": {
-          "available": true,
-          "episode": 2
-        },
-        "pdf": {
-          "available": true,
-          "pages": 18
-        },
-        "infographic": {
-          "available": true
-        },
-        "interactive": {
-          "available": true,
-          "dataFile": "002-mcp-interactive.json"
-        }
-      },
-      "i18n": {
-        "es": {
-          "title": "Model Context Protocol 2026: Arquitectura agéntica y el fin de la fragmentación en IA",
-          "summary": "En 2024, conectar un LLM con herramientas externas era una labor artesanal y fragmentada. Hoy, con más de 97 millones de implementaciones mensuales, el MCP se ha consolidado como el 'USB-C de la IA', resolviendo el problema de la interoperabilidad N-a-N. Analizamos cómo este protocolo no solo orquestas agentes, sino que introduce nuevos vectores de ataque críticos como la inyección de prompts indirecta.",
-          "contentFile": "002-mcp-estado-seguridad-futuro.md",
-          "podcasts": {
-            "short": "1cUiBFgiBtYkf4b618F7bw",
-            "normal": "654zBUWATkYItBhvRTcPdw"
-          }
-        },
-        "en": {
-          "title": "Model Context Protocol 2026: Agentic Architecture and the End of AI Fragmentation",
-          "summary": "In 2024, connecting an LLM with external tools was a handcrafted and fragmented task. Today, with over 97 million monthly implementations, MCP has established itself as the 'USB-C of AI', solving the N-to-N interoperability problem. We analyze how this protocol not only orchestrates agents but also introduces critical new attack vectors like indirect prompt injection.",
-          "contentFile": "002-mcp-estado-seguridad-futuro.md",
-          "podcasts": {
-            "short": "4oO4lEdzkYUs3E961Xt9Qv",
-            "normal": "3X4YYkn6qDrVbhakJUPHPh"
           }
         }
       }

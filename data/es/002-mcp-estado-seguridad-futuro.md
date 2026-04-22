@@ -1,3 +1,7 @@
+![Model Context Protocol 2026](assets/covers/002-mcp-hero.png)
+
+# **Model Context Protocol 2026: Arquitectura agéntica y el fin de la fragmentación en IA**
+
 El ecosistema de la inteligencia artificial en abril de 2026 ha consolidado una transformación estructural que ha desplazado el centro de gravedad desde la potencia bruta de los modelos de lenguaje (LLM) hacia la capacidad de orquestación y ejecución de tareas complejas en el mundo real. Esta transición ha sido posible gracias a la maduración del Model Context Protocol (MCP), que hoy se reconoce como la infraestructura crítica que resolvió la crisis de interoperabilidad que amenazaba con fragmentar el desarrollo de la IA durante 2024 y 2025.
 
 ## 1. Fundamentos y génesis: El estándar de oro de la interoperabilidad

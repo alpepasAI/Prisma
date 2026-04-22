@@ -82,3 +82,24 @@ In this system, depth is a function of light, not lines.
 *   **DON'T** use pure black (`#000000`). It creates "smearing" on OLED screens and feels unrefined. Stick to the `surface` palette.
 *   **DON'T** use traditional drop shadows on cards. Use tonal shifts instead.
 *   **DON'T** clutter the navigation. The language switcher and search should be the only persistent utility icons.
+
+---
+
+## 7. Branding & Assets
+
+The visual identity of PRISMA is centered around the concept of a glass prism refracting digital light, symbolizing the clarity and depth we bring to technical topics.
+
+### 🏛️ Master Logo
+*   **Path:** `assets/sources/master-logo.png`
+*   **Role:** This is the **definitive source of truth** for the PRISMA brand. It is a high-resolution version containing the complete prism design, light refraction rays, and the brand name in custom typography. 
+*   **Usage:** Never used directly in the web UI. It should be used to derive all other assets.
+
+### 📱 App Icon (Apple Touch Icon)
+*   **Path:** `assets/logo.png`
+*   **Role:** High-fidelity icon for mobile home screens and social media sharing (OG:Image).
+*   **Detail:** A direct copy of the master logo, optimized for 180x180 display.
+
+### 🌐 Favicon
+*   **Path:** `assets/favicon.png`
+*   **Role:** Browser tab icon.
+*   **Design:** A simplified, high-contrast version of the prism without text. This ensures brand recognition at minimal sizes (16x16 to 32x32).

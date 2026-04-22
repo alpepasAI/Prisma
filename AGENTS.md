@@ -7,6 +7,7 @@ PRISMA is a minimalist, **client-side only (Vanilla JS)** Single Page Applicatio
 - **No Build Tools:** There is no Webpack, Vite, Node.js, or npm dependency chain. All code is meant to run directly in the browser. 
 - **Vanilla Everything:** Do not introduce external heavy frameworks (like React, Vue, or TailwindCSS). We use raw CSS variables and Vanilla ES6+ JavaScript.
 - **Design System:** All aesthetic decisions must align with the `DESIGN.md` guidelines. It contains the core philosophy ("Neon Library"), spacing rules, typography, and color palette.
+- **Branding Assets:** The master logo (`assets/sources/master-logo.png`) is the source of truth for the brand. Derived assets like `assets/favicon.png` and `assets/logo.png` should be updated if the master design changes.
 - **Data Layer:** The "database" is entirely static, residing in `data/articles.json`. All fetching happens client-side via the Fetch API.
 
 ## 2. Core Components
