@@ -443,7 +443,10 @@ const PRISMA = {
     );
 
     // Fetch markdown content
-    const contentHtml = await this.fetchMarkdown(i18nData.contentFile, lang);
+    let contentHtml = await this.fetchMarkdown(i18nData.contentFile, lang);
+    
+    // Remove the first H1 if it exists (since we already render the title in the header)
+    contentHtml = contentHtml.replace(/<h1[^>]*>.*?<\/h1>/i, '');
 
     // Tags
     const tagsHtml = article.tags.map((tag, i) =>
@@ -981,6 +984,9 @@ const PRISMA = {
         else section.classList.remove('active');
       });
       if (contentArea) contentArea.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Re-trigger chart init to handle visibility/dimensions
+      this.initInteractiveCharts(data.chartData);
     };
 
     navItems.forEach(item => {
@@ -995,13 +1001,9 @@ const PRISMA = {
       });
     }
 
-    // Post-render logic: Charts
+    // Initial post-render setup
     this.initInteractiveCharts(data.chartData);
-
-    // Post-render logic: Checklist
     this.initInteractiveChecklist(data.checklistData);
-
-    // Post-render logic: Accordions
     this.initAccordions();
 
     // Post-render logic: Tabs
@@ -1126,11 +1128,20 @@ const PRISMA = {
     Chart.defaults.color = '#a8a29e'; // Stone-400
     Chart.defaults.borderColor = 'rgba(68, 64, 60, 0.3)'; // var(--outline)
     Chart.defaults.font.family = "'Inter', sans-serif";
-    
-    // Radar
-    const radarCanvas = document.getElementById('threatRadarChart');
-    if (radarCanvas && chartData.radar) {
-      new Chart(radarCanvas, {
+
+    // Helper to safely initialize or update charts
+    const safeInit = (id, config) => {
+      const canvas = document.getElementById(id);
+      if (!canvas) return null;
+
+      const existing = Chart.getChart(canvas);
+      if (existing) existing.destroy();
+      return new Chart(canvas, config);
+    };
+
+    // --- Article 001/002 Charts ---
+    if (chartData.radar) {
+      safeInit('threatRadarChart', {
         type: 'radar',
         data: {
           labels: chartData.radar.labels,
@@ -1159,54 +1170,59 @@ const PRISMA = {
       });
     }
 
-    // Bar
-    const barCanvas = document.getElementById('dependencyScaleChart');
-    if (barCanvas && chartData.bar) {
-      new Chart(barCanvas, {
+    if (chartData.bar) {
+      safeInit('dependencyScaleChart', {
         type: 'bar',
         data: {
           labels: chartData.bar.labels,
           datasets: [{
             label: 'NPM Packages',
             data: chartData.bar.data,
-            backgroundColor: ['#4edea3', '#4cd7f6', '#d0bcff']
+            backgroundColor: '#4edea3',
+            borderRadius: 4
           }]
         },
-        options: { responsive: true, maintainAspectRatio: false }
-      });
-    }
-
-    // Doughnut (Attack Vectors or Ecosystem)
-    const doughnutCanvas = document.getElementById('attackVectorsChart') || document.getElementById('ecosystemDoughnut');
-    if (doughnutCanvas && chartData.doughnut) {
-      new Chart(doughnutCanvas, {
-        type: 'doughnut',
-        data: {
-          labels: chartData.doughnut.labels,
-          datasets: [{
-            data: chartData.doughnut.data,
-            backgroundColor: doughnutCanvas.id === 'ecosystemDoughnut' 
-              ? ['#f43f5e', '#f59e0b', '#3b82f6', '#10b981']
-              : ['#4cd7f6', '#4edea3', '#d0bcff', '#ffb4ab']
-          }]
-        },
-        options: { 
-          responsive: true, 
+        options: {
+          responsive: true,
           maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              position: 'bottom',
-              labels: { color: '#ffffff', padding: 20 }
-            }
+          scales: {
+            y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' } },
+            x: { grid: { display: false } }
           }
         }
       });
     }
 
-    // Performance Chart (Article 003)
-    const perfCanvas = document.getElementById('performanceChart');
-    if (perfCanvas && chartData.performance) {
-      const perfChart = new Chart(perfCanvas, {
+    if (chartData.doughnut) {
+      ['doughnutChart', 'ecosystemDoughnut'].forEach(id => {
+        safeInit(id, {
+          type: 'doughnut',
+          data: {
+            labels: chartData.doughnut.labels,
+            datasets: [{
+              data: chartData.doughnut.data,
+              backgroundColor: id === 'ecosystemDoughnut' 
+                ? ['#f43f5e', '#f59e0b', '#3b82f6', '#10b981']
+                : ['#4cd7f6', '#4edea3', '#d0bcff', '#ffb4ab']
+            }]
+          },
+          options: { 
+            responsive: true, 
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'bottom',
+                labels: { color: '#ffffff', padding: 20 }
+              }
+            }
+          }
+        });
+      });
+    }
+
+    // --- Article 003 Charts ---
+    if (chartData.performance) {
+      const perfChart = safeInit('performanceChart', {
         type: 'bar',
         data: {
           labels: chartData.performance.labels,
@@ -1220,89 +1236,133 @@ const PRISMA = {
         options: { 
           responsive: true, 
           maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              labels: { 
-                color: '#f5f5f4', // Stone-100
-                font: { size: 12, weight: 'bold' }
-              }
-            }
-          },
-          scales: { 
-            y: { 
-              beginAtZero: true, 
-              grid: { 
-                color: 'rgba(245, 245, 244, 0.1)', // Light grid
-                drawBorder: false
-              },
-              ticks: { 
-                color: '#d6d3d1', // Stone-300
-                font: { size: 11 }
-              }
-            },
-            x: {
-              grid: { display: false },
-              ticks: { 
-                color: '#d6d3d1', // Stone-300
-                font: { size: 11 }
-              }
-            }
+          scales: {
+            y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' } }
           }
         }
       });
 
-      // Handle custom toggles
-      const btnWrite = document.getElementById('chart-toggle-write');
-      const btnRead = document.getElementById('chart-toggle-read');
-      const infoEl = document.getElementById('chart-info');
-
-      if (btnWrite && btnRead) {
-        btnWrite.addEventListener('click', () => {
-          btnWrite.classList.add('active');
-          btnRead.classList.remove('active');
-          perfChart.data.labels = chartData.performance.labels;
-          perfChart.data.datasets[0].data = chartData.performance.values;
-          perfChart.data.datasets[0].label = 'Write Throughput (TPS)';
-          perfChart.data.datasets[0].backgroundColor = ['#78716c', '#f59e0b'];
-          perfChart.update();
-          const descriptionEl = document.getElementById('chart-description');
-          if (descriptionEl && chartData.performance.infoWrite) descriptionEl.innerHTML = chartData.performance.infoWrite;
-        });
-        btnRead.addEventListener('click', () => {
-          btnRead.classList.add('active');
-          btnWrite.classList.remove('active');
-          perfChart.data.labels = chartData.performance.secondaryLabels;
-          perfChart.data.datasets[0].data = chartData.performance.secondaryValues;
-          perfChart.data.datasets[0].label = 'Read Latency (ms)';
-          perfChart.data.datasets[0].backgroundColor = ['#f59e0b', '#78716c']; // Use vibrant amber
-          perfChart.update();
-          const descriptionEl = document.getElementById('chart-description');
-          if (descriptionEl && chartData.performance.infoRead) descriptionEl.innerHTML = chartData.performance.infoRead;
-        });
+      if (perfChart) {
+        const btnWrite = document.getElementById('chart-toggle-write');
+        const btnRead = document.getElementById('chart-toggle-read');
+        if (btnWrite && btnRead) {
+          btnWrite.onclick = () => {
+            btnWrite.classList.add('active');
+            btnRead.classList.remove('active');
+            perfChart.data.labels = chartData.performance.labels;
+            perfChart.data.datasets[0].data = chartData.performance.values;
+            perfChart.data.datasets[0].label = 'Write Throughput (TPS)';
+            perfChart.update();
+          };
+          btnRead.onclick = () => {
+            btnRead.classList.add('active');
+            btnWrite.classList.remove('active');
+            perfChart.data.labels = chartData.performance.secondaryLabels;
+            perfChart.data.datasets[0].data = chartData.performance.secondaryValues;
+            perfChart.data.datasets[0].label = 'Read Latency (ms)';
+            perfChart.update();
+          };
+        }
       }
     }
 
-    // Bar/Line Hybrid (Adoption)
-    const adoptionCanvas = document.getElementById('adoptionChart');
-    if (adoptionCanvas && chartData.bar && chartData.bar.secondaryData) {
-      new Chart(adoptionCanvas, {
+    // --- Article 004 Charts (TurboQuant) ---
+    if (chartData.distribution) {
+      safeInit('distributionChart', {
+        type: 'line',
+        data: chartData.distribution,
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: { display: false },
+            x: { grid: { color: 'rgba(255,255,255,0.05)' } }
+          }
+        }
+      });
+    }
+
+    if (chartData.kvCache) {
+      const kvChart = safeInit('kvCacheChart', {
         type: 'bar',
         data: {
-          labels: chartData.bar.labels,
+          labels: [window.i18n.t('memory_footprint') || 'Memory Footprint'],
           datasets: [
             {
-              label: 'REST APIs',
-              data: chartData.bar.secondaryData,
-              type: 'line',
-              borderColor: '#ffb4ab',
-              borderWidth: 2,
-              tension: 0.4
+              label: 'Base FP16 (TB)',
+              data: [2.62],
+              backgroundColor: 'rgba(168, 162, 158, 0.3)',
+              borderColor: '#a8a29e',
+              borderWidth: 1,
+              borderRadius: 6
             },
             {
-              label: 'MCP Support',
-              data: chartData.bar.data,
-              backgroundColor: '#4cd7f6',
-              borderRadius: 4
+              label: 'TurboQuant (TB)',
+              data: [0.32],
+              backgroundColor: '#818cf8',
+              borderRadius: 6
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'bottom' }
+          },
+          scales: {
+            y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' } }
+          }
+        }
+      });
+
+      if (kvChart) {
+        this.kvChartInst = kvChart;
+        this.initKVCacheCalculator();
+      }
+    }
+
+    if (chartData.hardware) {
+      safeInit('hardwareChart', {
+        type: 'bar',
+        data: {
+          labels: chartData.hardware.labels,
+          datasets: [{
+            label: 'Bandwidth (TB/s)',
+            data: chartData.hardware.values,
+            backgroundColor: ['#4cd7f6', '#d0bcff', '#4edea3']
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            x: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' } }
+          }
+        }
+      });
+    }
+
+    if (chartData.tailBound) {
+      safeInit('tailBoundChart', {
+        type: 'line',
+        data: {
+          labels: chartData.tailBound.labels,
+          datasets: [
+            {
+              label: 'TurboQuant',
+              data: chartData.tailBound.turbo,
+              borderColor: '#4edea3',
+              borderWidth: 3,
+              tension: 0.2
+            },
+            {
+              label: 'RaBitQ',
+              data: chartData.tailBound.rabit,
+              borderColor: '#ffb4ab',
+              borderDash: [5, 5],
+              tension: 0.2
             }
           ]
         },
@@ -1310,8 +1370,7 @@ const PRISMA = {
           responsive: true,
           maintainAspectRatio: false,
           scales: {
-            y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' } },
-            x: { grid: { display: false } }
+            y: { type: 'logarithmic', grid: { color: 'rgba(255,255,255,0.05)' } }
           }
         }
       });
@@ -1360,6 +1419,49 @@ const PRISMA = {
     });
 
     updateScore();
+  },
+
+  initKVCacheCalculator() {
+    const uSlider = document.getElementById('usersSlider');
+    const tSlider = document.getElementById('tokensSlider');
+    const uLabel = document.getElementById('usersLabel');
+    const tLabel = document.getElementById('tokensLabel');
+    const totalText = document.getElementById('totalMemoryText');
+
+    if (!uSlider || !tSlider || !totalText) return;
+
+    // Remove old listeners to avoid duplicates
+    const newUSlider = uSlider.cloneNode(true);
+    const newTSlider = tSlider.cloneNode(true);
+    uSlider.parentNode.replaceChild(newUSlider, uSlider);
+    tSlider.parentNode.replaceChild(newTSlider, tSlider);
+
+    const update = () => {
+      const u = parseInt(newUSlider.value);
+      const t = parseInt(newTSlider.value);
+      
+      if (uLabel) uLabel.innerText = u;
+      if (tLabel) tLabel.innerText = t.toLocaleString();
+
+      // Formula: 2(K,V) * 80 layers * 16 heads * 128 dim * 2 bytes = 640 KB per token
+      const kbTotal = 640 * u * t;
+      const tbTotal = kbTotal / (1024 * 1024 * 1024);
+      
+      totalText.innerText = tbTotal.toFixed(2);
+
+      // TurboQuant typically achieves 6x-8x compression. We'll use 8x for the "best case" visual.
+      const turboQuantTb = tbTotal / 8;
+
+      if (this.kvChartInst) {
+        this.kvChartInst.data.datasets[0].data = [tbTotal];
+        this.kvChartInst.data.datasets[1].data = [turboQuantTb];
+        this.kvChartInst.update();
+      }
+    };
+
+    newUSlider.addEventListener('input', update);
+    newTSlider.addEventListener('input', update);
+    update();
   },
 
   ensureLightbox() {

@@ -1,6 +1,50 @@
 {
   "articles": [
     {
+      "id": "004-turboquant-llm-optimization",
+      "date": "2026-04-24",
+      "readingTime": 5,
+      "tags": ["ai", "optimization", "llm", "quantization", "architecture", "research"],
+      "featured": true,
+      "formats": {
+        "podcast": {
+          "available": true,
+          "episode": 4
+        },
+        "pdf": {
+          "available": true,
+          "pages": 12
+        },
+        "infographic": {
+          "available": true
+        },
+        "interactive": {
+          "available": true,
+          "dataFile": "004-turboquant-llm-optimization-interactive.json"
+        }
+      },
+      "i18n": {
+        "es": {
+          "title": "TurboQuant: El algoritmo que rompió el cuello de botella de la memoria en la era de la IA generativa",
+          "summary": "¿Puede una rotación geométrica ahorrar terabytes de memoria sin sacrificar la inteligencia? En 2026, el KV Cache se ha convertido en el principal limitador de los modelos de lenguaje masivos. Google Research ha presentado TurboQuant, una tecnología capaz de comprimir el contexto hasta 6 veces, permitiendo que modelos de 70B operen en hardware de consumo. Analizamos la matemática de PolarQuant y la corrección QJL que está sacudiendo los cimientos de la industria de semiconductores.",
+          "contentFile": "004-turboquant-llm-optimization.md",
+          "podcasts": {
+            "short": "3bolNeJ0jgBasp6SIuF9jf",
+            "normal": "31SC92eesJOcLBr3j3BtML"
+          }
+        },
+        "en": {
+          "title": "TurboQuant: The Algorithm That Cracked the Memory Bottleneck in the Generative AI Era",
+          "summary": "Can a geometric rotation save terabytes of memory without sacrificing intelligence? In 2026, KV Cache has become the primary limiter for massive language models. Google Research has introduced TurboQuant, a technology capable of compressing context up to 6 times, allowing 70B models to run on consumer hardware. We analyze the mathematics of PolarQuant and the QJL correction that is shaking the foundations of the semiconductor industry.",
+          "contentFile": "004-turboquant-llm-optimization.md",
+          "podcasts": {
+            "short": "2xrHdwb8ff37X4KlvUzuPj",
+            "normal": "4anukQQW2iBdkh25RuPXCn"
+          }
+        }
+      }
+    },
+    {
       "id": "003-consistencia-datos-backend-vs-db",
       "date": "2026-04-22",
       "readingTime": 10,

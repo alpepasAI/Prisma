@@ -87,6 +87,13 @@ const translations = {
     'tag_consistencia-eventual': 'Consistencia Eventual',
     'tag_microservicios': 'Microservicios',
     'tag_rendimiento': 'Rendimiento',
+    'tag_ai': 'IA',
+    'tag_optimization': 'Optimización',
+    'tag_llm': 'LLM',
+    'tag_quantization': 'Cuantización',
+    'tag_research': 'Investigación',
+    memory_footprint: 'Huella de Memoria',
+    implemented: 'Implementado',
   },
   en: {
     // Navigation
@@ -171,6 +178,13 @@ const translations = {
     'tag_consistencia-eventual': 'Eventual Consistency',
     'tag_microservicios': 'Microservices',
     'tag_rendimiento': 'Performance',
+    'tag_ai': 'AI',
+    'tag_optimization': 'Optimization',
+    'tag_llm': 'LLM',
+    'tag_quantization': 'Quantization',
+    'tag_research': 'Research',
+    memory_footprint: 'Memory Footprint',
+    implemented: 'Implemented',
   }
 };
 
