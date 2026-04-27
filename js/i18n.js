@@ -58,6 +58,17 @@ const translations = {
     detail_web_version: 'Leer Artículo Editorial',
     detail_related: 'Artículos Relacionados',
     detail_share: 'Compartir',
+    detail_explore: 'Explorar',
+    
+    // System Messages
+    content_load_error: 'No se pudo cargar el contenido.',
+    no_results: 'No se encontraron artículos.',
+    article_not_found: 'Artículo no encontrado.',
+    implemented: 'Implementados',
+    memory_footprint: 'Huella de Memoria',
+    topics_title: 'Temas',
+    topics_subtitle: 'Explora nuestros análisis técnicos',
+    topics_articles_count: 'artículos',
 
     // Topics
     topics_title: 'Explorador de Temas',
@@ -144,17 +155,27 @@ const translations = {
     detail_visual_data: 'Visual Data',
     detail_expand: 'Expand',
     detail_full_study: 'Full Study',
-    detail_full_study_desc: 'Access the detailed technical document with academic references and benchmarks.',
+    detail_full_study_desc: 'Access the detailed technical paper with academic references and benchmarks.',
     detail_download_pdf: 'Download PDF',
     detail_web_version: 'Read Editorial Article',
     detail_related: 'Related Articles',
     detail_share: 'Share',
+    detail_explore: 'Explore',
+
+    // System Messages
+    content_load_error: 'Content could not be loaded.',
+    no_results: 'No articles found.',
+    article_not_found: 'Article not found.',
+    implemented: 'Implemented',
+    memory_footprint: 'Memory Footprint',
+    topics_title: 'Topics',
+    topics_subtitle: 'Explore our technical analysis',
+    topics_articles_count: 'articles',
 
     // Topics
     topics_title: 'Topic Explorer',
     topics_subtitle: 'Select one or more topics to filter the knowledge library.',
     topics_filtered: 'Filtered articles',
-    topics_articles_count: 'articles',
     logic_or: 'Any',
     logic_and: 'All',
 

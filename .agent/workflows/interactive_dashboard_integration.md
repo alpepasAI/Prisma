@@ -9,36 +9,28 @@ This workflow provides specific technical steps to ensure an interactive HTML dr
 ## Step 1: HTML to JSON Mapping
 1.  **Extract Verbatim HTML:** Copy the contents of each major `<section>` from the draft HTML. 
 2.  **Section IDs:** Map the draft's section IDs to the `sections` object in the JSON file.
-3.  **Literal Content:** Do NOT summarize or change the text. Preserve all classes and specific IDs (e.g., `btn-acid`, `performanceChart`).
-4.  **JSON Metadata:** 
+3.  **Replace Tailwind with Native PRISMA Classes:** 
+    - The dashboard NO LONGER uses Tailwind. 
+    - Replace colors like `bg-white`, `bg-amber-50`, `text-stone-700` with native semantic classes: `interactive-box`, `text-on-surface`, `text-on-surface-variant`.
+    - Use `box-warning`, `box-error`, `box-success` for alert containers.
+4.  **Layout Translation (Grid vs Flex):**
+    - Avoid using `.interactive-grid` if the columns have specific unequal widths (e.g., `w-1/4` and `w-3/4`). `.interactive-grid` forces `1fr 1fr` columns.
+    - Instead, use `.flex.flex-col.lg:flex-row.gap-6` to allow children with `lg:w-1/4` and `lg:w-3/4` to size themselves correctly without squishing.
+5.  **JSON Metadata:** 
     - Set `theme: "stone"` for technical/architectural articles.
     - Map the `nav` labels to the section headings.
     - Map `chartData` manually by extracting values from the draft's `<script>` section.
 
-## Step 2: Dark Mode & Contrast Overrides (styles.css)
-Drafts often use light backgrounds (`bg-white`, `bg-stone-50`). You MUST override these in `css/styles.css` under the `.theme-stone` selector:
+## Step 2: JavaScript State & Logic (interactive.js)
+1.  **No Hardcoded Tailwind:** When toggling classes via JS (e.g., switching tabs), NEVER hardcode Tailwind color classes (like `text-amber-900` or `bg-white`). Always use PRISMA's semantic CSS variables to ensure dark mode fidelity (e.g., `interactive-box`, `tab-active`).
+2.  **Chart Initialization:** Check the `initInteractiveCharts()` function. Ensure that the `<canvas id="yourChartId">` defined in the JSON is EXPLICITLY initialized in `interactive.js`. Do not assume charts will auto-render; add missing IDs to the arrays inside `initInteractiveCharts()`.
 
-1.  **Background Overrides:**
-    ```css
-    .theme-stone .bg-white { background-color: var(--surface) !important; }
-    .theme-stone .bg-stone-50 { background-color: var(--background) !important; }
-    .theme-stone .bg-stone-100 { background-color: var(--surface-dim) !important; }
-    .theme-stone .bg-green-50 { background-color: #064e3b !important; border: 1px solid #10b981 !important; }
-    .theme-stone .bg-red-50 { background-color: #450a0a !important; border: 1px solid #ef4444 !important; }
-    ```
-2.  **Text Contrast:**
-    - Force stone-numeric classes (`text-stone-300`, etc.) to be light (`#d6d3d1`).
-    - Ensure `strong` and `li` tags inside colored boxes are white (`#ffffff`).
-    - Fix button contrast: Ensure dark text on bright buttons (e.g., `#000000` on amber).
-
-## Step 3: Chart.js Dark Mode Configuration (app.js)
-Default Chart.js settings are for light mode. You MUST update `js/app.js`:
-
-1.  **Global Defaults:** Set `Chart.defaults.color` to a light gray and `Chart.defaults.borderColor` to a translucent white.
-2.  **Instance Config:** Inside `initInteractiveCharts`, explicitly set the following for each new chart:
+## Step 3: Chart.js Dark Mode Configuration
+Default Chart.js settings are for light mode. You MUST respect the global defaults set in `js/interactive.js`:
+1.  **Instance Config:** Explicitly set the following for each new chart:
     ```javascript
     scales: { 
-      y: { grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: '#a8a29e' } },
+      y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#a8a29e' } },
       x: { ticks: { color: '#a8a29e' } }
     },
     plugins: { legend: { labels: { color: '#f5f5f4' } } }

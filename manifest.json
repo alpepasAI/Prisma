@@ -1,0 +1,23 @@
+{
+  "name": "PRISMA — Análisis Técnico",
+  "short_name": "PRISMA",
+  "description": "Biblioteca digital de análisis técnicos sobre programación, ciberseguridad e inteligencia artificial.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#0a0c10",
+  "theme_color": "#4cd7f6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/assets/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

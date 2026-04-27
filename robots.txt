@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# Opcional: Si hubiera un sitemap real
-# Sitemap: https://tudominio.com/sitemap.xml
+Sitemap: https://prisma.alpepaslabs.com/sitemap.xml
