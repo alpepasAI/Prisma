@@ -41,9 +41,9 @@ This workflow automates the process of adding a new technical article to the PRI
     -   Ensure dark-mode compatibility via `styles.css` overrides as described in the sub-workflow.
 3.  **Visual Assets & Covers:**
     -   Follow the instructions in [Visual Assets & Podcast Covers](.agent/workflows/podcast_cover_creation.md).
-    -   Generate a 21:9 Hero image and 4 branded 3000x3000px Spotify covers.
+    -   **Automation:** Use `fix_hero_crop_v2.py` for the panoramic Hero (3000x1285px) and `generate_branded_squares.py` for the 4 Spotify covers.
+    -   **Layout:** Embed the hero image at the very top of the markdown articles, **above the main title**.
     -   Organize Spotify assets in `assets/spotify/[ID_NUMBER]/`.
-    -   Embed the hero image at the top of the markdown articles.
 
 ## Step 5: Internationalization
 1.  **Update `js/i18n.js`**:
@@ -52,10 +52,19 @@ This workflow automates the process of adding a new technical article to the PRI
 
 ## Step 6: Validation & Prompts
 1.  **NotebookLM Prompt Generation:** 
-    -   Based on the final article content, generate a custom prompt for NotebookLM's "Customize Audio Overview" (specifically for the *'What should the AI hosts focus on in this episode?'* field).
+    -   Based on the final article content, generate a custom prompt for NotebookLM's "Customize Audio Overview".
     -   The prompt should emphasize the "Prisma style": technical depth, professional debate, and real-world implications.
-2.  **Final Report:** Summarize the changes, provide the NotebookLM prompt, and include links for manual verification.
+2.  **Request Spotify URLs:** After providing the NotebookLM prompt, explicitly ask the user for the Spotify URLs to complete the integration. Do not ask for cleanup until URLs are provided and updated.
 
 ## Step 7: Finalization (User Approval Required)
 1.  **Podcast Update:** Once the user provides Spotify URLs, update the `podcasts` object in the corresponding `articles.json` entry.
-2.  **Cleanup:** **NEVER delete files automatically.** Only after the user gives the final "OK" and explicitly confirms that the article is perfect, delete all files inside the `draft/` folder. This folder contains the templates and source materials that might be needed for fixes.
+2.  **Cleanup:** Only after the user confirms that the article is perfect AND the Spotify links are working, delete all files inside the `draft/` folder and any redundant temporary assets.
+
+---
+
+### 📦 Mandatory Deliverables (Final Report)
+Every time this workflow is executed, the agent **MUST** include:
+1.  **NotebookLM Prompt:** The specific text to be used in the "Customize" field of NotebookLM.
+2.  **Verification Links:** Local links to the new `.md` files and the interactive dashboard.
+3.  **Visual Confirmation:** Embed the generated Hero image and one Spotify cover.
+

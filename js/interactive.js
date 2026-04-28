@@ -323,19 +323,61 @@ export function initInteractiveCharts(chartData) {
     });
   }
 
-  // Article 004 – Tail bound
-  if (chartData.tailBound) {
-    safeInit('tailBoundChart', {
-      type: 'line',
+  // Article 005 – Ubuntu Performance
+  if (chartData.ubuntuPerf) {
+    const ubuntuPerf = safeInit('ubuntuPerfChart', {
+      type: 'bar',
       data: {
-        labels: chartData.tailBound.labels,
+        labels: chartData.ubuntuPerf.speed.labels,
         datasets: [
-          { label: 'TurboQuant', data: chartData.tailBound.turbo, borderColor: '#4edea3', borderWidth: 3, tension: 0.2 },
-          { label: 'RaBitQ',     data: chartData.tailBound.rabit, borderColor: '#ffb4ab', borderDash: [5,5], tension: 0.2 }
+          { label: 'Ubuntu 24.04 LTS', data: chartData.ubuntuPerf.speed.data24, backgroundColor: 'rgba(168,162,158,0.3)', borderRadius: 4 },
+          { label: 'Ubuntu 26.04 LTS', data: chartData.ubuntuPerf.speed.data26, backgroundColor: '#E95420', borderRadius: 4 }
         ]
       },
-      options: { responsive: true, maintainAspectRatio: false, scales: { y: { type: 'logarithmic', grid: { color: 'rgba(255,255,255,0.05)' } } } }
+      options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' }, title: { display: true, text: chartData.ubuntuPerf.speed.labelY } } } }
     });
+    if (ubuntuPerf) {
+      const btnSpeed = document.getElementById('btn-perf-speed');
+      const btnRes   = document.getElementById('btn-perf-res');
+      const context  = document.getElementById('perf-context');
+      if (btnSpeed && btnRes) {
+        btnSpeed.onclick = () => {
+          btnSpeed.classList.add('active'); btnRes.classList.remove('active');
+          ubuntuPerf.data.labels = chartData.ubuntuPerf.speed.labels;
+          ubuntuPerf.data.datasets[0].data = chartData.ubuntuPerf.speed.data24;
+          ubuntuPerf.data.datasets[1].data = chartData.ubuntuPerf.speed.data26;
+          ubuntuPerf.options.scales.y.title.text = chartData.ubuntuPerf.speed.labelY;
+          ubuntuPerf.update();
+          if (context) context.textContent = window.i18n.getLang() === 'es' ? 'Mostrando Velocidad: Nota la reducción drástica en los tiempos de arranque de Snaps.' : 'Showing Speed Metrics: Note the drastic reduction in Snap Application cold start times.';
+        };
+        btnRes.onclick = () => {
+          btnRes.classList.add('active'); btnSpeed.classList.remove('active');
+          ubuntuPerf.data.labels = chartData.ubuntuPerf.resources.labels;
+          ubuntuPerf.data.datasets[0].data = chartData.ubuntuPerf.resources.data24;
+          ubuntuPerf.data.datasets[1].data = chartData.ubuntuPerf.resources.data26;
+          ubuntuPerf.options.scales.y.title.text = chartData.ubuntuPerf.resources.labelY;
+          ubuntuPerf.update();
+          if (context) context.textContent = window.i18n.getLang() === 'es' ? 'Mostrando Recursos: 26.04 usa más RAM nativa por la IA, pero reduce el espacio en disco.' : 'Showing Resources: 26.04 uses more RAM due to AI, but reduces disk footprint.';
+        };
+      }
+    }
+  }
+
+  // Article 005 – Ubuntu Sentiment
+  if (chartData.ubuntuSentiment) {
+    safeInit('ubuntuSentimentChart', {
+      type: 'doughnut',
+      data: {
+        labels: chartData.ubuntuSentiment.labels,
+        datasets: [{
+          data: chartData.ubuntuSentiment.data,
+          backgroundColor: ['#10b981', '#4edea3', 'rgba(168,162,158,0.2)', '#f43f5e'],
+          borderWidth: 0
+        }]
+      },
+      options: { responsive: true, maintainAspectRatio: false, cutout: '70%', plugins: { legend: { position: 'right', labels: { color: '#a8a29e', boxWidth: 12, usePointStyle: true } } } }
+    });
+    initUbuntuQuiz();
   }
 }
 
@@ -415,3 +457,80 @@ export function initKVCacheCalculator() {
   newT.addEventListener('input', update);
   update();
 }
+
+// ─── UBUNTU QUIZ ──────────────────────────────────────────────────────────────
+
+let ubuntuQuizStep = 0;
+const ubuntuQuestions = {
+  es: [
+    "¿Tienes un PC moderno con NPU dedicada o una GPU de gama alta?",
+    "¿Eres desarrollador y usas LLMs o asistentes de código locales?",
+    "¿Es la estabilidad absoluta crítica para tu trabajo diario ahora mismo?"
+  ],
+  en: [
+    "Do you have a modern PC with a dedicated NPU or a high-end GPU?",
+    "Are you a developer who frequently uses local LLMs or AI coding assistants?",
+    "Is absolute rock-solid system stability critical for your daily work right now?"
+  ]
+};
+
+export function initUbuntuQuiz() {
+  ubuntuQuizStep = 0;
+  window.handleUbuntuQuiz = (answer) => {
+    const lang = window.i18n.getLang();
+    const qText = document.getElementById('quiz-question');
+    
+    if (ubuntuQuizStep === 0) {
+      if (answer === 'yes') showUbuntuResult('upgrade_now_npu');
+      else { ubuntuQuizStep = 1; if (qText) qText.textContent = ubuntuQuestions[lang][1]; }
+    } else if (ubuntuQuizStep === 1) {
+      if (answer === 'yes') showUbuntuResult('upgrade_now_dev');
+      else { ubuntuQuizStep = 2; if (qText) qText.textContent = ubuntuQuestions[lang][2]; }
+    } else if (ubuntuQuizStep === 2) {
+      if (answer === 'yes') showUbuntuResult('wait');
+      else showUbuntuResult('upgrade_general');
+    }
+  };
+  window.resetUbuntuQuiz = () => {
+    ubuntuQuizStep = 0;
+    const qArea = document.getElementById('quiz-area');
+    const rArea = document.getElementById('quiz-result');
+    const qText = document.getElementById('quiz-question');
+    if (qArea) qArea.classList.remove('hidden');
+    if (rArea) rArea.classList.add('hidden');
+    if (qText) qText.textContent = ubuntuQuestions[window.i18n.getLang()][0];
+  };
+}
+
+function showUbuntuResult(type) {
+  const lang = window.i18n.getLang();
+  const qArea = document.getElementById('quiz-area');
+  const rArea = document.getElementById('quiz-result');
+  if (qArea) qArea.classList.add('hidden');
+  if (rArea) rArea.classList.remove('hidden');
+
+  const title = document.getElementById('result-title');
+  const desc  = document.getElementById('result-desc');
+  const icon  = document.getElementById('result-icon');
+
+  const results = {
+    es: {
+      upgrade_now_npu: { icon: '🚀', title: '¡Actualiza ya!', desc: 'Tu hardware está preparado para la IA de 26.04.' },
+      upgrade_now_dev: { icon: '💻', title: '¡Recomendado!', desc: 'El nuevo stack de IA y Devbox simplificarán tu trabajo.' },
+      wait: { icon: '🛡️', title: 'Espera a la 26.04.1', desc: 'Si priorizas la estabilidad, espera a agosto.' },
+      upgrade_general: { icon: '✨', title: 'Seguro Actualizar', desc: 'Las mejoras en GNOME y Snaps valen la pena.' }
+    },
+    en: {
+      upgrade_now_npu: { icon: '🚀', title: 'Upgrade Now!', desc: 'Your hardware is perfectly suited for 26.04 AI.' },
+      upgrade_now_dev: { icon: '💻', title: 'Recommended!', desc: 'The new AI stack and Devbox will simplify your work.' },
+      wait: { icon: '🛡️', title: 'Wait for 26.04.1', desc: 'If stability is critical, wait until August.' },
+      upgrade_general: { icon: '✨', title: 'Safe to Upgrade', desc: 'GNOME and Snap improvements are worth it.' }
+    }
+  };
+
+  const res = results[lang][type];
+  if (icon) icon.textContent = res.icon;
+  if (title) title.textContent = res.title;
+  if (desc) desc.textContent = res.desc;
+}
+

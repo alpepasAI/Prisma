@@ -1,11 +1,55 @@
 {
   "articles": [
     {
+      "id": "005-ubuntu-26-04-resolute-raccoon",
+      "date": "2026-04-28",
+      "readingTime": 10,
+      "tags": ["ubuntu", "linux", "ai", "rust", "security", "open-source", "engineering"],
+      "featured": true,
+      "formats": {
+        "podcast": {
+          "available": true,
+          "episode": 5
+        },
+        "pdf": {
+          "available": true,
+          "pages": 15
+        },
+        "infographic": {
+          "available": true
+        },
+        "interactive": {
+          "available": true,
+          "dataFile": "005-ubuntu-26-04-resolute-raccoon-interactive.json"
+        }
+      },
+      "i18n": {
+        "es": {
+          "title": "Análisis de ingeniería de Ubuntu 26.04 LTS: El salto a Rust y la IA nativa",
+          "summary": "¿Es posible un sistema operativo donde la seguridad no sea una opción y la IA viva en el núcleo? Ubuntu 26.04 LTS 'Resolute Raccoon' marca el cambio más radical de Canonical en una década, migrando componentes críticos a Rust e integrando aceleración de IA nativa. Analizamos cómo el Kernel 7.0 y el proyecto Oxidation están redefiniendo el estándar de la computación de alto rendimiento y soberanía de datos.",
+          "contentFile": "005-ubuntu-26-04-resolute-raccoon.md",
+          "podcasts": {
+            "short": "3uxMfCKqUkh56xz0M21TQQ",
+            "normal": "5wkc4vk7u2oN0xWJ2c4zZW"
+          }
+        },
+        "en": {
+          "title": "Engineering Analysis of Ubuntu 26.04 LTS: The Leap to Rust and Native AI",
+          "summary": "Is it possible to have an operating system where security is not optional and AI lives in the core? Ubuntu 26.04 LTS 'Resolute Raccoon' marks Canonical's most radical shift in a decade, migrating critical components to Rust and integrating native AI acceleration. We analyze how Kernel 7.0 and the Oxidation project are redefining the standard for high-performance computing and data sovereignty.",
+          "contentFile": "005-ubuntu-26-04-resolute-raccoon.md",
+          "podcasts": {
+            "short": "62GWG7vi8n96Rykyb5fIhf",
+            "normal": "5yICMpljHkUgrfqDj9NWHt"
+          }
+        }
+      }
+    },
+    {
       "id": "004-turboquant-llm-optimization",
       "date": "2026-04-24",
       "readingTime": 5,
       "tags": ["ai", "optimization", "llm", "quantization", "architecture", "research"],
-      "featured": true,
+      "featured": false,
       "formats": {
         "podcast": {
           "available": true,
@@ -49,7 +93,7 @@
       "date": "2026-04-22",
       "readingTime": 10,
       "tags": ["arquitectura", "backend", "nosql", "consistencia-eventual", "microservicios", "rendimiento"],
-      "featured": true,
+      "featured": false,
       "formats": {
         "podcast": {
           "available": true,

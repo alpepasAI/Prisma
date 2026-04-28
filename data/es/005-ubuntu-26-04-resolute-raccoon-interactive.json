@@ -1,0 +1,39 @@
+{
+  "title": "Ubuntu 26.04 LTS \"Resolute Raccoon\"",
+  "subtitle": "Análisis del primer lanzamiento LTS nativo para IA y la transición a Rust.",
+  "theme": "stone",
+  "nav": [
+    { "id": "overview", "label": "Resumen" },
+    { "id": "ai", "label": "Integración de IA" },
+    { "id": "performance", "label": "Rendimiento" },
+    { "id": "community", "label": "Veredicto" },
+    { "id": "upgrade", "label": "Guía de Mejora" }
+  ],
+  "sections": {
+    "overview": "<div class=\"interactive-box mb-6\"><h2 class=\"text-xl font-bold mb-4 text-on-surface\">Resumen Ejecutivo</h2><p class=\"text-on-surface-variant leading-relaxed mb-4\">Lanzado en abril de 2026, Ubuntu 26.04 LTS representa un cambio de paradigma para el escritorio Linux. Canonical se ha centrado fuertemente en la <strong>IA local acelerada por hardware</strong>, mejoras masivas en el ecosistema Snap y la modernización de la experiencia central con GNOME 50.</p></div><div class=\"flex flex-col gap-6\"><div class=\"interactive-grid\"><div class=\"interactive-box\"><div class=\"text-3xl mb-3\">🧠</div><h3 class=\"font-bold mb-2 text-on-surface\">Stack de IA Nativo</h3><p class=\"text-sm text-on-surface-variant\">Enrutamiento NPU integrado. Incluye 'Ubuntu AI Core', permitiendo ejecutar LLMs locales de forma segura.</p></div><div class=\"interactive-box\"><div class=\"text-3xl mb-3\">⚡</div><h3 class=\"font-bold mb-2 text-on-surface\">Pre-caché de Snaps</h3><p class=\"text-sm text-on-surface-variant\">Las aplicaciones Snap ahora utilizan pre-caché en segundo plano, logrando arranques casi instantáneos.</p></div></div><div class=\"interactive-grid\"><div class=\"interactive-box\"><div class=\"text-3xl mb-3\">🛡️</div><h3 class=\"font-bold mb-2 text-on-surface\">Proyecto Oxidation</h3><p class=\"text-sm text-on-surface-variant\">Componentes críticos como sudo y coreutils migrados a Rust para seguridad de memoria por diseño.</p></div><div class=\"interactive-box\"><div class=\"text-3xl mb-3\">🔋</div><h3 class=\"font-bold mb-2 text-on-surface\">Kernel 7.0</h3><p class=\"text-sm text-on-surface-variant\">Mejoras masivas de eficiencia energética para arquitecturas Intel Panther Lake y AMD Zen 6.</p></div></div></div>",
+    "ai": "<div class=\"interactive-box mb-6\"><h2 class=\"text-xl font-bold mb-4 text-on-surface\">El Escritorio Nativo para IA</h2><p class=\"text-on-surface-variant mb-6\">Ubuntu 26.04 trata la IA como un componente central del sistema. Esta sección detalla cómo el SO utiliza la IA para mejorar el flujo de trabajo diario priorizando la privacidad.</p><div class=\"flex flex-col lg:flex-row gap-8 items-center\"><div class=\"flex-1\"><ul class=\"space-y-4\"><li class=\"flex items-start\"><span class=\"text-primary mr-3\">✓</span><div><strong class=\"text-on-surface\">Privacidad Primero:</strong> La ejecución local garantiza que tus datos nunca salgan de tu máquina.</div></li><li class=\"flex items-start\"><span class=\"text-primary mr-3\">✓</span><div><strong class=\"text-on-surface\">Enrutamiento de Hardware:</strong> Uso inteligente de NPU/GPU para liberar la carga de la CPU.</div></li><li class=\"flex items-start\"><span class=\"text-primary mr-3\">✓</span><div><strong class=\"text-on-surface\">Búsqueda Semántica:</strong> La búsqueda de GNOME entiende el contexto y la intención, no solo nombres de archivos.</div></li></ul></div><div class=\"flex-1 w-full bg-black/40 p-5 rounded-lg font-mono text-sm border border-white/5\"><div class=\"text-stone-500 mb-4 flex justify-between\"><span>terminal — bash</span><span>● ● ●</span></div><div class=\"text-green-400\"><span class=\"text-stone-500\">$</span> ubuntu-ai status<br>> Daemon: <span class=\"text-green-500\">EJECUTÁNDOSE</span><br>> Modelo: Mistral-Nemo-Instruct (Q4)<br>> Acelerador: AMD XDNA NPU<br>> Memoria: 2.1 GB VRAM<br><br><span class=\"text-stone-500\">$</span> ubuntu-ai query \"resumir logs\"<br>> Analizando 500 líneas...<br>> \"Sistema estable. Sin errores críticos.\"</div></div></div></div>",
+    "performance": "<div class=\"interactive-box mb-6\"><h2 class=\"text-xl font-bold mb-4 text-on-surface\">Rendimiento vs 24.04 LTS</h2><p class=\"text-on-surface-variant mb-6\">Selecciona una métrica para visualizar las mejoras en la capacidad de respuesta y gestión de recursos.</p><div class=\"flex justify-center gap-4 mb-8\"><button id=\"btn-perf-speed\" class=\"tab-btn active\" data-metric=\"speed\">Velocidad</button><button id=\"btn-perf-res\" class=\"tab-btn\" data-metric=\"resources\">Recursos</button></div><div class=\"chart-container\" style=\"height:300px;\"><canvas id=\"ubuntuPerfChart\"></canvas></div><div id=\"perf-context\" class=\"mt-6 text-center text-sm text-on-surface-variant bg-black/20 p-4 rounded-lg\">Mostrando Velocidad: Nota la reducción drástica en los tiempos de arranque de Snaps.</div></div>",
+    "community": "<div class=\"interactive-box mb-6\"><h2 class=\"text-xl font-bold mb-4 text-on-surface\">Veredicto de la Comunidad</h2><p class=\"text-on-surface-variant mb-8\">Datos agregados de foros de desarrolladores y encuestas en Reddit un mes después del lanzamiento.</p><div class=\"flex flex-col lg:flex-row gap-8 items-center\"><div class=\"w-full lg:w-1/2\" style=\"height:250px;\"><canvas id=\"ubuntuSentimentChart\"></canvas></div><div class=\"w-full lg:w-1/2 space-y-4\"><div class=\"box-success p-4 rounded-lg\"><h4 class=\"font-bold mb-2\">Puntos Positivos</h4><ul class=\"text-xs space-y-1 list-disc list-inside\"><li>Los Snaps finalmente se sienten instantáneos.</li><li>Las herramientas de IA local no agotan la batería gracias a la NPU.</li><li>GNOME 50 sobre Wayland es increíblemente fluido.</li></ul></div><div class=\"box-error p-4 rounded-lg\"><h4 class=\"font-bold mb-2\">Críticas Principales</h4><ul class=\"text-xs space-y-1 list-disc list-inside\"><li>El uso base de RAM aumentó en ~400MB.</li><li>Controversia sobre el nuevo Centro de Software.</li></ul></div></div></div></div>",
+    "upgrade": "<div class=\"interactive-box text-center\"><h2 class=\"text-xl font-bold mb-4 text-on-surface\">¿Deberías Actualizar?</h2><p class=\"text-on-surface-variant mb-8\">Usa esta evaluación personalizada para decidir si dar el salto a 26.04 ahora.</p><div id=\"quiz-area\" class=\"max-w-md mx-auto py-8\"><h3 id=\"quiz-question\" class=\"text-lg font-bold mb-6\">¿Tienes un PC moderno con NPU dedicada o una GPU de gama alta?</h3><div class=\"flex justify-center gap-4\"><button class=\"tab-btn active px-8\" onclick=\"handleUbuntuQuiz('yes')\">Sí</button><button class=\"tab-btn px-8\" onclick=\"handleUbuntuQuiz('no')\">No</button></div></div><div id=\"quiz-result\" class=\"hidden max-w-md mx-auto py-8\"><div id=\"result-icon\" class=\"text-5xl mb-4\">🚀</div><h3 id=\"result-title\" class=\"text-xl font-bold mb-3 text-primary\">¡Actualiza ya!</h3><p id=\"result-desc\" class=\"text-on-surface-variant mb-6\">Tu hardware está perfectamente preparado para las funciones de IA de 26.04.</p><button class=\"text-primary font-bold hover:underline\" onclick=\"resetUbuntuQuiz()\">Reiniciar Evaluación</button></div></div>"
+  },
+  "chartData": {
+    "ubuntuPerf": {
+      "speed": {
+        "labels": ["Arranque (s)", "Frío Snap (s)", "Login (s)"],
+        "data24": [12.5, 4.2, 3.8],
+        "data26": [9.1, 1.1, 2.0],
+        "labelY": "Segundos"
+      },
+      "resources": {
+        "labels": ["RAM Idle (GB)", "Disco (GB)", "CPU Idle %"],
+        "data24": [1.3, 18.5, 2.5],
+        "data26": [1.7, 16.0, 1.8],
+        "labelY": "Unidades"
+      }
+    },
+    "ubuntuSentiment": {
+      "labels": ["Muy Positivo", "Positivo", "Neutral", "Negativo"],
+      "data": [62, 23, 10, 5]
+    }
+  }
+}

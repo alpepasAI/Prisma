@@ -15,13 +15,19 @@ This workflow ensures every article has high-quality branded assets for both the
 
 ## Step 2: Processing & Branding
 1.  **Hero Image (Web):**
-    -   Use `fix_hero_crop_v2.py` to remove any blurred bars (letterboxing) and resize to **3000x1285px**.
+    -   Use `fix_hero_crop_v2.py` to crop/resize the raw generation to **3000x1285px**.
+    -   Ensure the focus of the image is vertically centered or slightly above center to avoid cutting off the main subject.
     -   Save to `assets/covers/[ID]-hero.png`.
 2.  **Spotify Covers (Branded):**
     -   Use `generate_branded_squares.py` to process the Square Base.
-    -   **Output:** 4 branded versions (ES, ES-Breve, EN, EN-Short) at **3000x3000px**.
-    -   **Logo Size:** Ensure logos (Alpepas Labs & PRISMA) are prominent (approx. 90% of the bottom bar height).
-    -   **Labels:** Use "BREVE" for Spanish and "SHORT" for English versions.
+    -   **Bottom Bar:** A solid dark bar (approx. 15% height) containing:
+        -   **Left:** Alpepas Labs logo (`assets/sources/logo-alpepas-labs.png`).
+        -   **Right:** PRISMA logo (`assets/sources/master-logo.png`).
+    -   **Language Tags (Top Right):**
+        -   `ES` or `EN` in a rounded semi-transparent box.
+    -   **Version Tags (Top Left):**
+        -   `BREVE` (for ES short) or `SHORT` (for EN short) in a rounded semi-transparent box.
+    -   **Output:** 4 branded versions (ES, ES-BREVE, EN, EN-SHORT) at **3000x3000px**.
 
 ## Step 3: Organization & Deployment
 1.  **Spotify Folder:** Move all podcast-specific assets (branded covers and the square base) to `assets/spotify/[ID_NUMBER]/`.
