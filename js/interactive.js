@@ -13,7 +13,7 @@ let kvChartInst = null;
 
 export async function initInteractive() {
   const articleId = getArticleId();
-  if (!articleId) { window.location.href = 'index.html'; return; }
+  if (!articleId) { window.location.href = './'; return; }
 
   const article = await getArticleById(articleId);
   if (!article || !article.formats?.interactive?.available) {
@@ -32,7 +32,7 @@ export async function initInteractive() {
     try {
       const res  = await fetch(`data/${lng}/${dataFile}?v=4`, { cache: 'no-store' });
       const data = await res.json();
-      renderInteractive(data);
+      renderInteractive(data, article);
     } catch (e) {
       console.error('Error loading interactive data:', e);
     }
@@ -41,13 +41,13 @@ export async function initInteractive() {
   await loadAndRender(lang);
 
   window.addEventListener('langchange', async () => {
-    await loadAndRender(window.i18n.getLang());
+    await loadAndRender(window.i18n.getLang(), article);
   });
 }
 
 // ─── RENDER DASHBOARD ─────────────────────────────────────────────────────────
 
-export function renderInteractive(data) {
+export function renderInteractive(data, article) {
   document.title = `PRISMA — ${data.title}`;
   updateSEO(`PRISMA — ${data.title}`, data.subtitle);
 
@@ -61,7 +61,8 @@ export function renderInteractive(data) {
   const mobileNav   = document.getElementById('mobile-nav');
   const contentArea = document.getElementById('interactive-content');
 
-  if (subtitleEl) subtitleEl.textContent = data.subtitle;
+  const lang = window.i18n.getLang();
+  if (subtitleEl) subtitleEl.textContent = article.i18n[lang].title;
 
   // Build nav
   let desktopNavHtml = '';
@@ -379,6 +380,164 @@ export function initInteractiveCharts(chartData) {
     });
     initUbuntuQuiz();
   }
+  // Article 006 – RAG Cost Analysis (4 datasets matching original draft)
+  if (chartData.ragCost) {
+    const initialData = calcRagCosts(10000);
+    const ragChart = safeInit('ragCostChart', {
+      type: 'line',
+      data: {
+        labels: ['Month 1','M2','M3','M4','M5','M6','M7','M8','M9','M10','M11','Month 12'],
+        datasets: [
+          {
+            label: 'Local Hardware (Phi-4 14B)',
+            data: initialData.localCosts,
+            borderColor: '#059669',
+            backgroundColor: 'rgba(5,150,105,0.1)',
+            borderWidth: 3,
+            fill: true,
+            tension: 0.1
+          },
+          {
+            label: 'VPS / Cloud Server',
+            data: initialData.vpsCosts,
+            borderColor: '#d97706',
+            borderWidth: 2,
+            borderDash: [5, 5],
+            tension: 0.1
+          },
+          {
+            label: 'Cloud API (Standard)',
+            data: initialData.apiStdCosts,
+            borderColor: '#0284c7',
+            borderWidth: 2,
+            tension: 0.1
+          },
+          {
+            label: 'Cloud API (GPT-5.5)',
+            data: initialData.apiAdvCosts,
+            borderColor: '#dc2626',
+            borderWidth: 2,
+            tension: 0.1
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: ctx => {
+                let label = ctx.dataset.label ? ctx.dataset.label + ': ' : '';
+                label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(ctx.parsed.y);
+                return label;
+              }
+            }
+          },
+          legend: { position: 'bottom', labels: { color: '#a8a29e', padding: 20, usePointStyle: true } }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: { color: 'rgba(255,255,255,0.05)' },
+            title: { display: true, text: 'Cumulative Cost (USD)', color: '#a8a29e' },
+            ticks: { color: '#a8a29e', callback: v => '$' + v }
+          },
+          x: { grid: { display: false }, ticks: { color: '#a8a29e' } }
+        }
+      }
+    });
+    if (ragChart) initRagCostCalculator(ragChart);
+  }
+
+  initRagStepExplorer();
+}
+
+// ─── ARTICLE 006: RAG COST FORMULAS ───────────────────────────────────────────
+
+function calcRagCosts(queriesPerMonth) {
+  const HW_COST = 1500;
+  const VPS_MONTHLY = 150;
+  const API_CHEAP_PER_1K = 0.005;
+  const API_EXP_PER_1K   = 0.05;
+  const months = Array.from({length: 12}, (_, i) => i + 1);
+  const apiStdMonthly = (queriesPerMonth * 1000 / 1000) * API_CHEAP_PER_1K;
+  const apiAdvMonthly = (queriesPerMonth * 1000 / 1000) * API_EXP_PER_1K;
+  return {
+    localCosts:  months.map(() => HW_COST),
+    vpsCosts:    months.map(m => m * VPS_MONTHLY),
+    apiStdCosts: months.map(m => m * apiStdMonthly),
+    apiAdvCosts: months.map(m => m * apiAdvMonthly)
+  };
+}
+
+// ─── ARTICLE 006: RAG STEP EXPLORER ───────────────────────────────────────────
+
+export function initRagStepExplorer() {
+  const panel = document.getElementById('rag-step-panel');
+  if (!panel) return;
+
+  const buttons = document.querySelectorAll('[data-rag-step]');
+  const details = {
+    es: {
+      1: "<strong>Consulta de Usuario:</strong> El usuario hace una pregunta, por ej. <em>'¿Cuáles fueron nuestros márgenes en Q3?'</em>. Se aplican guardarraíles para asegurar que la consulta sea pertinente.",
+      2: "<strong>Búsqueda Vectorial:</strong> El sistema convierte la consulta en un vector matemático y busca fragmentos documentales similares en la base de datos local.",
+      3: "<strong>Recuperación de Contexto:</strong> La base de datos devuelve solo los fragmentos de tus documentos que contienen la respuesta potencial. Esta es la restricción de la 'Base de Conocimiento'.",
+      4: "<strong>Inferencia del LLM (Phi-4):</strong> El sistema crea un prompt estricto: <em>'Usando ÚNICAMENTE los siguientes fragmentos, responde la consulta. Si la respuesta no está en el texto, di \"No lo sé\".'</em> El modelo local Phi-4 lo procesa.",
+      5: "<strong>Respuesta Final:</strong> El LLM genera una respuesta legible basada completamente en tus documentos locales, evitando totalmente las alucinaciones fuera del contexto proporcionado."
+    },
+    en: {
+      1: "<strong>User Query:</strong> The user asks a question, e.g., <em>'What were our Q3 margins?'</em>. Guardrails are applied here to ensure the question is appropriate.",
+      2: "<strong>Vector Search:</strong> The system converts the text query into numbers (vectors) and searches the local Vector Database for mathematically similar document chunks.",
+      3: "<strong>Retrieve Context:</strong> The database returns only the specific paragraphs from your loaded documents that contain the answer. This is the 'Knowledge Base' restriction.",
+      4: "<strong>LLM Inference (Phi-4):</strong> The system creates a strict prompt: <em>'Using ONLY the following text chunks, answer the user's query. If the answer is not in the text, say \"I don't know\".'</em> The local Phi-4 model processes this.",
+      5: "<strong>Final Answer:</strong> The LLM generates a human-readable answer based entirely on your local documents, completely avoiding hallucinations outside the provided context."
+    }
+  };
+
+  const lang = window.i18n ? window.i18n.getLang() : 'en';
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const step = btn.getAttribute('data-rag-step');
+      panel.innerHTML = `<p class="text-on-surface" style="text-align:left;font-size:1rem;">${details[lang][step]}</p>`;
+      // highlight selected, reset others
+      buttons.forEach(b => {
+        b.style.borderColor = '';
+        b.style.backgroundColor = '';
+      });
+      btn.style.borderColor = '#059669';
+      btn.style.backgroundColor = 'rgba(5,150,105,0.1)';
+    });
+  });
+}
+
+// ─── ARTICLE 006: RAG COST CALCULATOR ─────────────────────────────────────────
+
+export function initRagCostCalculator(chart) {
+  const slider  = document.getElementById('ragUsageSlider');
+  const display = document.getElementById('ragQueryDisplay');
+  if (!slider || !display) return;
+
+  const update = () => {
+    const val = parseInt(slider.value);
+    // Logarithmic scale: 1→500, 100→50000
+    const minV = Math.log(500);
+    const maxV = Math.log(50000);
+    const queries = Math.round(Math.exp(minV + (maxV - minV) * (val - 1) / 99));
+    display.textContent = new Intl.NumberFormat('en-US').format(queries);
+
+    const { localCosts, vpsCosts, apiStdCosts, apiAdvCosts } = calcRagCosts(queries);
+    chart.data.datasets[0].data = localCosts;
+    chart.data.datasets[1].data = vpsCosts;
+    chart.data.datasets[2].data = apiStdCosts;
+    chart.data.datasets[3].data = apiAdvCosts;
+    chart.update();
+  };
+
+  slider.addEventListener('input', update);
+  update();
 }
 
 // ─── CHECKLIST ────────────────────────────────────────────────────────────────

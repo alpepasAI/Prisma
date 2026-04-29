@@ -34,9 +34,9 @@ const translations = {
     footer_terms: 'Términos de Servicio',
     footer_github: 'Github',
     footer_contact: 'Contacto',
-    footer_designed_by: 'Diseñado por',
+    footer_designed_by: 'Creado por',
     footer_labs: 'Alpepas Labs',
-    footer_copyright: `© ${new Date().getFullYear()} PRISMA. Todos los derechos reservados.`,
+    footer_copyright: `© ${new Date().getFullYear()} PRISMA.`,
 
     // Search
     search_placeholder: 'Buscar artículos...',
@@ -81,7 +81,7 @@ const translations = {
     // Mission Section
     mission_title: 'Nuestra Misión',
     mission_text: 'Este blog nace del deseo de compartir temas de vanguardia sobre IA y programación. Aprovechamos la potencia de modelos como Gemini Deep Research y NotebookLM para crear un crisol de formatos (PDF, Podcast, Infografías, Dashboard Interactivo) para cada análisis, permitiendo que selecciones el que mejor se adapte a tu momento.',
-    powered_by: 'Potenciado por Gemini & NotebookLM',
+    powered_by: 'Potenciado con Gemini & NotebookLM',
 
     // Tags
     'tag_ciberseguridad': 'Ciberseguridad',
@@ -107,6 +107,9 @@ const translations = {
     'tag_rust': 'Rust',
     'tag_linux': 'Linux',
     'tag_engineering': 'Ingeniería',
+    'tag_chatbot': 'Chatbot',
+    'tag_rag': 'RAG',
+    'tag_vector-database': 'Base de Datos Vectorial',
     memory_footprint: 'Huella de Memoria',
     implemented: 'Implementado',
   },
@@ -140,9 +143,9 @@ const translations = {
     footer_terms: 'Terms of Service',
     footer_github: 'Github',
     footer_contact: 'Contact',
-    footer_designed_by: 'Designed by',
+    footer_designed_by: 'Created by',
     footer_labs: 'Alpepas Labs',
-    footer_copyright: `© ${new Date().getFullYear()} PRISMA. All rights reserved.`,
+    footer_copyright: `© ${new Date().getFullYear()} PRISMA.`,
 
     // Search
     search_placeholder: 'Search articles...',
@@ -212,6 +215,9 @@ const translations = {
     'tag_rust': 'Rust',
     'tag_linux': 'Linux',
     'tag_engineering': 'Engineering',
+    'tag_chatbot': 'Chatbot',
+    'tag_rag': 'RAG',
+    'tag_vector-database': 'Vector Database',
     memory_footprint: 'Memory Footprint',
     implemented: 'Implemented',
   }

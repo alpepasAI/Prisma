@@ -175,7 +175,7 @@ export async function renderArticleDetail() {
   if (!container) return;
 
   const articleId = getArticleId();
-  if (!articleId) { window.location.href = 'index.html'; return; }
+  if (!articleId) { window.location.href = './'; return; }
 
   const article = await getArticleById(articleId);
   if (!article) {

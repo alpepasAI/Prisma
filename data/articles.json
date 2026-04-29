@@ -1,11 +1,55 @@
 {
   "articles": [
     {
+      "id": "006-chatbot-grounded-rag-arquitectura",
+      "date": "2026-04-29",
+      "readingTime": 5,
+      "tags": ["ai", "chatbot", "rag", "architecture", "security"],
+      "featured": true,
+      "formats": {
+        "podcast": {
+          "available": true,
+          "episode": 6
+        },
+        "pdf": {
+          "available": true,
+          "pages": 20
+        },
+        "infographic": {
+          "available": true
+        },
+        "interactive": {
+          "available": true,
+          "dataFile": "006-chatbot-grounded-rag-arquitectura-interactive.json"
+        }
+      },
+      "i18n": {
+        "es": {
+          "title": "Chatbots Grounded: La arquitectura RAG como soberanía del conocimiento",
+          "summary": "¿Es posible un chatbot que solo sepa lo que tú le digas? En 2026, la arquitectura RAG (Generación Aumentada por Recuperación) ha dejado de ser un lujo para convertirse en la base de la soberanía de datos empresarial. Analizamos cómo implementar sistemas similares a NotebookLM utilizando modelos locales como Phi-4 y bases de datos vectoriales de alto rendimiento, garantizando privacidad absoluta y eliminando alucinaciones.",
+          "contentFile": "006-chatbot-grounded-rag-arquitectura.md",
+          "podcasts": {
+            "short": "2f50Jqc2eFnGt2y0Dvtxu3",
+            "normal": "37yYh0RsOmiS94d8OEgWOq"
+          }
+        },
+        "en": {
+          "title": "Grounded Chatbots: RAG Architecture as Knowledge Sovereignty",
+          "summary": "Is it possible to have a chatbot that only knows what you tell it? In 2026, RAG (Retrieval-Augmented Generation) architecture has moved from a luxury to the foundation of enterprise data sovereignty. We analyze how to implement NotebookLM-like systems using local models like Phi-4 and high-performance vector databases, ensuring absolute privacy and eliminating hallucinations.",
+          "contentFile": "006-chatbot-grounded-rag-arquitectura.md",
+          "podcasts": {
+            "short": "6RaJF6ybnr42G8OrKLquyv",
+            "normal": "54UHrLaglI2XvsGZRMco2A"
+          }
+        }
+      }
+    },
+    {
       "id": "005-ubuntu-26-04-resolute-raccoon",
       "date": "2026-04-28",
       "readingTime": 10,
       "tags": ["ubuntu", "linux", "ai", "rust", "security", "open-source", "engineering"],
-      "featured": true,
+      "featured": false,
       "formats": {
         "podcast": {
           "available": true,

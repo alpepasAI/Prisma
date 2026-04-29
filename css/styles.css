@@ -2216,6 +2216,12 @@ ul, ol {
 
 .skeleton-sidebar-card   { height: 14rem; border-radius: var(--radius-xl); }
 
+/* --- Article 006: RAG Dashboard Responsive Grids --- */
+@media (min-width: 900px) {
+  .arch-grid  { grid-template-columns: 1fr 1fr !important; }
+  .costs-grid { grid-template-columns: 1fr 2fr !important; }
+}
+
 /* --- Interactive Dashboard Layout Utilities (Replacing Tailwind) --- */
 .flex { display: flex !important; }
 .flex-col { flex-direction: column !important; }
@@ -2305,7 +2311,16 @@ ul, ol {
 }
 @media (min-width: 1024px) {
   .lg\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lg\:grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 }
+
+.ring-2 { outline: 2px solid transparent; outline-offset: 2px; }
+.ring-primary { outline-color: var(--primary); }
+.ring-emerald { outline-color: #10b981; }
+
+.shadow-glow-primary { box-shadow: 0 0 15px rgba(245, 158, 11, 0.4); }
+.shadow-glow-emerald { box-shadow: 0 0 15px rgba(16, 185, 129, 0.4); }
+
 
 
 /* Color Utilities */
