@@ -693,12 +693,45 @@ ul, ol {
 .footer-inner {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xl);
+  gap: var(--space-md);
   max-width: var(--max-width);
   margin: 0 auto;
   width: 100%;
   align-items: center;
   text-align: center;
+}
+
+@media (min-width: 768px) {
+  .footer-inner {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: var(--space-xl);
+  }
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+@media (min-width: 480px) {
+  .footer-links {
+    gap: var(--space-md);
+  }
+}
+
+.footer-divider {
+  display: none;
+  color: var(--outline-variant);
+}
+
+@media (min-width: 480px) {
+  .footer-divider {
+    display: inline;
+  }
 }
 
 .footer-logo {
@@ -708,12 +741,7 @@ ul, ol {
   color: var(--on-surface);
 }
 
-.footer-links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--space-lg);
-}
+
 
 .footer-link {
   font-size: 0.875rem;
@@ -2220,6 +2248,31 @@ ul, ol {
 @media (min-width: 900px) {
   .arch-grid  { grid-template-columns: 1fr 1fr !important; }
   .costs-grid { grid-template-columns: 1fr 2fr !important; }
+}
+
+.rag-flow-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.rag-flow-arrow {
+  color: var(--outline);
+  font-size: 1.4rem;
+  transform: rotate(90deg); /* Vertical arrow on mobile */
+}
+
+@media (min-width: 900px) {
+  .rag-flow-row {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+  .rag-flow-arrow {
+    transform: rotate(0deg); /* Horizontal arrow on desktop */
+  }
 }
 
 /* --- Interactive Dashboard Layout Utilities (Replacing Tailwind) --- */
