@@ -1,7 +1,10 @@
-const CACHE_NAME = 'prisma-cache-v1';
+// Incrementa este número cada vez que hagas un despliegue.
+// Esto invalida la caché del Service Worker automáticamente.
+const CACHE_VERSION = 'v25';
+const CACHE_NAME = `prisma-cache-${CACHE_VERSION}`;
+
 const STATIC_ASSETS = [
   '/',
-  '/index.html',
   '/article.html',
   '/topics.html',
   '/interactive.html',
@@ -37,13 +40,23 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
 
-  // Stale-while-revalidate for JSON data
-  if (url.pathname.endsWith('.json')) {
+  // Nunca cachear el propio SW ni las páginas HTML
+  if (
+    url.pathname === '/sw.js' ||
+    url.pathname.endsWith('.html') ||
+    url.pathname === '/'
+  ) {
+    event.respondWith(fetch(event.request));
+    return;
+  }
+
+  // Stale-while-revalidate para JSON (datos de artículos)
+  if (url.pathname.endsWith('.json') || url.pathname.endsWith('.md')) {
     event.respondWith(
-      caches.open(CACHE_NAME).then(cache => 
+      caches.open(CACHE_NAME).then(cache =>
         cache.match(event.request).then(cachedResponse => {
           const fetchPromise = fetch(event.request).then(networkResponse => {
-            cache.put(event.request, networkResponse.clone());
+            if (networkResponse.ok) cache.put(event.request, networkResponse.clone());
             return networkResponse;
           });
           return cachedResponse || fetchPromise;
@@ -53,12 +66,34 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // Cache-first for everything else
+  // Stale-while-revalidate para JS y CSS:
+  // Sirve desde caché inmediatamente, pero actualiza en background.
+  // El usuario verá la nueva versión en la SIGUIENTE carga, sin borrar caché.
+  if (
+    url.pathname.endsWith('.js') ||
+    url.pathname.endsWith('.css')
+  ) {
+    event.respondWith(
+      caches.open(CACHE_NAME).then(cache =>
+        cache.match(event.request).then(cachedResponse => {
+          const fetchPromise = fetch(event.request).then(networkResponse => {
+            if (networkResponse.ok) cache.put(event.request, networkResponse.clone());
+            return networkResponse;
+          }).catch(() => cachedResponse);
+
+          // Devuelve caché al instante, actualiza en background
+          return cachedResponse || fetchPromise;
+        })
+      )
+    );
+    return;
+  }
+
+  // Cache-first para assets estáticos (imágenes, fuentes, etc.)
   event.respondWith(
     caches.match(event.request).then(response => {
       return response || fetch(event.request).then(networkResponse => {
-        // Cache new assets dynamically
-        if (event.request.method === 'GET' && !url.pathname.startsWith('/browser-sync')) {
+        if (event.request.method === 'GET' && networkResponse.ok) {
           return caches.open(CACHE_NAME).then(cache => {
             cache.put(event.request, networkResponse.clone());
             return networkResponse;

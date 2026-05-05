@@ -82,6 +82,11 @@ export function initSearch() {
   const searchInput     = document.getElementById('search-input');
   if (!searchContainer || !searchBtn || !searchInput) return;
 
+  // On the topics page, always keep search bar expanded
+  if (document.body.dataset.page === 'topics') {
+    searchContainer.classList.add('active');
+  }
+
   searchBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     searchContainer.classList.toggle('active');
@@ -89,18 +94,23 @@ export function initSearch() {
   });
 
   document.addEventListener('click', (e) => {
-    if (!searchContainer.contains(e.target)) searchContainer.classList.remove('active');
+    // Only collapse if clicked outside AND the input is empty
+    // This prevents hiding an active search filter the user might have forgotten
+    if (!searchContainer.contains(e.target) && !searchInput.value.trim()) {
+      searchContainer.classList.remove('active');
+    }
   });
 
   searchInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
       const query = searchInput.value.trim();
       if (document.body.dataset.page !== 'topics') {
-        window.location.href = `topics.html?q=${encodeURIComponent(query)}`;
+        window.location.href = `/topics.html?q=${encodeURIComponent(query)}`;
       }
     }
   });
 }
+
 
 /** Bind lightbox open/close events for [data-infographic] elements */
 export function initLightbox() {

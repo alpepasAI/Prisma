@@ -77,7 +77,9 @@ const translations = {
     topics_articles_count: 'artículos',
     logic_or: 'Cualquiera',
     logic_and: 'Todos',
-
+    date_filter_label: 'Período',
+    date_from_placeholder: 'Desde',
+    date_to_placeholder: 'Hasta',
     // Mission Section
     mission_title: 'Nuestra Misión',
     mission_text: 'Este blog nace del deseo de compartir temas de vanguardia sobre IA y programación. Aprovechamos la potencia de modelos como Gemini Deep Research y NotebookLM para crear un crisol de formatos (PDF, Podcast, Infografías, Dashboard Interactivo) para cada análisis, permitiendo que selecciones el que mejor se adapte a tu momento.',
@@ -190,7 +192,9 @@ const translations = {
     topics_filtered: 'Filtered articles',
     logic_or: 'Any',
     logic_and: 'All',
-
+    date_filter_label: 'Period',
+    date_from_placeholder: 'From',
+    date_to_placeholder: 'To',
     // Mission Section
     mission_title: 'Our Mission',
     mission_text: 'This blog was born from a desire to share cutting-edge topics in AI and programming. We leverage the power of models like Gemini Deep Research and NotebookLM to create a crucible of formats (PDF, Podcast, Infographics, Interactive Dashboard) for each analysis, letting you choose the one that best fits your moment.',

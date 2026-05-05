@@ -1540,6 +1540,113 @@ ul, ol {
   background-color: var(--on-primary-container);
 }
 
+/* Topics Date Filter */
+.topics-date-filter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.date-filter-label {
+  font-family: var(--font-label);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--on-surface-variant);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.date-range-inputs {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  background: var(--surface-container-low);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-full);
+  padding: var(--space-xs) var(--space-md);
+  transition: border-color var(--transition-fast);
+}
+
+.date-range-inputs:hover {
+  border-color: var(--outline);
+}
+
+/* Hidden native inputs — functional but invisible */
+.date-picker-hidden {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* Custom trigger buttons */
+.date-picker-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-label);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--on-surface-variant);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-md);
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.date-picker-btn .material-symbols-outlined {
+  font-size: 1rem;
+}
+
+.date-picker-btn:hover {
+  color: var(--primary);
+  background-color: rgba(76, 215, 246, 0.06);
+}
+
+/* Highlighted state when a date is selected */
+.date-picker-btn.has-value {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+
+.date-range-sep {
+  color: var(--outline);
+  font-size: 0.875rem;
+  user-select: none;
+  flex-shrink: 0;
+  padding: 0 var(--space-xs);
+}
+
+.date-range-clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: var(--radius-full);
+  color: var(--on-surface-variant);
+  flex-shrink: 0;
+  margin-left: var(--space-xs);
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.date-range-clear:hover {
+  color: var(--error);
+  background-color: rgba(255, 180, 171, 0.1);
+}
+
+.date-range-clear .material-symbols-outlined {
+  font-size: 1rem;
+}
+
 /* Topics Results */
 .topics-results {
   max-width: 48rem;

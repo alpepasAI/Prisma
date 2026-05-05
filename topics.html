@@ -33,7 +33,7 @@
   <meta name="theme-color" content="#0a0c10" />
 
   <!-- Core Styles -->
-  <link rel="stylesheet" href="css/styles.css?v=24" />
+  <link rel="stylesheet" href="css/styles.css?v=27" />
 </head>
 <body data-page="topics">
 
@@ -43,7 +43,9 @@
   <nav class="nav-mobile" id="nav-mobile">
     <a href="./" class="nav-link" data-i18n="nav_home">Inicio</a>
     <a href="topics.html" class="nav-link active" data-i18n="nav_topics">Temas</a>
+    <!-- Archive hidden until section is ready
     <a href="#" class="nav-link" data-i18n="nav_archive">Archivo</a>
+    -->
   </nav>
 
   <!-- Main Content -->
@@ -63,6 +65,29 @@
           <span class="toggle-slider"></span>
         </label>
         <span class="logic-label" id="logic-and" data-i18n="logic_and">Todos</span>
+      </div>
+
+      <!-- Date range filter -->
+      <div class="topics-date-filter" id="topics-date-filter">
+        <span class="date-filter-label" data-i18n="date_filter_label">Período:</span>
+        <div class="date-range-inputs">
+          <!-- Hidden inputs (functional, not visible) -->
+          <input type="month" id="date-from" class="date-picker-hidden" aria-hidden="true" tabindex="-1">
+          <input type="month" id="date-to"   class="date-picker-hidden" aria-hidden="true" tabindex="-1">
+          <!-- Custom trigger buttons (visible UI) -->
+          <button class="date-picker-btn" id="date-from-btn" type="button" aria-label="Seleccionar mes inicial">
+            <span class="material-symbols-outlined">calendar_month</span>
+            <span id="date-from-label" data-i18n="date_from_placeholder">Desde</span>
+          </button>
+          <span class="date-range-sep" aria-hidden="true">→</span>
+          <button class="date-picker-btn" id="date-to-btn" type="button" aria-label="Seleccionar mes final">
+            <span class="material-symbols-outlined">calendar_month</span>
+            <span id="date-to-label" data-i18n="date_to_placeholder">Hasta</span>
+          </button>
+          <button class="date-range-clear" id="date-range-clear" aria-label="Limpiar rango de fechas" title="Limpiar fechas">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
       </div>
     </div>
 
@@ -88,7 +113,7 @@
       });
     }
   </script>
-  <script src="js/i18n.js?v=24"></script>
-  <script type="module" src="js/app.js?v=24"></script>
+  <script src="js/i18n.js?v=27"></script>
+  <script type="module" src="js/app.js?v=27"></script>
 </body>
 </html>
