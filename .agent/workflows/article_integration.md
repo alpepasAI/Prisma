@@ -52,8 +52,10 @@ This workflow automates the process of adding a new technical article to the PRI
 
 ## Step 6: Validation & Prompts
 1.  **NotebookLM Prompt Generation:** 
-    -   Based on the final article content, generate a custom prompt for NotebookLM's "Customize Audio Overview".
-    -   The prompt should emphasize the "Prisma style": technical depth, professional debate, and real-world implications.
+    -   Based on the final article content, generate a custom prompt for NotebookLM's "Customize Audio Overview" field.
+    -   **Natural Language Only:** The prompt MUST be a set of 1-2 paragraphs of natural language guidance (steering prompt), NOT a structured or bulleted script.
+    -   **Focus:** Emphasize the "Prisma style": technical depth, professional debate between two experts, and real-world implications.
+    -   **Constraints:** Include explicit instructions to avoid mentioning "Prisma" as a tool and to use the specific names of key figures/technologies from the article.
 2.  **Request Spotify URLs:** After providing the NotebookLM prompt, explicitly ask the user for the Spotify URLs to complete the integration. Do not ask for cleanup until URLs are provided and updated.
 
 ## Step 7: Finalization (User Approval Required)

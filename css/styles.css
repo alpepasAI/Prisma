@@ -2085,9 +2085,10 @@ ul, ol {
 }
 
 /* Article Hero Enhancements */
-.article-content img[alt*="Paradigma"], 
-.article-content img[alt*="Paradigm"],
-.article-content img[alt*="TurboQuant"] {
+.prose img[alt*="Paradigma"], 
+.prose img[alt*="Paradigm"],
+.prose img[alt*="TurboQuant"],
+.prose img[alt*="Hero Image"] {
     width: 100%;
     height: 300px;
     object-fit: cover;
@@ -2099,9 +2100,10 @@ ul, ol {
 }
 
 @media (max-width: 768px) {
-    .article-content img[alt*="Paradigma"], 
-    .article-content img[alt*="Paradigm"],
-    .article-content img[alt*="TurboQuant"] {
+    .prose img[alt*="Paradigma"], 
+    .prose img[alt*="Paradigm"],
+    .prose img[alt*="TurboQuant"],
+    .prose img[alt*="Hero Image"] {
         height: 200px;
     }
 }

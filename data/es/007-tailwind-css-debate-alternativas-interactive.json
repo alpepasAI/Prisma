@@ -1,0 +1,57 @@
+{
+  "title": "Más allá de Tailwind CSS",
+  "subtitle": "Analizando el auge de los frameworks de utilidades, la resistencia emergente y el resurgimiento de Vanilla CSS.",
+  "theme": "stone",
+  "nav": [
+    { "id": "origins", "label": "1. Orígenes" },
+    { "id": "pushback", "label": "2. La Resistencia" },
+    { "id": "alternatives", "label": "3. Alternativas" }
+  ],
+  "sections": {
+    "origins": "<div class=\"mb-8\"><h2 class=\"text-2xl font-bold text-on-surface mb-2 border-l-4 border-amber-500 pl-3\">1. El Origen y Auge de Tailwind</h2><p class=\"text-on-surface-variant text-lg\">Creado por Adam Wathan, Tailwind CSS popularizó el paradigma \"utility-first\". En lugar de escribir clases semánticas, los desarrolladores aplican clases de propósito único directamente en su HTML. Explora los datos y beneficios que impulsaron su adopción masiva.</p></div><div class=\"grid grid-cols-1 lg:grid-cols-2 gap-8 items-start\"><div class=\"interactive-box p-6 rounded-xl shadow-sm h-full\"><h3 class=\"text-lg font-semibold text-on-surface mb-4 text-center\">Adopción en la Industria (%)</h3><div class=\"chart-container\"><canvas id=\"adoptionChart\"></canvas></div><p class=\"text-sm text-center text-on-surface-variant mt-4\">Basado en encuestas agregadas de la comunidad de desarrolladores.</p></div><div class=\"interactive-box p-6 rounded-xl shadow-sm h-full flex flex-col justify-between\"><div><h3 class=\"text-xl font-bold text-on-surface mb-6\">Por qué encantó a los desarrolladores</h3><ul class=\"space-y-4\"><li class=\"flex items-start\"><span class=\"text-emerald-500 text-xl mr-3\">🚀</span><div><strong class=\"block text-on-surface\">Prototipado Rápido</strong><span class=\"text-on-surface-variant text-sm\">Sin cambio de contexto entre archivos HTML y CSS. La interfaz se construye directamente en el marcado.</span></div></li><li class=\"flex items-start\"><span class=\"text-emerald-500 text-xl mr-3\">✂️</span><div><strong class=\"block text-on-surface\">Cero CSS Muerto</strong><span class=\"text-on-surface-variant text-sm\">El compilador JIT elimina las clases no utilizadas, enviando paquetes de producción minúsculos.</span></div></li><li class=\"flex items-start\"><span class=\"text-emerald-500 text-xl mr-3\">📐</span><div><strong class=\"block text-on-surface\">Sistema de Diseño Restringido</strong><span class=\"text-on-surface-variant text-sm\">Evita números mágicos. El espaciado, la tipografía y los colores siguen una escala estricta y escalable.</span></div></li></ul></div><div class=\"mt-8 box-warning p-4 rounded-lg text-sm\"><span class=\"font-bold text-amber-700\">Conclusión clave:</span> Tailwind resolvió el problema de \"poner nombres es difícil\" y proporcionó una forma estandarizada de escalar estilos en equipos grandes.</div></div></div>",
+    "pushback": "<div class=\"mb-8\"><h2 class=\"text-2xl font-bold text-on-surface mb-2 border-l-4 border-amber-500 pl-3\">2. La Tendencia hacia Vanilla CSS</h2><p class=\"text-on-surface-variant text-lg\">A pesar de su popularidad, una facción creciente de desarrolladores está volviendo al CSS puro o \"Vanilla\". Esta sección analiza la comparación entre ambos enfoques y el desglose de las quejas sobre Tailwind.</p></div><div class=\"interactive-box rounded-xl shadow-sm overflow-hidden mb-12\"><div class=\"flex border-b border-outline-variant\"><button data-tab-btn=\"pushback\" data-tab-id=\"tailwind\" class=\"flex-1 py-4 text-center font-medium transition-colors tab-active\">La Fatiga de Tailwind</button><button data-tab-btn=\"pushback\" data-tab-id=\"vanilla\" class=\"flex-1 py-4 text-center font-medium transition-colors\">El Regreso de Vanilla CSS</button></div><div class=\"p-6 md:p-8 min-h-[250px]\"><div data-tab-content=\"pushback\" data-tab-id=\"tailwind\" class=\"fade-in block\"><h3 class=\"text-xl font-bold text-on-surface mb-4\">¿Por qué evitarlo?</h3><div class=\"grid grid-cols-1 md:grid-cols-2 gap-6\"><div class=\"interactive-box p-4 rounded-lg\"><div class=\"font-bold text-on-surface mb-1\">🍝 HTML Saturado</div><p class=\"text-on-surface-variant text-sm\">Los componentes terminan con más de 20 clases, haciendo que el marcado sea difícil de leer y mantener.</p></div><div class=\"interactive-box p-4 rounded-lg\"><div class=\"font-bold text-on-surface mb-1\">🔒 Bloqueo de Proveedor</div><p class=\"text-on-surface-variant text-sm\">Atar los estilos a nombres de clases específicos hace que migrar fuera de Tailwind sea una reescritura costosa.</p></div><div class=\"interactive-box p-4 rounded-lg\"><div class=\"font-bold text-on-surface mb-1\">📚 Curva de Aprendizaje</div><p class=\"text-on-surface-variant text-sm\">En lugar de aprender propiedades estándar de CSS, los desarrolladores deben memorizar cientos de abreviaturas.</p></div><div class=\"interactive-box p-4 rounded-lg\"><div class=\"font-bold text-on-surface mb-1\">⚠️ Fricción en Colaboración</div><p class=\"text-on-surface-variant text-sm\">Los diseñadores que inspeccionan CSS estándar luchan por mapear estilos a las clases de utilidad abstractas.</p></div></div></div><div data-tab-content=\"pushback\" data-tab-id=\"vanilla\" class=\"fade-in hidden\"><h3 class=\"text-xl font-bold text-on-surface mb-4\">Por qué Vanilla CSS vuelve a ser potente</h3><div class=\"grid grid-cols-1 md:grid-cols-2 gap-6\"><div class=\"interactive-box p-4 rounded-lg border-emerald-100\"><div class=\"font-bold text-on-surface mb-1\">✨ Variables CSS Nativas</div><p class=\"text-on-surface-variant text-sm\">Las propiedades personalizadas permiten tematización dinámica y cambios de estado sin preprocesadores.</p></div><div class=\"interactive-box p-4 rounded-lg border-emerald-100\"><div class=\"font-bold text-on-surface mb-1\">🪆 Anidamiento Nativo</div><p class=\"text-on-surface-variant text-sm\">Los navegadores ya soportan anidamiento nativo, haciendo que los bloques de CSS sean limpios y legibles.</p></div><div class=\"interactive-box p-4 rounded-lg border-emerald-100\"><div class=\"font-bold text-on-surface mb-1\">🧠 Selectores Modernos</div><p class=\"text-on-surface-variant text-sm\">Nuevos selectores como :has() y :is() eliminan la necesidad de JavaScript complejo para estilos de estado.</p></div><div class=\"interactive-box p-4 rounded-lg border-emerald-100\"><div class=\"font-bold text-on-surface mb-1\">🧩 Layouts Modernos</div><p class=\"text-on-surface-variant text-sm\">CSS Grid y Flexbox son universales y potentes sin necesidad de abstracciones de frameworks.</p></div></div></div></div></div><div class=\"interactive-box p-6 rounded-xl shadow-sm text-center mb-8\"><h3 class=\"text-lg font-semibold text-on-surface mb-2\">Principales Razones para abandonar Tailwind</h3><p class=\"text-on-surface-variant text-sm mb-6\">Distribución de las quejas principales entre los desarrolladores que se alejan del framework.</p><div class=\"chart-container\"><canvas id=\"painPointsChart\"></canvas></div></div>",
+    "alternatives": "<div class=\"mb-8\"><h2 class=\"text-2xl font-bold text-on-surface mb-2 border-l-4 border-amber-500 pl-3\">3. Paisaje de Alternativas Modernas</h2><p class=\"text-on-surface-variant text-lg\">El ecosistema ha respondido a estas críticas. A continuación, un desglose interactivo de las herramientas que los desarrolladores están usando en lugar de Tailwind. Haz clic en cualquier alternativa para ver su enfoque.</p></div><div class=\"grid grid-cols-1 md:grid-cols-3 gap-6 mb-8\"><button data-alt-key=\"cssmodules\" class=\"text-left interactive-box p-6 rounded-xl hover:border-amber-400 transition-all\"><div class=\"text-3xl mb-3\">📦</div><h3 class=\"font-bold text-on-surface text-lg\">CSS Modules</h3><p class=\"text-on-surface-variant text-sm mt-2\">Vanilla CSS con alcance local.</p></button><button data-alt-key=\"panda\" class=\"text-left interactive-box p-6 rounded-xl hover:border-amber-400 transition-all\"><div class=\"text-3xl mb-3\">🐼</div><h3 class=\"font-bold text-on-surface text-lg\">Panda CSS</h3><p class=\"text-on-surface-variant text-sm mt-2\">CSS-in-JS con seguridad de tipos.</p></button><button data-alt-key=\"unocss\" class=\"text-left interactive-box p-6 rounded-xl hover:border-amber-400 transition-all\"><div class=\"text-3xl mb-3\">⚡</div><h3 class=\"font-bold text-on-surface text-lg\">UnoCSS</h3><p class=\"text-on-surface-variant text-sm mt-2\">Motor atómico bajo demanda instantáneo.</p></button></div><div id=\"alternative-detail-box\" class=\"interactive-box p-8 rounded-xl hidden fade-in\"><div class=\"flex items-center mb-4\"><div id=\"detail-icon\" class=\"text-4xl mr-4\"></div><h3 id=\"detail-title\" class=\"text-2xl font-bold text-on-surface\"></h3></div><div class=\"grid md:grid-cols-2 gap-8 mt-6\"><div><h4 class=\"font-semibold text-on-surface-variant uppercase text-sm tracking-wider mb-2\">Cómo funciona</h4><p id=\"detail-desc\" class=\"text-on-surface leading-relaxed\"></p></div><div><h4 class=\"font-semibold text-on-surface-variant uppercase text-sm tracking-wider mb-2\">Ideal para</h4><p id=\"detail-best\" class=\"interactive-box bg-surface-container-low p-4 rounded-lg\"></p></div></div></div>"
+  },
+  "chartData": {
+    "cssEvolution": {
+      "labels": ["2018", "2019", "2020", "2021", "2022", "2023", "2024"],
+      "datasets": [
+        {
+          "label": "Uso de Tailwind",
+          "data": [8, 15, 30, 55, 75, 78, 76],
+          "color": "#d97706"
+        },
+        {
+          "label": "Vanilla CSS (Moderno)",
+          "data": [90, 85, 80, 70, 68, 75, 82],
+          "color": "#10b981",
+          "dash": [5, 5]
+        }
+      ]
+    },
+    "painPoints": {
+      "labels": ["Saturación de Marcado", "Bloqueo de Proveedor", "Aprender Sintaxis", "Fricción de Depuración", "Otros"],
+      "data": [45, 25, 15, 10, 5]
+    }
+  },
+  "alternativeData": {
+    "cssmodules": {
+      "title": "Vanilla CSS y CSS Modules",
+      "icon": "📦",
+      "desc": "Los desarrolladores escriben archivos CSS estándar y semánticos. La herramienta de construcción hashea los nombres de las clases automáticamente, asegurando que los estilos tengan un alcance local al componente.",
+      "best": "Equipos que no quieren bloqueo de framework, prefieren HTML semántico y quieren aprovechar todo el poder de las características nativas modernas (Nesting, Container Queries, Grid)."
+    },
+    "panda": {
+      "title": "Panda CSS",
+      "icon": "🐼",
+      "desc": "Un motor que combina la experiencia de desarrollo de CSS-in-JS con el rendimiento de CSS atómico. Escribes estilos en TypeScript y Panda los extrae a CSS estático en tiempo de construcción.",
+      "best": "Aplicaciones intensivas en TypeScript que quieren seguridad de tipos estricta para sus tokens de diseño manteniendo un rendimiento excelente."
+    },
+    "unocss": {
+      "title": "UnoCSS",
+      "icon": "⚡",
+      "desc": "Un motor de CSS atómico bajo demanda increíblemente rápido. No tiene utilidades predefinidas; utiliza un sistema de análisis basado en regex para generar estilos al instante.",
+      "best": "Desarrolladores que aman el enfoque utility-first pero quieren tiempos de construcción más rápidos y control total sobre las reglas de análisis."
+    }
+  }
+}

@@ -107,6 +107,7 @@ export function renderInteractive(data, article) {
   initInteractiveChecklist(data.checklistData);
   initAccordions();
   initTabs();
+  initCssAlternatives(data.alternativeData);
 }
 
 // ─── TABS ─────────────────────────────────────────────────────────────────────
@@ -260,16 +261,49 @@ export function initInteractiveCharts(chartData) {
   }
 
   // Doughnut
-  if (chartData.doughnut) {
-    ['doughnutChart', 'ecosystemDoughnut', 'attackVectorsChart'].forEach(id => {
+  if (chartData.doughnut || chartData.painPoints) {
+    const labels = chartData.doughnut?.labels || chartData.painPoints?.labels;
+    const data   = chartData.doughnut?.data   || chartData.painPoints?.data;
+    ['doughnutChart', 'ecosystemDoughnut', 'attackVectorsChart', 'painPointsChart'].forEach(id => {
       safeInit(id, {
         type: 'doughnut',
         data: {
-          labels: chartData.doughnut.labels,
-          datasets: [{ data: chartData.doughnut.data, backgroundColor: id === 'ecosystemDoughnut' ? ['#f43f5e','#f59e0b','#3b82f6','#10b981'] : ['#4cd7f6','#4edea3','#d0bcff','#ffb4ab'] }]
+          labels: labels,
+          datasets: [{ data: data, backgroundColor: id === 'ecosystemDoughnut' ? ['#f43f5e','#f59e0b','#3b82f6','#10b981'] : ['#f59e0b','#10b981','#64748b','#f43f5e','#d6d3d1'] }]
         },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: '#ffffff', padding: 20 } } } }
+        options: { responsive: true, maintainAspectRatio: false, cutout: '65%', plugins: { legend: { position: 'bottom', labels: { color: '#ffffff', padding: 20 } } } }
       });
+    });
+  }
+
+  // Article 007 – CSS Evolution (Line)
+  if (chartData.cssEvolution) {
+    safeInit('adoptionChart', {
+      type: 'line',
+      data: {
+        labels: chartData.cssEvolution.labels,
+        datasets: chartData.cssEvolution.datasets.map(ds => ({
+          label: ds.label,
+          data: ds.data,
+          borderColor: ds.color,
+          backgroundColor: ds.color + '1A', // 10% opacity
+          borderWidth: 3,
+          borderDash: ds.dash || [],
+          fill: !!ds.fill,
+          tension: 0.4,
+          pointRadius: ds.dash ? 0 : 4,
+          pointBackgroundColor: '#ffffff'
+        }))
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { position: 'top' } },
+        scales: {
+          y: { beginAtZero: true, max: 100, grid: { color: 'rgba(255,255,255,0.05)' } },
+          x: { grid: { display: false } }
+        }
+      }
     });
   }
 
@@ -474,11 +508,13 @@ function calcRagCosts(queriesPerMonth) {
 
 // ─── ARTICLE 006: RAG STEP EXPLORER ───────────────────────────────────────────
 
+// Use a flag to avoid attaching the same delegation listener multiple times
+let ragListenerAttached = false;
+
 export function initRagStepExplorer() {
   const panel = document.getElementById('rag-step-panel');
   if (!panel) return;
 
-  const buttons = document.querySelectorAll('[data-rag-step]');
   const details = {
     es: {
       1: "<strong>Consulta de Usuario:</strong> El usuario hace una pregunta, por ej. <em>'¿Cuáles fueron nuestros márgenes en Q3?'</em>. Se aplican guardarraíles para asegurar que la consulta sea pertinente.",
@@ -496,21 +532,31 @@ export function initRagStepExplorer() {
     }
   };
 
-  const lang = window.i18n ? window.i18n.getLang() : 'en';
+  if (!ragListenerAttached) {
+    // Event Delegation: listen on body, filter for [data-rag-step]
+    document.body.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-rag-step]');
+      if (!btn) return;
 
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
       const step = btn.getAttribute('data-rag-step');
+      const panel = document.getElementById('rag-step-panel');
+      if (!panel) return;
+
+      const lang = window.i18n ? window.i18n.getLang() : 'en';
       panel.innerHTML = `<p class="text-on-surface" style="text-align:left;font-size:1rem;">${details[lang][step]}</p>`;
-      // highlight selected, reset others
-      buttons.forEach(b => {
+
+      // Reset all buttons in current view
+      document.querySelectorAll('[data-rag-step]').forEach(b => {
         b.style.borderColor = '';
         b.style.backgroundColor = '';
       });
+
+      // Highlight selected
       btn.style.borderColor = '#059669';
       btn.style.backgroundColor = 'rgba(5,150,105,0.1)';
     });
-  });
+    ragListenerAttached = true;
+  }
 }
 
 // ─── ARTICLE 006: RAG COST CALCULATOR ─────────────────────────────────────────
@@ -691,5 +737,41 @@ function showUbuntuResult(type) {
   if (icon) icon.textContent = res.icon;
   if (title) title.textContent = res.title;
   if (desc) desc.textContent = res.desc;
+}
+
+// ─── ARTICLE 007: CSS ALTERNATIVES GRID ───────────────────────────────────────
+
+export function initCssAlternatives(alternativeData) {
+  if (!alternativeData) return;
+
+  const box = document.getElementById('alternative-detail-box');
+  if (!box) return;
+
+  const title = document.getElementById('detail-title');
+  const icon  = document.getElementById('detail-icon');
+  const desc  = document.getElementById('detail-desc');
+  const best  = document.getElementById('detail-best');
+
+  document.querySelectorAll('[data-alt-key]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const key  = btn.getAttribute('data-alt-key');
+      const data = alternativeData[key];
+      if (!data) return;
+
+      title.textContent = data.title;
+      icon.textContent  = data.icon;
+      desc.textContent  = data.desc;
+      best.textContent  = data.best;
+
+      box.classList.remove('hidden');
+      box.classList.remove('fade-in');
+      void box.offsetWidth;
+      box.classList.add('fade-in');
+
+      // Highlight active button
+      document.querySelectorAll('[data-alt-key]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
 }
 

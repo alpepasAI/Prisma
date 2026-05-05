@@ -1,11 +1,55 @@
 {
   "articles": [
     {
+      "id": "007-tailwind-css-debate-alternativas",
+      "date": "2026-05-05",
+      "readingTime": 5,
+      "tags": ["tailwind", "css", "vanilla-css", "frontend", "design-systems"],
+      "featured": true,
+      "formats": {
+        "podcast": {
+          "available": true,
+          "episode": 7
+        },
+        "pdf": {
+          "available": true,
+          "pages": 24
+        },
+        "infographic": {
+          "available": true
+        },
+        "interactive": {
+          "available": true,
+          "dataFile": "007-tailwind-css-debate-alternativas-interactive.json"
+        }
+      },
+      "i18n": {
+        "es": {
+          "title": "Tailwind CSS: Auge, Crisis y el Resurgimiento de Vanilla CSS",
+          "summary": "¿Es el fin de los frameworks de utilidades o su consolidación definitiva? En 2026, Tailwind CSS enfrenta su mayor crisis financiera mientras se convierte en la infraestructura preferida de la IA. Analizamos por qué el resurgimiento de las capacidades nativas de CSS (Container Queries, :has) está llevando a muchos desarrolladores de vuelta al 'Vanilla CSS' y qué significa esto para el futuro del diseño web.",
+          "contentFile": "007-tailwind-css-debate-alternativas.md",
+          "podcasts": {
+            "short": "7mqysEGZ5o1T0zBM758SkP",
+            "normal": "2M8WfdHnslau9aQywHdXGq"
+          }
+        },
+        "en": {
+          "title": "Tailwind CSS: The Rise, Crisis, and Resurgence of Vanilla CSS",
+          "summary": "Is it the end of utility frameworks or their ultimate consolidation? In 2026, Tailwind CSS faces its biggest financial crisis while becoming the preferred infrastructure for AI. We analyze why the resurgence of native CSS capabilities (Container Queries, :has) is leading many developers back to 'Vanilla CSS' and what this means for the future of web design.",
+          "contentFile": "007-tailwind-css-debate-alternativas.md",
+          "podcasts": {
+            "short": "2U3VT4IxeET8vFl79d9VRo",
+            "normal": "5tjCffnhNHDsYCBQ3l0OWK"
+          }
+        }
+      }
+    },
+    {
       "id": "006-chatbot-grounded-rag-arquitectura",
       "date": "2026-04-29",
       "readingTime": 5,
       "tags": ["ai", "chatbot", "rag", "architecture", "security"],
-      "featured": true,
+      "featured": false,
       "formats": {
         "podcast": {
           "available": true,

@@ -71,16 +71,16 @@ PRISMA is a minimalist, **client-side only (Vanilla JS)** Multi-Page Application
 ### Script Loading Order
 All HTML pages follow this exact pattern at the bottom of `<body>`:
 ```html
-<script src="js/i18n.js?v=9"></script>
-<script type="module" src="js/app.js?v=11"></script>
+<script src="js/i18n.js?v=24"></script>
+<script type="module" src="js/app.js?v=24"></script>
 ```
 `i18n.js` **must** be a regular script (not a module) and **must** come first. It sets `window.i18n` synchronously, which modules depend on at import time.
 
 ### Cache Busting
 Increment the `?v=X` parameter in `<script>` and `<link>` tags whenever you make logic or style changes. Current versions:
-- `css/styles.css?v=12`
-- `js/i18n.js?v=9`
-- `js/app.js?v=11`
+- `css/styles.css?v=24`
+- `js/i18n.js?v=24`
+- `js/app.js?v=24`
 
 Data fetches (`articles.json`, markdown files) already use `{ cache: 'no-store' }` and do not need versioning.
 

@@ -212,15 +212,15 @@ Every HTML page in PRISMA follows this structure:
   <link rel="apple-touch-icon" href="assets/logo.png?v=1" />
 
   <!-- Styles -->
-  <link rel="stylesheet" href="css/styles.css?v=12" />
+  <link rel="stylesheet" href="css/styles.css?v=24" />
 </head>
 <body data-page="[page-identifier]">
 
   <!-- [Header, Nav, Content, Footer — see existing pages] -->
 
   <!-- Scripts: i18n FIRST as regular script, then app as module -->
-  <script src="js/i18n.js?v=9"></script>
-  <script type="module" src="js/app.js?v=11"></script>
+  <script src="js/i18n.js?v=24"></script>
+  <script type="module" src="js/app.js?v=24"></script>
 </body>
 </html>
 ```
@@ -251,9 +251,9 @@ en: {
 
 | File | Current version | When to bump |
 |------|----------------|--------------|
-| `css/styles.css` | `?v=12` | Any CSS change |
-| `js/i18n.js` | `?v=9` | Any translation change |
-| `js/app.js` | `?v=11` | Any JS change in any module |
+| `css/styles.css` | `?v=24` | Any CSS change |
+| `js/i18n.js` | `?v=24` | Any translation change |
+| `js/app.js` | `?v=24` | Any JS change in any module |
 
 When bumping, update the version in **all 4 HTML files** simultaneously. The module files themselves (`data.js`, `ui.js`, etc.) do not need individual versioning — they are imported by `app.js` and will bust with it.
 
