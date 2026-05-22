@@ -1,6 +1,6 @@
 // Incrementa este número cada vez que hagas un despliegue.
 // Esto invalida la caché del Service Worker automáticamente.
-const CACHE_VERSION = 'v29';
+const CACHE_VERSION = 'v30';
 const CACHE_NAME = `prisma-cache-${CACHE_VERSION}`;
 
 const STATIC_ASSETS = [
@@ -23,7 +23,11 @@ const STATIC_ASSETS = [
 
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(STATIC_ASSETS))
+    caches.open(CACHE_NAME).then(cache => {
+      // Force fetching from network to bypass browser HTTP cache during installation
+      const requests = STATIC_ASSETS.map(url => new Request(url, { cache: 'reload' }));
+      return cache.addAll(requests);
+    })
   );
   self.skipWaiting();
 });

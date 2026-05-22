@@ -33,7 +33,7 @@
   <meta name="theme-color" content="#0a0c10" />
 
   <!-- Core Styles -->
-  <link rel="stylesheet" href="css/styles.css?v=29" />
+  <link rel="stylesheet" href="css/styles.css?v=30" />
 </head>
 <body data-page="topics">
 
@@ -111,9 +111,18 @@
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js').catch(err => console.error('SW error', err));
       });
+      let refreshing = false;
+      const hadController = !!navigator.serviceWorker.controller;
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (refreshing) return;
+        refreshing = true;
+        if (hadController) {
+          window.location.reload();
+        }
+      });
     }
   </script>
-  <script src="js/i18n.js?v=29"></script>
-  <script type="module" src="js/app.js?v=29"></script>
+  <script src="js/i18n.js?v=30"></script>
+  <script type="module" src="js/app.js?v=30"></script>
 </body>
 </html>

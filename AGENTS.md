@@ -78,10 +78,10 @@ All HTML pages follow this exact pattern at the bottom of `<body>`:
 
 ### Cache Busting
 Increment the `?v=X` parameter in `<script>` and `<link>` tags in all four HTML files whenever you make logic or style changes. Additionally, you **must** increment the `CACHE_VERSION` constant in `sw.js` (Service Worker) to invalidate client-side caching of native ES6 modules. Current versions:
-- `css/styles.css?v=28` (HTML files: `v=29`)
-- `js/i18n.js?v=28` (HTML files: `v=29`)
-- `js/app.js?v=28` (HTML files: `v=29`)
-- `sw.js` `CACHE_VERSION`: `v29`
+- `css/styles.css?v=30` (HTML files: `v=30`)
+- `js/i18n.js?v=30` (HTML files: `v=30`)
+- `js/app.js?v=30` (HTML files: `v=30`)
+- `sw.js` `CACHE_VERSION`: `v30`
 
 Data fetches (`articles.json`, markdown files) already use `{ cache: 'no-store' }` and do not need versioning.
 
