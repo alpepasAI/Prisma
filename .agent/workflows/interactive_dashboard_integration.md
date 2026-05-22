@@ -103,6 +103,7 @@ Whenever logic (`app.js`, `interactive.js`) or styles (`styles.css`) are modifie
 
 1. Bump `?v=X` in **all four HTML files**: `index.html`, `article.html`, `interactive.html`, `topics.html`.
 2. Bump both `css/styles.css?v=X` and `js/app.js?v=X` / `js/i18n.js?v=X` to the same number.
+3. Bump `CACHE_VERSION` inside `sw.js` (e.g. `const CACHE_VERSION = 'vX';`) to match the new version, which invalidates the Service Worker cache and forces clients to reload all new assets.
 
 ---
 

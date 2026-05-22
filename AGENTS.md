@@ -77,10 +77,11 @@ All HTML pages follow this exact pattern at the bottom of `<body>`:
 `i18n.js` **must** be a regular script (not a module) and **must** come first. It sets `window.i18n` synchronously, which modules depend on at import time.
 
 ### Cache Busting
-Increment the `?v=X` parameter in `<script>` and `<link>` tags whenever you make logic or style changes. Current versions:
-- `css/styles.css?v=24`
-- `js/i18n.js?v=24`
-- `js/app.js?v=24`
+Increment the `?v=X` parameter in `<script>` and `<link>` tags in all four HTML files whenever you make logic or style changes. Additionally, you **must** increment the `CACHE_VERSION` constant in `sw.js` (Service Worker) to invalidate client-side caching of native ES6 modules. Current versions:
+- `css/styles.css?v=28` (HTML files: `v=29`)
+- `js/i18n.js?v=28` (HTML files: `v=29`)
+- `js/app.js?v=28` (HTML files: `v=29`)
+- `sw.js` `CACHE_VERSION`: `v29`
 
 Data fetches (`articles.json`, markdown files) already use `{ cache: 'no-store' }` and do not need versioning.
 
@@ -128,6 +129,6 @@ Standardized procedures for content integration and maintenance are located in `
 4. **Translation First:** Do not hardcode user-facing strings in HTML or JS. Always add a key to both language dictionaries in `i18n.js` and reference it via `window.i18n.t('key')`.
 5. **Skeleton First:** New pages or sections with async content should include skeleton placeholder HTML so users never see a blank flash.
 6. **SEO Always:** New HTML pages must have populated static `og:*`, `twitter:*`, `<link rel="canonical">`, and a `<title>` with the PRISMA brand prefix.
-7. **Cache Busting:** Bump `?v=X` on any modified `.js` or `.css` file. All four HTML files share the same version number for simplicity.
+7. **Cache Busting:** Bump `?v=X` on any modified `.js` or `.css` file across all four HTML files (using the same version number for simplicity), AND increment the `CACHE_VERSION` variable in `sw.js` to ensure the Service Worker refreshes all client-side cached ES6 modules.
 8. **Accessibility:** Preserve `aria-label` attributes and focus states. Ensure interactive elements are keyboard accessible.
 9. **No Hardcoded Colors:** Always use CSS variables. Never write hex values directly in component styles.
