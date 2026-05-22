@@ -108,6 +108,7 @@ export function renderInteractive(data, article) {
   initAccordions();
   initTabs();
   initCssAlternatives(data.alternativeData);
+  initAntigravityInteractions();
 }
 
 // ─── TABS ─────────────────────────────────────────────────────────────────────
@@ -227,6 +228,98 @@ export function initInteractiveCharts(chartData) {
     if (existing) existing.destroy();
     return new Chart(canvas, config);
   };
+
+  // Article 008 – Antigravity
+  if (chartData.antigravity) {
+    safeInit('modelRadarChart', {
+      type: 'radar',
+      data: {
+        labels: chartData.antigravity.radarLabels,
+        datasets: [
+          {
+            label: 'Gemini 3.1 Pro',
+            data: chartData.antigravity.proData,
+            backgroundColor: 'rgba(129, 140, 248, 0.2)', // indigo-400
+            borderColor: '#818cf8',
+            pointBackgroundColor: '#818cf8',
+            borderWidth: 2
+          },
+          {
+            label: 'Gemini 3.5 Flash',
+            data: chartData.antigravity.flashData,
+            backgroundColor: 'rgba(45, 212, 191, 0.2)', // teal-400
+            borderColor: '#2dd4bf',
+            pointBackgroundColor: '#2dd4bf',
+            borderWidth: 2
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          r: {
+            min: 0,
+            max: 100,
+            grid: { color: 'rgba(255,255,255,0.05)' },
+            angleLines: { color: 'rgba(255,255,255,0.05)' },
+            pointLabels: {
+              font: { size: 11, weight: '500' },
+              color: '#94a3b8'
+            },
+            ticks: { display: false }
+          }
+        },
+        plugins: {
+          legend: { position: 'bottom', labels: { color: '#a8a29e', boxWidth: 12 } }
+        }
+      }
+    });
+
+    safeInit('tokenChart', {
+      type: 'line',
+      data: {
+        labels: chartData.antigravity.lineLabels,
+        datasets: [
+          {
+            label: 'v1.0 (Full Upload)',
+            data: chartData.antigravity.v1Data,
+            borderColor: '#ef4444',
+            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+            tension: 0.3,
+            fill: true
+          },
+          {
+            label: 'v2.0 (Context Caching + Delta)',
+            data: chartData.antigravity.v2Data,
+            borderColor: '#22c55e',
+            backgroundColor: 'rgba(34, 197, 94, 0.1)',
+            tension: 0.3,
+            fill: true
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: { color: 'rgba(255,255,255,0.05)' },
+            title: { display: true, text: 'Tokens Consumed (k)', color: '#a8a29e' },
+            ticks: { color: '#a8a29e' }
+          },
+          x: {
+            grid: { display: false },
+            ticks: { color: '#a8a29e' }
+          }
+        },
+        plugins: {
+          legend: { position: 'top', labels: { color: '#a8a29e' } }
+        }
+      }
+    });
+  }
 
   // Article 001/002 – Radar
   if (chartData.radar) {
@@ -774,4 +867,101 @@ export function initCssAlternatives(alternativeData) {
     });
   });
 }
+
+export function initAntigravityInteractions() {
+  // 1. Architecture Switcher (Hub vs Manager)
+  const btnOldMgr = document.getElementById('btn-old-mgr');
+  const btnNewHub = document.getElementById('btn-new-hub');
+  const contentOldMgr = document.getElementById('content-old-mgr');
+  const contentNewHub = document.getElementById('content-new-hub');
+
+  if (btnOldMgr && btnNewHub && contentOldMgr && contentNewHub) {
+    const switchArch = (view) => {
+      if (view === 'hub') {
+        btnNewHub.style.backgroundColor = 'var(--primary-container)';
+        btnNewHub.style.color = 'var(--primary)';
+        btnOldMgr.style.backgroundColor = '';
+        btnOldMgr.style.color = 'var(--on-surface-variant)';
+        contentNewHub.classList.remove('hidden');
+        contentNewHub.classList.add('block');
+        contentOldMgr.classList.remove('block');
+        contentOldMgr.classList.add('hidden');
+      } else {
+        btnOldMgr.style.backgroundColor = 'var(--primary-container)';
+        btnOldMgr.style.color = 'var(--primary)';
+        btnNewHub.style.backgroundColor = '';
+        btnNewHub.style.color = 'var(--on-surface-variant)';
+        contentOldMgr.classList.remove('hidden');
+        contentOldMgr.classList.add('block');
+        contentNewHub.classList.remove('block');
+        contentNewHub.classList.add('hidden');
+      }
+    };
+
+    btnOldMgr.addEventListener('click', () => switchArch('mgr'));
+    btnNewHub.addEventListener('click', () => switchArch('hub'));
+  }
+
+  // 2. Linux Migration Stepper
+  const btnPrev = document.getElementById('btn-prev-step');
+  const btnNext = document.getElementById('btn-next-step');
+  const stepCounter = document.getElementById('step-counter');
+  const stepIndicatorsContainer = document.getElementById('step-indicators');
+
+  if (btnPrev && btnNext && stepCounter && stepIndicatorsContainer) {
+    let currentStep = 1;
+    const totalSteps = 3;
+    const indicators = stepIndicatorsContainer.children;
+
+    const updateTerminal = () => {
+      for (let i = 1; i <= totalSteps; i++) {
+        const stepEl = document.getElementById(`step-${i}`);
+        if (stepEl) {
+          stepEl.classList.remove('block');
+          stepEl.classList.add('hidden');
+        }
+        if (indicators[i - 1]) {
+          indicators[i - 1].style.backgroundColor = 'var(--outline)';
+        }
+      }
+
+      const activeStepEl = document.getElementById(`step-${currentStep}`);
+      if (activeStepEl) {
+        activeStepEl.classList.remove('hidden');
+        activeStepEl.classList.add('block');
+      }
+      if (indicators[currentStep - 1]) {
+        indicators[currentStep - 1].style.backgroundColor = 'var(--primary)';
+      }
+      stepCounter.innerText = currentStep;
+
+      btnPrev.disabled = currentStep === 1;
+      btnNext.disabled = currentStep === totalSteps;
+
+      // Adjust opacity based on disabled state
+      btnPrev.style.opacity = currentStep === 1 ? '0.5' : '1';
+      btnPrev.style.cursor = currentStep === 1 ? 'not-allowed' : 'pointer';
+      btnNext.style.opacity = currentStep === totalSteps ? '0.5' : '1';
+      btnNext.style.cursor = currentStep === totalSteps ? 'not-allowed' : 'pointer';
+    };
+
+    btnNext.addEventListener('click', () => {
+      if (currentStep < totalSteps) {
+        currentStep++;
+        updateTerminal();
+      }
+    });
+
+    btnPrev.addEventListener('click', () => {
+      if (currentStep > 1) {
+        currentStep--;
+        updateTerminal();
+      }
+    });
+
+    // Run initial setup
+    updateTerminal();
+  }
+}
+
 

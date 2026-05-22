@@ -1,11 +1,55 @@
 {
   "articles": [
     {
+      "id": "008-antigravity-2-0-gemini",
+      "date": "2026-05-21",
+      "readingTime": 6,
+      "tags": ["gemini", "devsecops", "linux", "research", "ciberseguridad"],
+      "featured": true,
+      "formats": {
+        "podcast": {
+          "available": true,
+          "episode": 8
+        },
+        "pdf": {
+          "available": true,
+          "pages": 23
+        },
+        "infographic": {
+          "available": true
+        },
+        "interactive": {
+          "available": true,
+          "dataFile": "008-antigravity-2-0-gemini-interactive.json"
+        }
+      },
+      "i18n": {
+        "es": {
+          "title": "La Nueva Era del Desarrollo Agéntico: Google Antigravity 2.0 y la Integración de Gemini 3.5 Flash",
+          "summary": "¿Es el fin de los asistentes de código pasivos? Google Antigravity 2.0 y Gemini 3.5 Flash consolidan la transición hacia ecosistemas agénticos completamente autónomos. Analizamos cómo el almacenamiento en caché del contexto (Context Caching), la sincronización delta y el sandboxing de V8 optimizan drásticamente el consumo de tokens y la seguridad en flujos DevSecOps.",
+          "contentFile": "008-antigravity-2-0-gemini.md",
+          "podcasts": {
+            "short": "0gOyL8aNCDowCqHi5MWGF9",
+            "normal": "2GvrU54bDO1MLC4NmVq0ba"
+          }
+        },
+        "en": {
+          "title": "The New Era of Agentic Development: Google Antigravity 2.0 and Gemini 3.5 Flash Integration",
+          "summary": "Is this the end of passive code assistants? Google Antigravity 2.0 and Gemini 3.5 Flash cement the transition toward fully autonomous agentic ecosystems. We analyze how Context Caching, Delta-Sync, and V8 sandboxing drastically optimize token consumption and security in DevSecOps workflows.",
+          "contentFile": "008-antigravity-2-0-gemini.md",
+          "podcasts": {
+            "short": "0XU8C8Qy0R14pY0hNrbvS1",
+            "normal": "3EgZaGRDAQBPkhfaQKHpvT"
+          }
+        }
+      }
+    },
+    {
       "id": "007-tailwind-css-debate-alternativas",
       "date": "2026-05-05",
       "readingTime": 5,
       "tags": ["tailwind", "css", "vanilla-css", "frontend", "design-systems"],
-      "featured": true,
+      "featured": false,
       "formats": {
         "podcast": {
           "available": true,

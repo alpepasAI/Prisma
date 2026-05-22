@@ -117,6 +117,8 @@ const translations = {
     'tag_vanilla-css': 'Vanilla CSS',
     'tag_frontend': 'Frontend',
     'tag_design-systems': 'Sistemas de Diseño',
+    'tag_gemini': 'Gemini',
+    'tag_devsecops': 'DevSecOps',
     memory_footprint: 'Huella de Memoria',
     implemented: 'Implementado',
   },
@@ -232,6 +234,8 @@ const translations = {
     'tag_vanilla-css': 'Vanilla CSS',
     'tag_frontend': 'Frontend',
     'tag_design-systems': 'Design Systems',
+    'tag_gemini': 'Gemini',
+    'tag_devsecops': 'DevSecOps',
     memory_footprint: 'Memory Footprint',
     implemented: 'Implemented',
   }
