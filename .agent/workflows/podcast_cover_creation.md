@@ -4,6 +4,9 @@ description: Guidelines for generating and composing thematic visual assets (Her
 
 # 🎨 Workflow: Visual Assets & Podcast Covers
 
+> [!NOTE]
+> **Agentic Engineering Context:** This workflow demonstrates how to offload high-precision mathematical and graphic composition operations (such as resizing, cropping, and pasting logos with exact margins) to Python scripts (`fix_hero_crop_v2.py`, `generate_branded_squares.py`) instead of relying on the LLM to generate them using raw vision models or CSS. This ensures pixel-perfect visual branding across multi-format web and podcast platforms.
+
 This workflow ensures every article has high-quality branded assets for both the web and external podcast platforms.
 
 ## Step 1: Thematic Image Generation

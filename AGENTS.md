@@ -4,6 +4,20 @@ This file contains architectural context, design philosophy, and technical guide
 
 ---
 
+## 0. Agentic Collaboration & Engineering Paradigm
+
+PRISMA is designed as an **agent-first repository**. This means the codebase is engineered not only for human readability but specifically to act as a structured environment where AI agents (LLMs) can contribute with high autonomy, zero design regressions, and strict adherence to patterns.
+
+### Why this is a Demonstration of Agentic Engineering
+AI agents are highly capable but prone to specific failure modes: *circular imports, design drift, style inflation (e.g. leaking Tailwind styles in dark mode), and cache invalidation oversights*. To prevent this, the repository implements a system of **architectural constraints** and **executable markdown protocols**:
+
+1. **Strict Dependency Layering:** By enforcing a strict one-way import hierarchy (`data.js` ➔ `ui.js` ➔ `renderer.js` ➔ `app.js`), agents are architecturally blocked from creating circular dependencies, which would crash the ES6 module execution.
+2. **Workflows as Executive State Machines (.agent/workflows/):** Workflows are not just text files; they are strict protocols designed to be followed sequentially by LLMs. They define input validation, file positioning, and automatic script invocation (Python-based Pillow scripts) to bridge the gap between LLM text generation and deterministic image processing.
+3. **Data-Isolated Dashboards:** By separating the dashboard UI components into declarative JSON schemas (`interactive.json`), the agent is restricted to safe, sandboxed structural edits, avoiding modifications to the critical rendering loop.
+4. **Enforced Design Constraints:** Setting a hard rule against inline hex codes and framework-specific utility classes in favor of native CSS Custom Properties prevents LLMs from introducing visual drift.
+
+---
+
 ## 1. Architectural Philosophy
 
 PRISMA is a minimalist, **client-side only (Vanilla JS)** Multi-Page Application (MPA) structured across a few distinct HTML files.
@@ -71,8 +85,8 @@ PRISMA is a minimalist, **client-side only (Vanilla JS)** Multi-Page Application
 ### Script Loading Order
 All HTML pages follow this exact pattern at the bottom of `<body>`:
 ```html
-<script src="js/i18n.js?v=24"></script>
-<script type="module" src="js/app.js?v=24"></script>
+<script src="js/i18n.js?v=30"></script>
+<script type="module" src="js/app.js?v=30"></script>
 ```
 `i18n.js` **must** be a regular script (not a module) and **must** come first. It sets `window.i18n` synchronously, which modules depend on at import time.
 

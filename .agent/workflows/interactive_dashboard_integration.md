@@ -4,6 +4,9 @@ description: Detailed guidelines for integrating complex interactive HTML drafts
 
 # 📊 Workflow: Interactive Dashboard Integration
 
+> [!NOTE]
+> **Agentic Engineering Context:** LLMs often struggle with spatial visualization and CSS layout matching, which can lead to UI regressions. This workflow is designed as a safety guardrail. It forbids the agent from "reinterpreting" layouts and instead forces a verbatim HTML migration with targeted color mapping via CSS custom variables. This ensures 100% design fidelity while leveraging the agent's ability to map structured data.
+
 This workflow provides specific technical steps to ensure an interactive HTML draft is correctly mapped into the PRISMA JSON format while maintaining high visual quality and dark-mode compatibility.
 
 > [!IMPORTANT]

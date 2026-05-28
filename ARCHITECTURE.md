@@ -175,7 +175,7 @@ Each HTML page sets `<body data-page="...">`. Adding a new page:
 
 ## HTML Page Template
 
-Every HTML page in PRISMA follows this structure:
+Every HTML page in PRISMA follows this structure (version number is illustrative—always check `AGENTS.md` for the current value):
 
 ```html
 <!DOCTYPE html>
@@ -211,16 +211,16 @@ Every HTML page in PRISMA follows this structure:
   <link rel="icon" type="image/png" href="assets/favicon.png?v=1" />
   <link rel="apple-touch-icon" href="assets/logo.png?v=1" />
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="css/styles.css?v=24" />
+  <!-- Styles: bump ?v=X on every CSS change (see AGENTS.md § Cache Busting) -->
+  <link rel="stylesheet" href="css/styles.css?v=30" />
 </head>
 <body data-page="[page-identifier]">
 
   <!-- [Header, Nav, Content, Footer — see existing pages] -->
 
   <!-- Scripts: i18n FIRST as regular script, then app as module -->
-  <script src="js/i18n.js?v=24"></script>
-  <script type="module" src="js/app.js?v=24"></script>
+  <script src="js/i18n.js?v=30"></script>
+  <script type="module" src="js/app.js?v=30"></script>
 </body>
 </html>
 ```
@@ -251,9 +251,9 @@ en: {
 
 | File | Current version | When to bump |
 |------|----------------|--------------|
-| `css/styles.css` | `?v=24` | Any CSS change |
-| `js/i18n.js` | `?v=24` | Any translation change |
-| `js/app.js` | `?v=24` | Any JS change in any module |
+| `css/styles.css` | `?v=30` | Any CSS change |
+| `js/i18n.js` | `?v=30` | Any translation change |
+| `js/app.js` | `?v=30` | Any JS change in any module |
 
 When bumping, update the version in **all 4 HTML files** simultaneously. The module files themselves (`data.js`, `ui.js`, etc.) do not need individual versioning — they are imported by `app.js` and will bust with it.
 

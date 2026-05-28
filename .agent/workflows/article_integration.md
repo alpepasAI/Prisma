@@ -4,6 +4,9 @@ description: This workflow automates the process of adding a new technical artic
 
 # 🔄 Workflow: Article Integration
 
+> [!NOTE]
+> **Agentic Engineering Context:** This workflow is a deterministic runtime protocol for AI agents. It orchestrates complex multi-step content integration tasks (parsing, metadata updates, directory moves) by pairing the LLM's semantic reasoning (generating summaries, validating prompts) with Python helper scripts for precise operations (image cropping, version compiling). This hybrid orchestration ensures zero-defect automation.
+
 This workflow automates the process of adding a new technical article to the PRISMA blog using source materials from the `draft/` folder.
 
 ## Prerequisites

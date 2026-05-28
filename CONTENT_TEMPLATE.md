@@ -31,14 +31,12 @@ Please ensure these files are present in the `draft/` directory:
 
 Key points to verify before and after integration:
 
-- **Custom JS logic**: List all interactive functions found in `<script>` and confirm they are re-implemented in `js/interactive.js`.
-  - Functions in this draft: `switchTab()`, `showStepDetail()`, `initChart()`, slider `input` event.
-- **Chart datasets**: The cost chart has **4 datasets** (Local Hardware, VPS, Cloud API Standard, Cloud API GPT-5.5). Do not simplify to fewer.
-- **Element IDs used by JS**: `ragCostChart`, `ragUsageSlider`, `ragQueryDisplay`, `rag-step-panel`, `[data-rag-step]` buttons.
-- **Grid layouts**:
-  - Architecture section: `1fr 1fr` at ≥900px via `.arch-grid` CSS class.
-  - Cost section: `1fr 2fr` at ≥900px via `.costs-grid` CSS class.
-- **Color adaptation**: Replace `bg-white`/light backgrounds with `var(--surface-container-low)`; replace `text-stone-700` with `var(--on-surface)`. Keep all layout styles (padding, margin, border-radius, flex/grid) identical to the draft.
+- **Custom JS logic:** List all interactive functions found in `<script>` and confirm they are re-implemented in `js/interactive.js`.
+  - *Example: `switchTab()`, `updateChart()`, slider `input` event, etc.*
+- **Chart datasets:** Document the exact number of datasets. **Do not simplify** — replicate them all.
+- **Element IDs used by JS:** List every `id="..."` referenced by the script block (e.g. chart canvas IDs, slider IDs, panel IDs).
+- **Grid layouts:** Note any responsive grid column rules (e.g., `1fr 1fr` at ≥900px) and the CSS class name to add to `styles.css`.
+- **Color adaptation:** Replace `bg-white`/light backgrounds with `var(--surface-container-low)`; replace light text classes with `var(--on-surface)`. Keep all layout styles (padding, margin, border-radius, flex/grid) identical to the draft.
 
 ## 🚀 Execution
 **Agent:** Please execute the `article_integration` workflow located in `.agent/workflows/article_integration.md` using the assets provided above.
