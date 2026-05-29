@@ -18,7 +18,7 @@ Más allá de ser una plataforma de contenido multiformato, PRISMA ha sido desar
 
 ---
 
-## 🎯 Propuesta de Valor e Hitos
+## 🎯 Visión del Proyecto
 
 **PRISMA** resuelve la complejidad inherente a la visualización y consumo de contenido técnico avanzado en múltiples formatos sin comprometer el rendimiento de carga. En lugar de depender de pesados frameworks modernos de JavaScript que ralentizan el renderizado inicial y aumentan la sobrecarga de configuración, PRISMA demuestra cómo una arquitectura modular pura en Vanilla JS y un diseño desacoplado orientado a datos pueden ofrecer una experiencia de usuario sumamente fluida, interactiva y robusta.
 
@@ -199,7 +199,7 @@ Para asegurar un rendimiento óptimo de carga y escalabilidad, los activos se or
 
 ---
 
-## 💻 Despliegue Local Sencillo
+## 💻 Instalación y Configuración Local
 
 Sigue estos sencillos pasos para clonar y ejecutar el proyecto localmente sin necesidad de instalar dependencias ni herramientas de compilación complejas:
 
@@ -255,7 +255,7 @@ In addition to being a multi-format content platform, PRISMA acts as an **Agenti
 
 ---
 
-## 🎯 Value Proposition & Milestones
+## 🎯 Project Vision
 
 **PRISMA** solves the inherent complexity of serving multi-device technical content without compromising page load speeds. Instead of relying on heavy JavaScript frameworks that delay initial rendering and increase configuration overhead, PRISMA demonstrates how a pure Vanilla JS modular architecture and data-decoupled layout engine can deliver a smooth, interactive, and highly immersive reading experience.
 
@@ -436,7 +436,7 @@ Assets are structured according to their network delivery profiles:
 
 ---
 
-## 💻 Simple Local Setup
+## 💻 Local Installation & Setup
 
 Follow these simple steps to clone and run the project locally without having to deal with heavy setup steps or package dependencies:
 
