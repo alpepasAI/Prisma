@@ -6,9 +6,27 @@
 
 # Español
 
+<p align="center">
+  <a href="https://prisma.alpepaslabs.com" target="_blank">
+    <img src="https://img.shields.io/badge/Demo-Live%20Demo%20%F0%9F%9A%80-00F5FF?style=for-the-badge&labelColor=121214" alt="Live Demo" />
+  </a>
+</p>
+
 PRISMA es una biblioteca digital de análisis técnicos profundos sobre programación, ciberseguridad e inteligencia artificial, diseñada bajo estándares de **alto rendimiento, modularidad extrema y cero dependencias de construcción**. 
 
 Más allá de ser una plataforma de contenido multiformato, PRISMA ha sido desarrollado como un caso de estudio de **Ingeniería Agéntica (Agentic Engineering)**, demostrando cómo una base de código puede diseñarse específicamente para la colaboración autónoma con Agentes de IA (LLMs) sin perder calidad ni introducir regresiones.
+
+---
+
+## 🎯 Propuesta de Valor e Hitos
+
+**PRISMA** resuelve la complejidad inherente a la visualización y consumo de contenido técnico avanzado en múltiples formatos sin comprometer el rendimiento de carga. En lugar de depender de pesados frameworks modernos de JavaScript que ralentizan el renderizado inicial y aumentan la sobrecarga de configuración, PRISMA demuestra cómo una arquitectura modular pura en Vanilla JS y un diseño desacoplado orientado a datos pueden ofrecer una experiencia de usuario sumamente fluida, interactiva y robusta.
+
+### Hitos del Proyecto:
+- **Rendimiento Óptimo (Lighthouse 100/100):** Carga y ejecución instantáneas sin necesidad de bundlers (Webpack, Vite) ni transpiladores.
+- **Internacionalización Síncrona Dinámica:** Sistema de traducción i18n síncrono que conmuta el idioma en tiempo real sin recargar la página, conservando fallbacks de SEO estáticos para indexación.
+- **Dashboards Interactivos Desacoplados:** Visualizaciones analíticas y calculadoras basadas en Chart.js controladas enteramente por esquemas JSON externos, aislando la lógica UI.
+- **Colaboración Agéntica Escalable:** Arquitectura estructurada con límites definidos en [AGENTS.md](AGENTS.md) y flujos automáticos que permiten el mantenimiento y adición de contenido mediante agentes de IA autónomos de forma segura.
 
 ---
 
@@ -35,14 +53,19 @@ Este repositorio está optimizado para demostrar el valor de saber dirigir, rest
 
 ---
 
-## 🛠️ Tecnologías Utilizadas
+## 🛠️ Stack Tecnológico
 
-- **Core:** HTML5 Semántico, CSS3 Vanilla (Custom Properties, Nesting, Flexbox/Grid nativo), JavaScript ES6+ (Módulos nativos sin compiladores).
-- **Librerías Externas (Vía CDN con integridad SRI):**
-  - [marked.js](https://marked.js.org/) — Renderizador client-side de Markdown.
-  - [Prism.js](https://prismjs.com/) — Resaltado sintáctico de código con temas oscuros.
-  - [Chart.js](https://www.chartjs.org/) — Gráficas de rendimiento, coste y análisis cuantitativo.
-  - Google Fonts (Inter & Space Grotesk) y Material Symbols.
+El proyecto está diseñado bajo la filosofía **zero-dependency build**, seleccionando tecnologías nativas estables apoyadas por librerías cargadas mediante CDN seguras:
+
+| Tecnología / Herramienta | Rol en el Proyecto | Ventaja Clave |
+| :--- | :--- | :--- |
+| **HTML5 Semántico** | Estructura base de la aplicación y SEO | Accesibilidad nativa y parsing óptimo para buscadores sin JavaScript. |
+| **CSS3 Vanilla** | Diseño responsivo ("Neon Library") | Uso extensivo de variables CSS (`var()`), CSS nesting y layouts Flexbox/Grid sin sobrecarga de frameworks. |
+| **JavaScript ES6+** | Lógica de negocio y comportamiento | Módulos nativos (`import`/`export`) cargados bajo demanda por el navegador. |
+| **marked.js (CDN)** | Compilador de Markdown a HTML | Conversión ultra rápida de archivos de contenido directamente en el cliente. |
+| **Prism.js (CDN)** | Resaltador de sintaxis de código | Estilización de bloques de código en los artículos técnicos con alta velocidad. |
+| **Chart.js (CDN)** | Motor de visualización interactiva | Generación de gráficos analíticos en los dashboards a partir de esquemas JSON. |
+| **Service Worker** | Cache y PWA básica | Pre-carga selectiva de assets para permitir navegación y accesibilidad offline. |
 
 ---
 
@@ -99,6 +122,61 @@ El núcleo de lógica de la aplicación se divide en módulos ES6 con responsabi
 
 ---
 
+## 📐 Diagrama de Arquitectura
+
+PRISMA opera de manera 100% autónoma en el navegador del cliente. La interacción entre el usuario, los componentes modulares de JS, los archivos estáticos de datos y la orquestación en tiempo de desarrollo asistido por IA se modela de la siguiente manera:
+
+```mermaid
+flowchart TD
+    %% Estilo general
+    classDef browser fill:#121214,stroke:#00F5FF,stroke-width:1px,color:#fff;
+    classDef code fill:#1a1a24,stroke:#bd93f9,stroke-width:1px,color:#fff;
+    classDef static fill:#152238,stroke:#50fa7b,stroke-width:1px,color:#fff;
+    classDef ext fill:#2c2c35,stroke:#ffb86c,stroke-width:1px,color:#fff;
+    classDef process fill:#212121,stroke:#ff79c6,stroke-dasharray: 5 5,color:#fff;
+
+    User([👤 Usuario]) <--> |Interactúa| Browser[🌐 Navegador Web]
+    
+    subgraph Cliente [Entorno Cliente / Navegador]
+        Browser <--> App[app.js <br> Central Orchestrator]
+        
+        App <--> UI[ui.js <br> Menú, Lightbox, SEO]
+        App <--> Renderer[renderer.js <br> Motor de Renderizado]
+        App <--> Interactive[interactive.js <br> Dashboards & Gráficas]
+        
+        i18n[i18n.js <br> Traducción Síncrona] -.-> |Inicializa DOM| Browser
+        SW[sw.js <br> Service Worker Cache] <--> |Offline / Carga Rápida| Browser
+    end
+
+    subgraph Datos [Capa de Datos Estática]
+        Renderer --> |Fetch API| ArticlesJSON[(articles.json <br> Catálogo y Metadatos)]
+        Renderer --> |Fetch API| MDContent[(data/es/ data/en/ <br> Artículos Markdown)]
+        Interactive --> |Fetch API| InterJSON[(interactive.json <br> Config Dashboards)]
+    end
+
+    subgraph CDNs [Librerías Externas / CDNs]
+        Renderer -.-> |Integridad SRI| Marked[marked.js <br> Parser Markdown]
+        Renderer -.-> |Integridad SRI| Prism[Prism.js <br> Sintaxis de Código]
+        Interactive -.-> |Integridad SRI| ChartJS[Chart.js <br> Renderizado Gráfico]
+    end
+
+    subgraph Desarrollo [Fase de Desarrollo / Ingeniería Agéntica]
+        Agent[🤖 Agente IA / Copiloto] --> |Ejecuta| Workflows[.agent/workflows/ <br> Protocolos en Markdown]
+        Agent --> |Ejecuta| PyScripts[Scripts Python <br> Optimización de Activos]
+        Workflows --> |Estructura| Codebase[(Código de PRISMA)]
+        AGENTS[AGENTS.md <br> Reglas Arquitectónicas] -.-> |Guía / Restringe| Agent
+    end
+
+    %% Asignación de clases
+    class Browser browser;
+    class App,UI,Renderer,Interactive,i18n,SW code;
+    class ArticlesJSON,MDContent,InterJSON static;
+    class Marked,Prism,ChartJS ext;
+    class Agent,Workflows,PyScripts,AGENTS,Codebase process;
+```
+
+---
+
 ## 🔄 Gestión de Contenido y Workflows
 
 El proceso de creación y despliegue de nuevos artículos técnicos se realiza mediante un flujo de trabajo agéntico estructurado:
@@ -121,33 +199,71 @@ Para asegurar un rendimiento óptimo de carga y escalabilidad, los activos se or
 
 ---
 
-## 💻 Ejecución Local
+## 💻 Despliegue Local Sencillo
 
-> [!IMPORTANT]
-> Debido al uso de módulos nativos de ES6, abrir los archivos directamente (`file://`) causará errores de CORS. Es obligatorio levantar un servidor HTTP.
+Sigue estos sencillos pasos para clonar y ejecutar el proyecto localmente sin necesidad de instalar dependencias ni herramientas de compilación complejas:
 
-Ejecuta cualquiera de los siguientes comandos en la raíz:
+1. **Clonar el repositorio:**
+   ```bash
+   git clone https://github.com/tu-usuario/prisma.git
+   cd prisma
+   ```
 
-```bash
-# Node.js
-npx serve .
+2. **Iniciar un servidor local (Obligatorio):**
+   > [!IMPORTANT]
+   > Debido al uso de módulos nativos de ES6, abrir los archivos HTML directamente (`file://`) causará errores de CORS en el navegador. Es obligatorio servir los archivos a través de un servidor HTTP local.
+   
+   Ejecuta cualquiera de los siguientes comandos en la raíz del proyecto según las herramientas que tengas instaladas en tu sistema:
 
-# Python
-python3 -m http.server 8000
+   ```bash
+   # Opción A: Con Node.js (Recomendado)
+   npx serve .
 
-# PHP
-php -S localhost:8000
-```
-Luego, accede a `http://localhost:8000`.
+   # Opción B: Con Python (Instalado por defecto en la mayoría de sistemas)
+   python3 -m http.server 8000
+
+   # Opción C: Con PHP
+   php -S localhost:8000
+   ```
+
+3. **Acceder a la aplicación:**
+   Abre tu navegador web y entra en la dirección indicada por tu servidor (usualmente `http://localhost:3000` para `npx serve` o `http://localhost:8000` para Python/PHP).
+
+---
+
+## 🤖 Desarrollo Asistido por IA (Honestidad Profesional)
+
+> [!NOTE]
+> **Declaración de Transparencia:** La arquitectura modular, el sistema de diseño estético "Neon Library", la lógica de negocio modular y el control del estado de esta aplicación han sido ideados y estructurados en su totalidad por mí. Como parte de una práctica moderna y altamente productiva, he utilizado herramientas de Inteligencia Artificial (LLMs) como copilotos avanzados de codificación. 
+> 
+> La diferencia en este repositorio radica en que **la IA no ha trabajado de forma descontrolada**: se diseñó un entorno de desarrollo estructurado (documentado en [AGENTS.md](AGENTS.md) y los workflows de `.agent/workflows/`) que restringe, guía y audita los cambios realizados por las herramientas autónomas, logrando un código libre de regresiones de diseño, sin dependencias circulares y optimizado de forma determinista.
 
 ---
 ---
 
 # English
 
+<p align="center">
+  <a href="https://prisma.alpepaslabs.com" target="_blank">
+    <img src="https://img.shields.io/badge/Demo-Live%20Demo%20%F0%9F%9A%80-00F5FF?style=for-the-badge&labelColor=121214" alt="Live Demo" />
+  </a>
+</p>
+
 PRISMA is a digital technical library featuring deep analyses of programming, cybersecurity, and artificial intelligence, built with a focus on **high performance, extreme modularity, and zero build tool dependencies**.
 
 In addition to being a multi-format content platform, PRISMA acts as an **Agentic Engineering** case study, proving how a repository's structure and developer experience can be tailored to support safe, high-quality, and autonomous code generation by AI Agents (LLMs).
+
+---
+
+## 🎯 Value Proposition & Milestones
+
+**PRISMA** solves the inherent complexity of serving multi-device technical content without compromising page load speeds. Instead of relying on heavy JavaScript frameworks that delay initial rendering and increase configuration overhead, PRISMA demonstrates how a pure Vanilla JS modular architecture and data-decoupled layout engine can deliver a smooth, interactive, and highly immersive reading experience.
+
+### Key Milestones:
+- **Peak Performance (100/100 Lighthouse):** Zero bundlers (webpack/vite) or build tools. Instant rendering with client-side execution.
+- **Seamless Synchronous Internationalization:** Client-side i18n translation without page reloads, accompanied by static fallback tags for optimized crawler SEO.
+- **Decoupled Interactive Dashboards:** Infrastructure calculators and metrics visualizations powered by Chart.js, managed entirely via external declarative JSON schemas to prevent runtime regressions.
+- **Agentic Collaboration Paradigm:** Strict dependency limits and automated guidelines that allow AI Agents to safely contribute to the codebase without introducing regressions or circular imports.
 
 ---
 
@@ -176,12 +292,17 @@ This repository highlights the value of prompt engineering, architectural constr
 
 ## 🛠️ Tech Stack
 
-- **Core:** Semantic HTML5, Vanilla CSS3 (Custom Variables, Nesting, Flexbox/Grid), ES6+ JavaScript (Native modules without transpilers).
-- **External Libraries (via CDN with SRI integrity):**
-  - [marked.js](https://marked.js.org/) — Client-side Markdown parser.
-  - [Prism.js](https://prismjs.com/) — Syntax highlighting for code snippets.
-  - [Chart.js](https://www.chartjs.org/) — Performance and costing interactive charts.
-  - Google Fonts (Inter & Space Grotesk) and Material Symbols.
+PRISMA is designed under a **zero-dependency build** philosophy, prioritizing native features and optimized utilities loaded from secure CDNs:
+
+| Technology / Tool | Role in Project | Key Benefit |
+| :--- | :--- | :--- |
+| **Semantic HTML5** | App structure and base SEO | Standard compliance, accessibility, and clean indexing without JS. |
+| **Vanilla CSS3** | "Neon Library" responsive design | Custom variables (`var()`), native nesting, and Flexbox/Grid layouts with zero stylesheet size inflation. |
+| **ES6+ JavaScript** | Core logical orchestrator | Native modules (`import`/`export`) loaded dynamically by the browser at runtime. |
+| **marked.js (CDN)** | Markdown-to-HTML parser | Blazing-fast client-side compile of content files into page containers. |
+| **Prism.js (CDN)** | Syntax highlighting engine | Low-overhead code formatting for technical posts. |
+| **Chart.js (CDN)** | Analytics dashboard rendering | Client-side visual graph generation dynamically built from JSON structures. |
+| **Service Worker** | PWA Caching | Selected background assets pre-fetching for offline reading and speeds. |
 
 ---
 
@@ -238,6 +359,61 @@ The core logic of the application is separated into single-responsibility ES6 mo
 
 ---
 
+## 📐 Architecture Diagram
+
+PRISMA runs entirely inside the client's browser. The interaction between the user, JavaScript module orchestration, static local data files, CDNs, and development-time AI orchestration is structured as follows:
+
+```mermaid
+flowchart TD
+    %% General styling
+    classDef browser fill:#121214,stroke:#00F5FF,stroke-width:1px,color:#fff;
+    classDef code fill:#1a1a24,stroke:#bd93f9,stroke-width:1px,color:#fff;
+    classDef static fill:#152238,stroke:#50fa7b,stroke-width:1px,color:#fff;
+    classDef ext fill:#2c2c35,stroke:#ffb86c,stroke-width:1px,color:#fff;
+    classDef process fill:#212121,stroke:#ff79c6,stroke-dasharray: 5 5,color:#fff;
+
+    User([👤 User]) <--> |Interacts| Browser[🌐 Web Browser]
+    
+    subgraph Cliente [Client-Side Runtime]
+        Browser <--> App[app.js <br> Central Orchestrator]
+        
+        App <--> UI[ui.js <br> Hamburger, Lightbox, SEO]
+        App <--> Renderer[renderer.js <br> Core Rendering Engine]
+        App <--> Interactive[interactive.js <br> Dashboard & Charts]
+        
+        i18n[i18n.js <br> Synchronous i18n] -.-> |Initializes DOM| Browser
+        SW[sw.js <br> Service Worker Cache] <--> |Pre-fetch/Offline| Browser
+    end
+
+    subgraph Datos [Static Data Layer]
+        Renderer --> |Fetch API| ArticlesJSON[(articles.json <br> Catalog & Metadata)]
+        Renderer --> |Fetch API| MDContent[(data/es/ data/en/ <br> Markdown Articles)]
+        Interactive --> |Fetch API| InterJSON[(interactive.json <br> Dashboard Config)]
+    end
+
+    subgraph CDNs [External Libraries / CDNs]
+        Renderer -.-> |SRI Integrity| Marked[marked.js <br> Markdown Parser]
+        Renderer -.-> |SRI Integrity| Prism[Prism.js <br> Code Highlighter]
+        Interactive -.-> |SRI Integrity| ChartJS[Chart.js <br> Data Visualization]
+    end
+
+    subgraph Desarrollo [Development Phase / AI Agentic Orchestration]
+        Agent[🤖 AI Agent / Copilot] --> |Runs| Workflows[.agent/workflows/ <br> Markdown Protocols]
+        Agent --> |Runs| PyScripts[Python Scripts <br> Asset Automation]
+        Workflows --> |Enforces| Codebase[(PRISMA Codebase)]
+        AGENTS[AGENTS.md <br> Architecture Rules] -.-> |Guides & Constrains| Agent
+    end
+
+    %% Class assignment
+    class Browser browser;
+    class App,UI,Renderer,Interactive,i18n,SW code;
+    class ArticlesJSON,MDContent,InterJSON static;
+    class Marked,Prism,ChartJS ext;
+    class Agent,Workflows,PyScripts,AGENTS,Codebase process;
+```
+
+---
+
 ## 🔄 Content Ingestion & Workflows
 
 New content is processed and deployed using a structured agentic workflow:
@@ -260,21 +436,41 @@ Assets are structured according to their network delivery profiles:
 
 ---
 
-## 💻 Local Setup
+## 💻 Simple Local Setup
 
-> [!IMPORTANT]
-> Due to native ES6 modules, opening HTML files directly via `file://` will fail due to CORS. A local HTTP server is required.
+Follow these simple steps to clone and run the project locally without having to deal with heavy setup steps or package dependencies:
 
-Run any of the following commands in the root directory:
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/prisma.git
+   cd prisma
+   ```
 
-```bash
-# Node.js
-npx serve .
+2. **Start a local HTTP server (Required):**
+   > [!IMPORTANT]
+   > Due to native ES6 modules, opening HTML files directly (`file://`) will fail due to CORS. Serving files over a local HTTP server is required.
+   
+   Run any of the following commands in the root folder depending on your installed toolchain:
 
-# Python
-python3 -m http.server 8000
+   ```bash
+   # Option A: With Node.js (Recommended)
+   npx serve .
 
-# PHP
-php -S localhost:8000
-```
-Then, navigate to `http://localhost:8000`.
+   # Option B: With Python (Pre-installed on most modern OS)
+   python3 -m http.server 8000
+
+   # Option C: With PHP
+   php -S localhost:8000
+   ```
+
+3. **Access the application:**
+   Open your browser and navigate to the address output by your server (usually `http://localhost:3000` for `npx serve` or `http://localhost:8000` for Python/PHP).
+
+---
+
+## 🤖 AI-Assisted Development (Professional Honesty)
+
+> [!NOTE]
+> **Transparency Declaration:** The architectural design, modular separation of concerns, visual design choices, and business state tracking of this application were fully conceived and designed by me. As part of a modern, high-productivity engineering loop, I leveraged Artificial Intelligence (LLM) agents as advanced code generation copilots.
+> 
+> The difference in this project is that **AI agency was tightly constrained and controlled**: a custom architectural guideline ([AGENTS.md](AGENTS.md)) and structured workflows (`.agent/workflows/`) were put in place to restrict, direct, and audit all automated code edits. This guarantees zero circular dependency crashes and maintains design consistency without manual human overhead.
