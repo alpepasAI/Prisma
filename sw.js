@@ -1,6 +1,6 @@
 // Incrementa este número cada vez que hagas un despliegue.
 // Esto invalida la caché del Service Worker automáticamente.
-const CACHE_VERSION = 'v31';
+const CACHE_VERSION = 'v32';
 const CACHE_NAME = `prisma-cache-${CACHE_VERSION}`;
 
 const STATIC_ASSETS = [
