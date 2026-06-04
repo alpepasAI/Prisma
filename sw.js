@@ -1,6 +1,6 @@
 // Incrementa este número cada vez que hagas un despliegue.
 // Esto invalida la caché del Service Worker automáticamente.
-const CACHE_VERSION = 'v30';
+const CACHE_VERSION = 'v31';
 const CACHE_NAME = `prisma-cache-${CACHE_VERSION}`;
 
 const STATIC_ASSETS = [
@@ -15,6 +15,7 @@ const STATIC_ASSETS = [
   '/js/renderer.js',
   '/js/interactive.js',
   '/js/i18n.js',
+  '/js/sw-register.js',
   '/components/header.html',
   '/components/footer.html',
   '/assets/logo.png',

@@ -234,9 +234,9 @@ Sigue estos sencillos pasos para clonar y ejecutar el proyecto localmente sin ne
 ## 🤖 Desarrollo Asistido por IA (Honestidad Profesional)
 
 > [!NOTE]
-> **Declaración de Transparencia:** La arquitectura modular, el sistema de diseño estético "Neon Library", la lógica de negocio modular y el control del estado de esta aplicación han sido ideados y estructurados en su totalidad por mí. Como parte de una práctica moderna y altamente productiva, he utilizado herramientas de Inteligencia Artificial (LLMs) como copilotos avanzados de codificación. 
+> **Declaración de Transparencia:** La concepción original de la aplicación, la definición del stack tecnológico y la dirección de este proyecto han sido realizadas en su totalidad por mí, ejerciendo el rol de director de proyecto y decisor técnico. Para la definición de la arquitectura de software, el sistema de diseño estético "Neon Library", la lógica de negocio modular y la implementación del código desde cero, he estructurado y guiado la ejecución de agentes de Inteligencia Artificial (LLMs) a través de un proceso iterativo de discusión e investigación de alternativas.
 > 
-> La diferencia en este repositorio radica en que **la IA no ha trabajado de forma descontrolada**: se diseñó un entorno de desarrollo estructurado (documentado en [AGENTS.md](AGENTS.md) y los workflows de `.agent/workflows/`) que restringe, guía y audita los cambios realizados por las herramientas autónomas, logrando un código libre de regresiones de diseño, sin dependencias circulares y optimizado de forma determinista.
+> La diferencia en este repositorio radica en que **la IA no ha trabajado de forma descontrolada**: se diseñó un entorno de desarrollo estructurado (documentado en [AGENTS.md](AGENTS.md) y los workflows de `.agent/workflows/`) que restringe, guía y audita los cambios realizados por las herramientas autónomas, logrando un código libre de regresiones de diseño, sin dependencias circulares y optimizado de forma determinista bajo mi supervisión directa.
 
 ---
 ---
@@ -471,6 +471,6 @@ Follow these simple steps to clone and run the project locally without having to
 ## 🤖 AI-Assisted Development (Professional Honesty)
 
 > [!NOTE]
-> **Transparency Declaration:** The architectural design, modular separation of concerns, visual design choices, and business state tracking of this application were fully conceived and designed by me. As part of a modern, high-productivity engineering loop, I leveraged Artificial Intelligence (LLM) agents as advanced code generation copilots.
+> **Transparency Declaration:** The original concept of the application, the tech stack definition, and the overall project direction were fully conceived and led by me, serving as project manager and technical decision-maker. For the software architecture design, the "Neon Library" design system, the modular business logic, and the implementation of the code from scratch, I structured and guided the execution of Artificial Intelligence (LLM) agents through an iterative process of technical discussion and research of alternatives.
 > 
-> The difference in this project is that **AI agency was tightly constrained and controlled**: a custom architectural guideline ([AGENTS.md](AGENTS.md)) and structured workflows (`.agent/workflows/`) were put in place to restrict, direct, and audit all automated code edits. This guarantees zero circular dependency crashes and maintains design consistency without manual human overhead.
+> The difference in this project is that **AI agency was tightly constrained and controlled**: a custom architectural guideline ([AGENTS.md](AGENTS.md)) and structured workflows (`.agent/workflows/`) were put in place to restrict, direct, and audit all automated code edits. This guarantees zero circular dependency crashes and maintains design consistency under my direct supervision.
