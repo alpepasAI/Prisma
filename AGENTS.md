@@ -85,17 +85,17 @@ PRISMA is a minimalist, **client-side only (Vanilla JS)** Multi-Page Application
 ### Script Loading Order
 All HTML pages follow this exact pattern at the bottom of `<body>`:
 ```html
-<script src="js/i18n.js?v=32"></script>
-<script type="module" src="js/app.js?v=32"></script>
+<script src="js/i18n.js?v=35"></script>
+<script type="module" src="js/app.js?v=35"></script>
 ```
 `i18n.js` **must** be a regular script (not a module) and **must** come first. It sets `window.i18n` synchronously, which modules depend on at import time.
 
 ### Cache Busting
 Increment the `?v=X` parameter in `<script>` and `<link>` tags in all four HTML files whenever you make logic or style changes. Additionally, you **must** increment the `CACHE_VERSION` constant in `sw.js` (Service Worker) to invalidate client-side caching of native ES6 modules. Current versions:
-- `css/styles.css?v=32` (HTML files: `v=32`)
-- `js/i18n.js?v=32` (HTML files: `v=32`)
-- `js/app.js?v=32` (HTML files: `v=32`)
-- `sw.js` `CACHE_VERSION`: `v32`
+- `css/styles.css?v=35` (HTML files: `v=35`)
+- `js/i18n.js?v=35` (HTML files: `v=35`)
+- `js/app.js?v=35` (HTML files: `v=35`)
+- `sw.js` `CACHE_VERSION`: `v35`
 
 Data fetches (`articles.json`, markdown files) already use `{ cache: 'no-store' }` and do not need versioning.
 

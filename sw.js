@@ -1,6 +1,6 @@
 // Incrementa este número cada vez que hagas un despliegue.
 // Esto invalida la caché del Service Worker automáticamente.
-const CACHE_VERSION = 'v32';
+const CACHE_VERSION = 'v35';
 const CACHE_NAME = `prisma-cache-${CACHE_VERSION}`;
 
 const STATIC_ASSETS = [
@@ -19,7 +19,16 @@ const STATIC_ASSETS = [
   '/components/header.html',
   '/components/footer.html',
   '/assets/logo.png',
-  '/assets/favicon.png'
+  '/assets/favicon.png',
+  '/assets/fonts/inter-400-latin.woff2',
+  '/assets/fonts/inter-500-latin.woff2',
+  '/assets/fonts/inter-600-latin.woff2',
+  '/assets/fonts/inter-700-latin.woff2',
+  '/assets/fonts/space-grotesk-400-latin.woff2',
+  '/assets/fonts/space-grotesk-500-latin.woff2',
+  '/assets/fonts/space-grotesk-600-latin.woff2',
+  '/assets/fonts/space-grotesk-700-latin.woff2',
+  '/assets/fonts/material-symbols-outlined.woff2'
 ];
 
 self.addEventListener('install', event => {
@@ -44,6 +53,15 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
+
+  // Ignore cross-origin requests except our whitelisted CDNs
+  if (
+    url.origin !== self.location.origin &&
+    !url.origin.includes('cdnjs.cloudflare.com') &&
+    !url.origin.includes('cdn.jsdelivr.net')
+  ) {
+    return; // Let browser handle it
+  }
 
   // Nunca cachear el propio SW ni las páginas HTML
   if (
