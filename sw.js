@@ -1,6 +1,6 @@
 // Incrementa este número cada vez que hagas un despliegue.
 // Esto invalida la caché del Service Worker automáticamente.
-const CACHE_VERSION = 'v35';
+const CACHE_VERSION = 'v38';
 const CACHE_NAME = `prisma-cache-${CACHE_VERSION}`;
 
 const STATIC_ASSETS = [
@@ -9,6 +9,12 @@ const STATIC_ASSETS = [
   '/topics.html',
   '/interactive.html',
   '/css/styles.css',
+  '/css/variables.css',
+  '/css/base.css',
+  '/css/components.css',
+  '/css/pages.css',
+  '/css/interactive.css',
+  '/css/utilities.css',
   '/js/app.js',
   '/js/data.js',
   '/js/ui.js',
@@ -31,7 +37,7 @@ const STATIC_ASSETS = [
   '/assets/fonts/material-symbols-outlined.woff2'
 ];
 
-self.addEventListener('install', event => {
+globalThis.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
       // Force fetching from network to bypass browser HTTP cache during installation
@@ -39,24 +45,24 @@ self.addEventListener('install', event => {
       return cache.addAll(requests);
     })
   );
-  self.skipWaiting();
+  globalThis.skipWaiting();
 });
 
-self.addEventListener('activate', event => {
+globalThis.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(keys => Promise.all(
       keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
     ))
   );
-  self.clients.claim();
+  globalThis.clients.claim();
 });
 
-self.addEventListener('fetch', event => {
+globalThis.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
 
   // Ignore cross-origin requests except our whitelisted CDNs
   if (
-    url.origin !== self.location.origin &&
+    url.origin !== globalThis.location.origin &&
     !url.origin.includes('cdnjs.cloudflare.com') &&
     !url.origin.includes('cdn.jsdelivr.net')
   ) {

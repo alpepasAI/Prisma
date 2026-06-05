@@ -73,10 +73,15 @@ PRISMA is a minimalist, **client-side only (Vanilla JS)** Multi-Page Application
 - Dispatches a `langchange` event on `window` to trigger re-renders in page init functions.
 
 ### `css/styles.css` — The Design System
-- Extensive CSS Custom Properties at `:root` level for colors, spacing, typography, and border radii.
+- Entry point stylesheet using native `@import` statements to import modular sub-files:
+  - `variables.css`: Local fonts and Design Tokens.
+  - `base.css`: CSS reset and base HTML tag styling.
+  - `components.css`: Header, footer, navigations, skeletons, lightbox, and animations.
+  - `pages.css`: Page structural layouts (hero, chronological log, topics, articles).
+  - `interactive.css`: Calculators, checklists, charts, accordion, tabs, and theme settings.
+  - `utilities.css`: Utility classes, Tailwind compatibility, and responsive helpers.
 - **Do not hardcode colors.** Always use variables (`var(--primary)`, `var(--surface-container)`, etc.).
 - Media queries follow a **mobile-first** approach (`min-width`). Always place larger-breakpoint rules at the bottom.
-- Includes the **Skeleton Screen** system (`@keyframes skeleton-shimmer`, `.skeleton`, and page-specific skeleton utility classes).
 
 ---
 
@@ -85,17 +90,17 @@ PRISMA is a minimalist, **client-side only (Vanilla JS)** Multi-Page Application
 ### Script Loading Order
 All HTML pages follow this exact pattern at the bottom of `<body>`:
 ```html
-<script src="js/i18n.js?v=35"></script>
-<script type="module" src="js/app.js?v=35"></script>
+<script src="js/i18n.js?v=38"></script>
+<script type="module" src="js/app.js?v=38"></script>
 ```
 `i18n.js` **must** be a regular script (not a module) and **must** come first. It sets `window.i18n` synchronously, which modules depend on at import time.
 
 ### Cache Busting
 Increment the `?v=X` parameter in `<script>` and `<link>` tags in all four HTML files whenever you make logic or style changes. Additionally, you **must** increment the `CACHE_VERSION` constant in `sw.js` (Service Worker) to invalidate client-side caching of native ES6 modules. Current versions:
-- `css/styles.css?v=35` (HTML files: `v=35`)
-- `js/i18n.js?v=35` (HTML files: `v=35`)
-- `js/app.js?v=35` (HTML files: `v=35`)
-- `sw.js` `CACHE_VERSION`: `v35`
+- `css/styles.css?v=38` (HTML files: `v=38`)
+- `js/i18n.js?v=38` (HTML files: `v=38`)
+- `js/app.js?v=38` (HTML files: `v=38`)
+- `sw.js` `CACHE_VERSION`: `v38`
 
 Data fetches (`articles.json`, markdown files) already use `{ cache: 'no-store' }` and do not need versioning.
 

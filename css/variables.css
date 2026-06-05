@@ -1,0 +1,178 @@
+/* ====================================
+   PRISMA — VARIABLES.CSS
+   ============================================ */
+
+/* ============================================
+   PRISMA — Design System "The Neon Library"
+   ============================================ */
+
+/* --- Local Fonts --- */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../assets/fonts/inter-400-latin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../assets/fonts/inter-500-latin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../assets/fonts/inter-600-latin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../assets/fonts/inter-700-latin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../assets/fonts/space-grotesk-400-latin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../assets/fonts/space-grotesk-500-latin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../assets/fonts/space-grotesk-600-latin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../assets/fonts/space-grotesk-700-latin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Material Symbols Outlined';
+  font-style: normal;
+  font-weight: 100 700;
+  font-display: swap;
+  src: url('../assets/fonts/material-symbols-outlined.woff2') format('woff2');
+}
+
+
+/* --- Design Tokens --- */
+:root {
+  /* Colors - Foundation */
+  --background: #0b1326;
+  --surface: #0b1326;
+  --surface-dim: #0b1326;
+  --surface-container-lowest: #060e20;
+  --surface-container-low: #131b2e;
+  --surface-container: #171f33;
+  --surface-container-high: #222a3d;
+  --surface-container-highest: #2d3449;
+  --surface-bright: #31394d;
+  --surface-variant: #2d3449;
+
+  /* Colors - Accents */
+  --primary: #4cd7f6;           /* Cyan Spark */
+  --primary-container: #06b6d4;
+  --on-primary: #003640;
+  --on-primary-container: #00424f;
+
+  --secondary: #d0bcff;         /* Electric Orchid */
+  --secondary-container: #571bc1;
+  --on-secondary: #3c0091;
+
+  --tertiary: #4edea3;          /* Code Emerald */
+  --tertiary-container: #1bbd85;
+  --on-tertiary: #003824;
+
+  /* Colors - Text */
+  --on-surface: #dae2fd;
+  --on-surface-variant: #bcc9cd;
+  --on-background: #dae2fd;
+
+  /* Colors - Utility */
+  --outline: #5c6e73;
+  --outline-variant: #3d494c;
+  
+  --error: #ffb4ab;
+  --on-error: #690005;
+  --success: #2dd4bf;
+  --on-success: #003730;
+  --warning: #fde68a;
+  --on-warning: #453700;
+  --error-container: #93000a;
+  --inverse-surface: #dae2fd;
+  --inverse-on-surface: #283044;
+  --inverse-primary: #00687a;
+  --surface-tint: #4cd7f6;
+
+  /* Typography */
+  --font-headline: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-label: 'Inter', sans-serif;
+  --font-display: 'Space Grotesk', sans-serif;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  /* Text Sizes */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+
+  /* Border Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-ambient: 0 20px 40px rgba(6, 14, 32, 0.4);
+  --shadow-glow-primary: 0 0 20px rgba(76, 215, 246, 0.4);
+  --shadow-glow-primary-subtle: 0 0 20px rgba(76, 215, 246, 0.15);
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms ease;
+  --transition-slow: 500ms ease;
+
+  /* Layout */
+  --max-width: 72rem;
+  --header-height: 4rem;
+}
+
